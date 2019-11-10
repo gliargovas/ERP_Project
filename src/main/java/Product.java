@@ -14,23 +14,12 @@ public class Product {
 	private static ArrayList <Product> products = new ArrayList <Product>();
 	// Product constructors
 	// New product order with specific quantity
-	public Product(String name, String category, String description, double salePrice, int quantity) {
-		this.productId = ++idCounter;
-		this.name = name;
-		this.category = category;
-		this.description = description;
-		this.salePrice = salePrice;
-		this.quantity = quantity;
-		products.add(this);
-	}
-	// New product with no quantity
 	public Product(String name, String category, String description, double salePrice) {
 		this.productId = ++idCounter;
 		this.name = name;
 		this.category = category;
 		this.description = description;
 		this.salePrice = salePrice;
-		this.quantity = 0;
 		products.add(this);
 	}
 	// Getters and setters
@@ -58,33 +47,10 @@ public class Product {
 	public String getCategory() {
 		return category;
 	}
-	public static ArrayList<Product> getProducts() {
-		return products;
-	}
 	// toString
 	@Override
 	public String toString() {
-		return String.format("Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac | Units Available: %d\nDescription: %s", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), this.getQuantity(), this.getDescription());
-	}
-	// Searches product by id
-	public static Product searchProductById(int id) {
-		for (Product product : getProducts()) {
-			if (product.getProductId() == id) {
-				return product;
-			}
-		}
-		return null;
-	}
-	// Deletes a product from list
-	public static void deleteProductFromList(int id) {
-		products.remove(products.indexOf(searchProductById(id)));
-	}
-	// Prints all products
-	public static void printAllProducts() {
-		System.out.println("Product List");
-		for (Product p : getProducts()) {
-			System.out.println(p);
-		}
+		return String.format("Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac \nDescription: %s", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), this.getDescription());
 	}
 	
 }
