@@ -4,6 +4,13 @@ public class Customer {
 	private String surname;
 	private String adress;
 	private int telephone;
+	//constructor
+	public Customer(String name, String surname, String adress, int telephone) {
+		this.name = name;
+		this.surname = surname;
+		this.adress = adress;
+		this.telephone = telephone;
+	}
 	//getters and setters
 	public String getName() {
 		return name;
@@ -28,6 +35,12 @@ public class Customer {
 	}
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
+	}
+	//toString Method
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", surname=" + surname + ", adress=" + adress + ", telephone=" + telephone
+				+ "]";
 	}
 	
 }
