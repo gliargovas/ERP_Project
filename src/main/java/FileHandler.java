@@ -1,22 +1,25 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FileHandler {
 
     //CSV separator used: ;
     private static final String CSV_SEPARATOR = ";";
-    private static void writeToCSV(Product product)
+    public static void writeToCSV(Product product)
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Products.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Products.csv"), true));
             {
                 StringBuffer line = new StringBuffer();
                 line.append(product.getProductId());
@@ -40,12 +43,12 @@ public class FileHandler {
         catch (IOException e){}
     }
     
-    private static void writeToCSV(RegisteredCustomer customer)
+    public static void writeToCSV(RegisteredCustomer customer)
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("RegisteredCustomers.csv"), "UTF-8"));
-            {
+        	BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Customers.csv"), true));
+        	{
                 StringBuffer line = new StringBuffer();
                 line.append(customer.getId());
                 line.append(CSV_SEPARATOR);
@@ -67,9 +70,9 @@ public class FileHandler {
         catch (IOException e){}
     }
     
-    private static void writeToCSV(User user) {
+    public static void writeToCSV(User user) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Users.csv"), "UTF-8")); {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Users.csv"), true)); {
             	StringBuffer line = new StringBuffer();
             	if (user instanceof Cashier) {
             		line.append("Cashier");
@@ -98,9 +101,9 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    private static void writeToCSV(Order order) {
+    public static void writeToCSV(Order order) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Orders.csv"), "UTF-8")); {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Orders.csv"), true)); {
             	line.append(order.getOrderNumber());
                 line.append(CSV_SEPARATOR);
                 line.append(order.getOrderDate());
@@ -126,9 +129,9 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    private static void writeToCSV(StorageOrder order) {
+    public static void writeToCSV(StorageOrder order) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Orders.csv"), "UTF-8")); {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("StorageOrders.csv"), true)); {
             	line.append(order.getOrderNumber);
                 line.append(CSV_SEPARATOR);
                 line.append(order.getOrderDate());
@@ -155,9 +158,9 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    private static void writeToCSV(Supplier supplier) {
+    public static void writeToCSV(Supplier supplier) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Orders.csv"), "UTF-8")); {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Suppliers.csv"), true)); {
             	line.append(supplier.getId());
                 line.append(CSV_SEPARATOR);
                 line.append(supplier.getAddress());
@@ -176,25 +179,26 @@ public class FileHandler {
     }
     
     //File Reader
-    public static void ReadAllProducstFromCsv() {
-    	public static void main(String[] args) throws FileNotFoundException 
-    	{
-            Scanner scanner = new Scanner(new File("SampleCSVFile.csv"));
-             
-            //Set the delimiter used in file
-            scanner.useDelimiter(";");
-            String line = new String[];
-            ArrayList<String[]> data = new ArrayList<String[]>()
-            while (scanner.hasNext()) 
-            {
-                System.out.print(scanner.next() + "|");
-            }
-            scanner.close();
+    public static ArrayList<ArrayList<String>> getProductsFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./Products.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
         }
+        scanner.close();
+        return records;
     }
-    
-    
-    
-    
-    
+    private static ArrayList<String> getRecordFromLine(String line) {
+        ArrayList<String> values = new ArrayList<String>();
+        Scanner rowScanner = new Scanner(line);
+            rowScanner.useDelimiter(CSV_SEPARATOR);
+            while (rowScanner.hasNext()) {
+                values.add(rowScanner.next());
+        }
+        return values;
+    }
 }

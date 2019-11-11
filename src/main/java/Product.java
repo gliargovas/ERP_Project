@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Product {
 	// Counts the number of objects created
 	private static int idCounter;
@@ -9,9 +10,19 @@ public class Product {
 	private double salePrice;
 	// Product array list
 	// Product constructors
-	// New product order with specific quantity
+	// New product
 	public Product(String name, String category, String description, double salePrice) {
 		this.productId = ++idCounter;
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.salePrice = salePrice;
+		FileHandler.writeToCSV(this);
+	}
+	//Constructor for loading products read from .csv file
+	//The id is already associated the product
+	public Product(String name, String category, String description, double salePrice, int id) {
+		this.productId = id;
 		this.name = name;
 		this.category = category;
 		this.description = description;
@@ -40,6 +51,19 @@ public class Product {
 	@Override
 	public String toString() {
 		return String.format("Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac \nDescription: %s", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), this.getDescription());
+	}
+	public static void createProductsFromList(ArrayList<ArrayList<String>> products) {
+		int id;
+		String name, category, description;
+		double salePrice;
+		for (ArrayList<String> product: products) {
+			id = Integer.parseInt(product.get(0));
+			name = product.get(1);
+			category = product.get(2);
+			description = product.get(3);
+			salePrice = Double.parseDouble(product.get(4));
+			new Product(name, category, description, salePrice, id);
+		}
 	}
 	
 }
