@@ -17,8 +17,8 @@ public class RegisteredCustomer extends Customer {
 	}
 	//Constructor for loading customers read from .csv file
 	//The id is already associated the customer
-	public RegisteredCustomer(String name, String adress, int telephone, int id, int points) {
-		super(name, adress, telephone);
+	public RegisteredCustomer(String name, String address, int telephone, int id, int points) {
+		super(name, address, telephone);
 		this.id = id;
 		this.points = points;
 		customers.add(this);
@@ -48,5 +48,17 @@ public class RegisteredCustomer extends Customer {
 			}
 		}
 		return null;
-}
+	}
+	public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
+		int id, points, telephone;
+		String name, address;
+		for (ArrayList<String> customer: customers) {
+			id = Integer.parseInt(customer.get(0));
+			name = customer.get(1);
+			address = customer.get(2);
+			telephone = Integer.parseInt(customer.get(3));
+			points = Integer.parseInt(customer.get(4));
+			new RegisteredCustomer(name, address, telephone, id, points);
+		}
+	}
 }

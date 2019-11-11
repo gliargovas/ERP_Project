@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Customer {
 	//instance variables
 	private String companyName;
@@ -34,5 +36,4 @@ public class Customer {
 		return "Customer [compunyName =" + companyName + ", address=" + address + ", telephone=" + telephone
 				+ "]";
 	}
-	
 }
