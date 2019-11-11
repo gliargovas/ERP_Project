@@ -4,16 +4,16 @@ public class RegisteredCustomer extends Customer {
 	private int id;
 	private int points;
 	// counts the number of Registered Customers created
-	private static int idcounter;
+	private static int idCounter;
 	private static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
 	// new registered customer
-	public RegisteredCustomer(String name, String adress, int telephone, int points) {
-			super(name, adress, telephone);
+	public RegisteredCustomer(String name, String address, int telephone, int points) {
+			super(name, address, telephone);
 			this.points = points;
-			this.id = ++idcounter;
+			this.id = ++idCounter;
 			//adding registered customer to arraylist
 			customers.add(this);
-			idcounter++;
+			idCounter++;
 			//adding customer to csv file
 			FileHandler.writeToCSV(this);
 		}

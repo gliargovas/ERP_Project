@@ -1,26 +1,26 @@
 public class Customer {
 	//instance variables
 	private String companyName;
-	private String adress;
+	private String address;
 	private int telephone;
 	//constructor
-	public Customer(String name, String adress, int telephone) {
+	public Customer(String name, String address, int telephone) {
 		this.companyName = name;
-		this.adress = adress;
+		this.address = address;
 		this.telephone = telephone;
 	}
 	//getters and setters
-	public String getcompanyName() {
+	public String getCompanyName() {
 		return companyName;
 	}
 	public void setName(String name) {
 		this.companyName = name;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = adress;
 	}
 	public int getTelephone() {
 		return telephone;
@@ -31,7 +31,7 @@ public class Customer {
 	//toString Method
 	@Override
 	public String toString() {
-		return "Customer [compunyName =" + companyName + ", adress=" + adress + ", telephone=" + telephone
+		return "Customer [compunyName =" + companyName + ", address=" + address + ", telephone=" + telephone
 				+ "]";
 	}
 	
