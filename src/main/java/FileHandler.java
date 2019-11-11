@@ -192,6 +192,73 @@ public class FileHandler {
         scanner.close();
         return records;
     }
+    
+    public static ArrayList<ArrayList<String>> getUsersFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./Users.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    
+    public static ArrayList<ArrayList<String>> getRegisteredCustomersFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./Customers.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    public static ArrayList<ArrayList<String>> getOrdersFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./Orders.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    public static ArrayList<ArrayList<String>> getStorageOrdersFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./StorageOrders.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    public static ArrayList<ArrayList<String>> getSuppliersFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./Suppliers.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
     private static ArrayList<String> getRecordFromLine(String line) {
         ArrayList<String> values = new ArrayList<String>();
         Scanner rowScanner = new Scanner(line);
