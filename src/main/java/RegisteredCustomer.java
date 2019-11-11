@@ -14,9 +14,15 @@ public class RegisteredCustomer extends Customer {
 			//adding registered customer to arraylist
 			customers.add(this);
 			idCounter++;
-			//adding customer to csv file
-			FileHandler.writeToCSV(this);
-		}
+	}
+	//Constructor for loading customers read from .csv file
+	//The id is already associated the customer
+	public RegisteredCustomer(String name, String adress, int telephone, int id, int points) {
+		super(name, adress, telephone);
+		this.id = id;
+		this.points = points;
+		customers.add(this);
+	}
 	//getters and setters
 	public int getPoints() {
 		return points;
@@ -27,13 +33,8 @@ public class RegisteredCustomer extends Customer {
 	public int getId() {
 		return id;
 	}
-	//Constructor for loading customers read from .csv file
-	//The id is already associated the customer
-	public RegisteredCustomer(String name, String adress, int telephone, int id, int points) {
-		super(name, adress, telephone);
-		this.id = id;
-		this.points = points;
-		customers.add(this);
+	public static ArrayList<RegisteredCustomer> getCustomers() {
+		return customers;
 	}
 	@Override
 	public String toString() {

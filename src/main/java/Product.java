@@ -17,7 +17,6 @@ public class Product {
 		this.category = category;
 		this.description = description;
 		this.salePrice = salePrice;
-		FileHandler.writeToCSV(this);
 	}
 	//Constructor for loading products read from .csv file
 	//The id is already associated the product
