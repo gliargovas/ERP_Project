@@ -110,7 +110,6 @@ public class Storage {
 				in.nextLine();
 			}
 		}
-		in.close();
 		new Product(name, category, description, price);
 		System.out.printf("Product %s created successfully!\n", name);
 	}
@@ -127,7 +126,6 @@ public class Storage {
 				input = in.nextLine();
 				if (input.equals("")) {
 					System.out.println("Process cancelled. Returning to previous menu...");
-					in.close();
 					return;
 				}
 				id = Integer.parseInt(input);
@@ -144,7 +142,6 @@ public class Storage {
 				System.err.println(e.getMessage());
 			}
 		}
-		in.close();
 	}
 	// changes a specific product's price 
 	private static void changeProductPrice(int id, double price) throws NoSuchElementException{
@@ -165,10 +162,11 @@ public class Storage {
 				input = in.nextLine();
 				if (input.equals("0")) {
 					System.out.println("Process cancelled. Returning to previous menu...");
-					in.close();
 					return;
 				}
 				id = Integer.parseInt(input);
+				Storage.deleteProduct(id);
+				break;
 			} catch (NumberFormatException e){
 				System.err.println("Invalid input given. Price must be an integer");
 			} catch (NoSuchElementException e) {
