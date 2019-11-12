@@ -35,7 +35,7 @@ public class Storage {
 		}
 	}
 	// Deletes a product from list
-	public static void deleteProduct(int id) {
+	private static void deleteProduct(int id) {
 		products.remove(products.indexOf(searchById(id)));
 	}
 	// Prints all products
@@ -123,9 +123,9 @@ public class Storage {
 		for(;;) {
 			id = 0;
 			try {
-				System.out.print("Enter the id of the product you want to change\nTo cancel, enter 0: ");
+				System.out.print("Enter the id of the product you want to change\nTo cancel, press \"enter\": ");
 				input = in.nextLine();
-				if (input.equals("0")) {
+				if (input.equals("")) {
 					System.out.println("Process cancelled. Returning to previous menu...");
 					in.close();
 					return;
@@ -136,24 +136,45 @@ public class Storage {
 				in.nextLine();
 				changeProductPrice(id, price);
 				break;
+			} catch (NumberFormatException e){
+				System.err.println("Invalid input given. Price must be an integer");
 			} catch (InputMismatchException e) {
-				System.err.println("Invalid inputs given. Id must be an integer and price must be double");
-				// checking if exception occurred during or after the id input
-				if (id !=0) {
-					//clearing the buffer
-					in.nextLine();
-				}
+				System.err.println("Invalid input given. Price must be a number");
 			} catch (NoSuchElementException e) {
-				e.getMessage();
+				System.err.println(e.getMessage());
 			}
 		}
 		in.close();
 	}
 	// changes a specific product's price 
-	public static void changeProductPrice(int id, double price) throws NoSuchElementException{
+	private static void changeProductPrice(int id, double price) throws NoSuchElementException{
 		Product product = searchById(id);
 		if (product == null) {
 			throw new NoSuchElementException("Product with such id does not exist");
 		} else product.setSalePrice(price);
 	}
+	
+	public static void deleteProductMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input;
+		for(;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the product you want to delete\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("0")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					in.close();
+					return;
+				}
+				id = Integer.parseInt(input);
+			} catch (NumberFormatException e){
+				System.err.println("Invalid input given. Price must be an integer");
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+	
 }
