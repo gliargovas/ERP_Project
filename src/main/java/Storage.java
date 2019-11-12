@@ -6,10 +6,10 @@ import java.util.Scanner;
 public class Storage {
 	protected static ArrayList<Product> products = new ArrayList <Product>();
 	protected static ArrayList<Integer[]> productQuantities = new ArrayList <Integer[]> ();
-	public static ArrayList<Product> getProducts() {
+	private static ArrayList<Product> getProducts() {
 		return products;
 	}
-	public static ArrayList<Integer[]> getProductQuantities() {
+	private static ArrayList<Integer[]> getProductQuantities() {
 		return productQuantities;
 	}
 	// Searches product by id
@@ -20,6 +20,9 @@ public class Storage {
 			}
 		}
 		return null;
+	}
+	public static void addProductToList(Product product) {
+		products.add(product);
 	}
 	// Searches and prints all products that contain a specific string in their name 
 	public static void searchAndPrintProductsByName(String name) {
