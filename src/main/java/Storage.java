@@ -21,6 +21,11 @@ public class Storage {
 		}
 		return null;
 	}
+	public static void printAllProductsWithQuantities() {
+		for (Product product : products) {
+			System.out.println(product.toStringWithQuantity());
+		}
+	}
 	public static void addProductToList(Product product) {
 		products.add(product);
 	}
@@ -38,8 +43,12 @@ public class Storage {
 		}
 	}
 	// Deletes a product from list
-	private static void deleteProduct(int id) {
-		products.remove(products.indexOf(searchById(id)));
+	private static void deleteProduct(int id) throws NoSuchElementException {
+		Product product = searchById(id);
+		if (product == null) {
+			throw new NoSuchElementException("Product with such id does not exist");
+		}
+		products.remove(products.indexOf(product));
 	}
 	// Prints all products
 	public static void printAllProducts() {
@@ -107,6 +116,10 @@ public class Storage {
 			try {
 				price = in.nextDouble();
 				in.nextLine();
+				if (price <= 0) {
+					System.out.println("Price must be larger than 0. Try again...");
+					continue;
+				}
 				break;
 			} catch(InputMismatchException e) {
 				System.err.println("Invalid input given. Price must be a number");
@@ -138,7 +151,7 @@ public class Storage {
 				changeProductPrice(id, price);
 				break;
 			} catch (NumberFormatException e){
-				System.err.println("Invalid input given. Price must be an integer");
+				System.err.println("Invalid input given. Price must be an integer, larger than 0");
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid input given. Price must be a number");
 			} catch (NoSuchElementException e) {
@@ -147,7 +160,10 @@ public class Storage {
 		}
 	}
 	// changes a specific product's price 
-	private static void changeProductPrice(int id, double price) throws NoSuchElementException{
+	private static void changeProductPrice(int id, double price) throws NoSuchElementException, NumberFormatException{
+		if (price <= 0) {
+			throw new NumberFormatException("Price must be larger than 0");
+		}
 		Product product = searchById(id);
 		if (product == null) {
 			throw new NoSuchElementException("Product with such id does not exist");
@@ -174,7 +190,18 @@ public class Storage {
 				System.err.println("Invalid input given. Price must be an integer");
 			} catch (NoSuchElementException e) {
 				System.err.println(e.getMessage());
+			} catch (Exception e) {
+				System.err.println("An error occured. Returning to previous menu");
 			}
+		}
+	}
+	//Adds productQuantity elements in productQuantities list that have been read from a .csv file
+	public static void createProductQuantitiesFromList(ArrayList<ArrayList<String>> idQuantities) {
+		int id, quantity;
+		for (ArrayList<String> idQuantity: idQuantities) {
+			id = Integer.parseInt(idQuantity.get(0));
+			quantity = Integer.parseInt(idQuantity.get(1));
+			Storage.createProductQuantity(id, quantity);
 		}
 	}
 	

@@ -54,6 +54,13 @@ public class Product {
 	public String toString() {
 		return String.format("Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac \nDescription: %s", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), this.getDescription());
 	}
+	
+	public String toShortString() {
+		return String.format("Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice());
+	}
+	public String toStringWithQuantity() {
+		return String.format("Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac | Units Available: %3d", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), Storage.getProductQuantity(this.getProductId()));
+	}
 	public static void createProductsFromList(ArrayList<ArrayList<String>> products) {
 		int id;
 		String name, category, description;
