@@ -43,6 +43,28 @@ public class FileHandler {
         catch (IOException e){}
     }
     
+    public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities)
+    {
+        try
+        {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ProductQuantities.csv"), "UTF-8"));
+            for (int[] productQuantity : productQuantities) {
+            	StringBuffer line = new StringBuffer();
+            	line.append(productQuantity[0]);
+                line.append(CSV_SEPARATOR);
+                line.append(productQuantity[1]);
+                line.append(CSV_SEPARATOR);               
+                bw.write(line.toString());
+                bw.newLine();
+                }
+            bw.flush();
+            bw.close();
+        }
+        catch (UnsupportedEncodingException e) {}
+        catch (FileNotFoundException e){}
+        catch (IOException e){}
+    }
+    
     public static void writeCustomerListToCsv(ArrayList<RegisteredCustomer> customers) {
         try
         {
@@ -190,6 +212,20 @@ public class FileHandler {
 		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     	try {
 			scanner = new Scanner(new File("./Products.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    
+    public static ArrayList<ArrayList<String>> getProductQuantityFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./ProductQuantities.csv"));
 		} catch (FileNotFoundException e) {}
         scanner.useDelimiter(CSV_SEPARATOR);
         while (scanner.hasNext()) {
