@@ -69,7 +69,7 @@ public class Storage {
 	}
 	
 	//checks if a product already exists and if it does, increases its quantity
-	public static void addProductQuantityToList(int id, int quantity) throws NoSuchElementException{
+	public static void addProductQuantity(int id, int quantity) throws NoSuchElementException{
 		for (Integer[] i : productQuantities) {
 			if (i[0] == id) {
 				i[1] += quantity;

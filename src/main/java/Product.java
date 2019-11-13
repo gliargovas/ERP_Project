@@ -18,7 +18,7 @@ public class Product {
 		this.description = description;
 		this.salePrice = salePrice;
 		Storage.addProductToList(this);
-		Storage.addProductQuantityToList(this.productId, 0);
+		Storage.createProductQuantity(this.getProductId());
 	}
 	//Constructor for loading products read from .csv file
 	//The id is already associated the product
