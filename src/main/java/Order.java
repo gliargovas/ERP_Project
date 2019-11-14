@@ -9,7 +9,8 @@ public class Order {
 	private final Customer customer;
 	private final Cashier cashier;
 	protected ArrayList<Order> orders=new ArrayList<Order>();
-	
+	protected ArrayList<String> Basket=new ArrayList<String>();
+ 	
 	public Order(int orderNo, Date orderDate, double totalCost, Customer customer, Cashier cashier) {
 		super();
 		OrderDate = orderDate;
@@ -40,5 +41,11 @@ public class Order {
 
 	public Cashier getCashier() {
 		return cashier;
+	}
+	
+	public void addProductToBasket(int Id, int quantity) {
+		//Check if productId containts Id
+		String prod= new String (quantity + " - " + Id);
+		Basket.add(prod);
 	}
 }
