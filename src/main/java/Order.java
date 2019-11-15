@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 	private final int OrderNo;
@@ -9,7 +10,7 @@ public class Order {
 	private final Customer customer;
 	private final Cashier cashier;
 	protected ArrayList<Order> orders=new ArrayList<Order>();
-	protected ArrayList<String> Basket=new ArrayList<String>();
+	protected List<int[]> basket=new ArrayList<int[]>();
  	
 	public Order(int orderNo, Date orderDate, double totalCost, Customer customer, Cashier cashier) {
 		super();
@@ -45,7 +46,7 @@ public class Order {
 	
 	public void addProductToBasket(int Id, int quantity) {
 		//Check if productId containts Id
-		String prod= new String (quantity + " - " + Id);
-		Basket.add(prod);
+		int[] prod= {Id, quantity};
+		basket.add(prod);
 	}
 }
