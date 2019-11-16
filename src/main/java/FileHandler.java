@@ -15,14 +15,14 @@ public class FileHandler {
 
     //CSV separator used: ;
     private static final String CSV_SEPARATOR = ";";
-    public static void writeToCSV(Product product)
+    public static void writeProductListToCSV(ArrayList<Product> products)
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Products.csv"), true));
-            {
-                StringBuffer line = new StringBuffer();
-                line.append(product.getProductId());
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Products.csv"), "UTF-8"));
+            for (Product product : products) {
+            	StringBuffer line = new StringBuffer();
+            	line.append(product.getProductId());
                 line.append(CSV_SEPARATOR);
                 line.append(product.getName());
                 line.append(CSV_SEPARATOR);
@@ -31,10 +31,10 @@ public class FileHandler {
                 line.append(product.getDescription());
                 line.append(CSV_SEPARATOR);
                 line.append(product.getSalePrice());
-                line.append(CSV_SEPARATOR);
+                line.append(CSV_SEPARATOR);                 
                 bw.write(line.toString());
                 bw.newLine();
-            }
+                }
             bw.flush();
             bw.close();
         }
@@ -43,22 +43,43 @@ public class FileHandler {
         catch (IOException e){}
     }
     
-    public static void writeToCSV(RegisteredCustomer customer)
+    public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities)
     {
         try
         {
-        	BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Customers.csv"), true));
-        	{
-                StringBuffer line = new StringBuffer();
-                line.append(customer.getId());
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ProductQuantities.csv"), "UTF-8"));
+            for (int[] productQuantity : productQuantities) {
+            	StringBuffer line = new StringBuffer();
+            	line.append(productQuantity[0]);
                 line.append(CSV_SEPARATOR);
-                line.append(customer.getName());
+                line.append(productQuantity[1]);
+                line.append(CSV_SEPARATOR);               
+                bw.write(line.toString());
+                bw.newLine();
+                }
+            bw.flush();
+            bw.close();
+        }
+        catch (UnsupportedEncodingException e) {}
+        catch (FileNotFoundException e){}
+        catch (IOException e){}
+    }
+    
+    public static void writeCustomerListToCsv(ArrayList<RegisteredCustomer> customers) {
+        try
+        {
+        	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Customers.csv"), "UTF-8"));
+            for (RegisteredCustomer registeredCustomer : customers) {
+            	StringBuffer line = new StringBuffer();
+            	line.append(registeredCustomer.getId());
                 line.append(CSV_SEPARATOR);
-                line.append(customer.getAddress());
+                line.append(registeredCustomer.getCompanyName());
                 line.append(CSV_SEPARATOR);
-                line.append(customer.getTel());
+                line.append(registeredCustomer.getAddress());
                 line.append(CSV_SEPARATOR);
-                line.append(customer.getPoints());
+                line.append(registeredCustomer.getTelephone());
+                line.append(CSV_SEPARATOR);
+                line.append(registeredCustomer.getPoints());
                 bw.write(line.toString());
                 bw.newLine();
             }
@@ -70,29 +91,30 @@ public class FileHandler {
         catch (IOException e){}
     }
     
-    public static void writeToCSV(User user) {
+    public static void writeUserListToCSV(ArrayList<User> users) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Users.csv"), true)); {
+    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Users.csv"), "UTF-8"));
+            for (User user : users) {
             	StringBuffer line = new StringBuffer();
             	if (user instanceof Cashier) {
-            		line.append("Cashier");
-            	} else if (user instanceof Storekeeper) {
-            		line.append("Storekeeper");
-            	} else if (user instanceof DataAnalyst) {
-                		line.append("DataAnalyst");
-            	} else if (user instanceof Admin) {
-                    		line.append("Admin");
-            	}
-            	line.append(CSV_SEPARATOR);
-            	line.append(user.getId());
-                line.append(CSV_SEPARATOR);
-                line.append(user.getName());
-                line.append(CSV_SEPARATOR);
-                line.append(user.getSurname());
-                line.append(CSV_SEPARATOR);
-                bw.write(line.toString());
-                bw.newLine();
-            }
+           			line.append("Cashier");
+           		} else if (user instanceof Storekeeper) {
+           			line.append("Storekeeper");
+           		} else if (user instanceof DataAnalyst) {
+               		line.append("DataAnalyst");
+           		} else if (user instanceof Admin) {
+               		line.append("Admin");
+           		}
+           		line.append(CSV_SEPARATOR);
+           		line.append(user.getId());
+           		line.append(CSV_SEPARATOR);
+           		line.append(user.getName());
+           		line.append(CSV_SEPARATOR);
+           		line.append(user.getSurname());
+           		line.append(CSV_SEPARATOR);
+           		bw.write(line.toString());
+               	bw.newLine();
+           	}
             bw.flush();
             bw.close();
         }
@@ -101,10 +123,12 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    public static void writeToCSV(Order order) {
+    public static void writeOrderListToCSV(ArrayList<Order> orders) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Orders.csv"), true)); {
-            	line.append(order.getOrderNumber());
+    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Orders.csv"), "UTF-8"));
+            for (Order order : orders) {
+            	StringBuffer line = new StringBuffer();
+           		line.append(order.getOrderNumber());
                 line.append(CSV_SEPARATOR);
                 line.append(order.getOrderDate());
                 line.append(CSV_SEPARATOR);
@@ -113,14 +137,14 @@ public class FileHandler {
                 line.append(order.getCustomer.getId());
                 line.append(CSV_SEPARATOR);
                 for (int[] i : order.getBasket()) {
-                	line.append(CSV_SEPARATOR);
+                 	line.append(CSV_SEPARATOR);
                     line.append(i[0]);
                     line.append(CSV_SEPARATOR);
                     line.append(i[1]);
                 }
                 bw.write(line.toString());
                 bw.newLine();
-            }
+          	}
             bw.flush();
             bw.close();
         }
@@ -129,10 +153,12 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    public static void writeToCSV(StorageOrder order) {
+    public static void writeStorageOrderToCSV(ArrayList<StorageOrder> orders) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("StorageOrders.csv"), true)); {
-            	line.append(order.getOrderNumber);
+    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("StorageOrders.csv"), "UTF-8"));
+    		for (StorageOrder order : orders) {
+    			StringBuffer line = new StringBuffer();
+        		line.append(order.getOrderNumber);
                 line.append(CSV_SEPARATOR);
                 line.append(order.getOrderDate());
                 line.append(CSV_SEPARATOR);
@@ -146,9 +172,9 @@ public class FileHandler {
                     line.append(i[0]);
                     line.append(CSV_SEPARATOR);
                     line.append(i[1]);
-                }
                 bw.write(line.toString());
                 bw.newLine();
+                }	
             }
             bw.flush();
             bw.close();
@@ -158,10 +184,12 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    public static void writeToCSV(Supplier supplier) {
+    public static void writeSupplierToCSV(ArrayList<Supplier> suppliers) {
     	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("Suppliers.csv"), true)); {
-            	line.append(supplier.getId());
+    		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Suppliers.csv"), "UTF-8"));
+    		for (Supplier supplier : suppliers) {
+    			StringBuffer line = new StringBuffer();
+    			line.append(supplier.getId());
                 line.append(CSV_SEPARATOR);
                 line.append(supplier.getAddress());
                 line.append(CSV_SEPARATOR);
@@ -184,6 +212,20 @@ public class FileHandler {
 		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     	try {
 			scanner = new Scanner(new File("./Products.csv"));
+		} catch (FileNotFoundException e) {}
+        scanner.useDelimiter(CSV_SEPARATOR);
+        while (scanner.hasNext()) {
+        	records.add(getRecordFromLine(scanner.nextLine()));
+        }
+        scanner.close();
+        return records;
+    }
+    
+    public static ArrayList<ArrayList<String>> getProductQuantityFromCsv() {
+		Scanner scanner=null;
+		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+    	try {
+			scanner = new Scanner(new File("./ProductQuantities.csv"));
 		} catch (FileNotFoundException e) {}
         scanner.useDelimiter(CSV_SEPARATOR);
         while (scanner.hasNext()) {
@@ -268,4 +310,5 @@ public class FileHandler {
         }
         return values;
     }
+    
 }

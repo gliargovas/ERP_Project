@@ -17,7 +17,8 @@ public class Product {
 		this.category = category;
 		this.description = description;
 		this.salePrice = salePrice;
-		FileHandler.writeToCSV(this);
+		Storage.addProductToList(this);
+		Storage.createProductQuantity(this.getProductId());
 	}
 	//Constructor for loading products read from .csv file
 	//The id is already associated the product
@@ -27,6 +28,7 @@ public class Product {
 		this.category = category;
 		this.description = description;
 		this.salePrice = salePrice;
+		Storage.addProductToList(this);
 	}
 	// Getters and setters
 	public double getSalePrice() {
@@ -51,6 +53,13 @@ public class Product {
 	@Override
 	public String toString() {
 		return String.format("Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac \nDescription: %s", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), this.getDescription());
+	}
+	
+	public String toShortString() {
+		return String.format("Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice());
+	}
+	public String toStringWithQuantity() {
+		return String.format("Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac | Units Available: %3d", this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice(), Storage.getProductQuantity(this.getProductId()));
 	}
 	public static void createProductsFromList(ArrayList<ArrayList<String>> products) {
 		int id;
