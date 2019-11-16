@@ -135,10 +135,24 @@ public class Main {
 	
 	private static void saveAllListsToCsv() {
 		//TODO Complete the method when all the classes have been connected
+		FileHandler.writeToCSV(Order.getOrders());
+		FileHandler.writeToCSV(Storage.getProducts());
+		FileHandler.writeToCSV(Storage.getIdQuantities());
+		FileHandler.writeToCSV(User.getUsers());
+		FileHandler.writeToCSV(StorageOrder.getStorageOrders());
+		FileHandler.writeToCSV(Supplier.getSuppliers());
+		FileHandler.writeToCSV(RegisteredCustomer.getRegisteredCustomers());
 	}
 	
 	private static void loadAllListsFromCsv() {
 		// TODO Complete the method when all the classes have been connected
+		User.createUsersFromList(FileHandler.getUsersFromCsv());
+		Product.createProductsFromList(FileHandler.getProductsFromCsv());
+		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
+		StorageOrder.createOrdersFromList(FileHandler.getStorageOrdersFromCsv());
+		Supplier.createStorageOrdersFromList(FileHandler.getSuppliersFromList());
+		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
+		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv);
 	}
 
 }
