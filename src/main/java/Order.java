@@ -13,7 +13,6 @@ public class Order {
 	protected List<int[]> basket=new ArrayList<int[]>();
  	
 	public Order(int orderNo, Date orderDate, double totalCost, Customer customer, Cashier cashier) {
-		super();
 		OrderDate = orderDate;
 		TotalCost = totalCost;
 		this.customer = customer;
