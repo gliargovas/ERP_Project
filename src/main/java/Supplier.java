@@ -38,6 +38,9 @@ public class Supplier {
 	public void setAddress(String address) {
 		Address = address;
 	}
+	public static ArrayList<Supplier> getSuppliers() {
+		return Suppliers;
+	}
 	private 
 	@Override
 	public String toString() {
