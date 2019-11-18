@@ -150,7 +150,7 @@ public class Main {
 		Product.createProductsFromList(FileHandler.getProductsFromCsv());
 		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
 		StorageOrder.createOrdersFromList(FileHandler.getStorageOrdersFromCsv());
-		Supplier.createStorageOrdersFromList(FileHandler.getSuppliersFromList());
+		Supplier.createStorageOrdersFromList(FileHandler.getSuppliersFromCsv());
 		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
 		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv);
 	}
