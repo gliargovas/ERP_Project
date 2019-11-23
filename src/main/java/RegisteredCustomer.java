@@ -41,7 +41,7 @@ public class RegisteredCustomer extends Customer {
 	public String toString() {
 		return super.toString()+" id=" + id + ", points=" + points + "]";
 	}
-	//returns a customer from the @Arraylist with a specific id
+	//returns a customer by Id
 	public static RegisteredCustomer searchbyId(int id) {
 		for (RegisteredCustomer i : customers) {
 			if (i.getId() == id) {
@@ -61,6 +61,11 @@ public class RegisteredCustomer extends Customer {
 			telephone = Integer.parseInt(customer.get(3));
 			points = Integer.parseInt(customer.get(4));
 			new RegisteredCustomer(name, address, telephone, id, points);
+		}
+	}
+	public static void printAllCustomers() {
+		for (Customer c : customers) {
+			System.out.println(c);
 		}
 	}
 }
