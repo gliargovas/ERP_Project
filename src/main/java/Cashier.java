@@ -37,13 +37,15 @@ public class Cashier extends User {
 	public static void printCustomerMenu() {
 		System.out.print("--- Customer Menu ---\n"
 				+ "1) View All Customers\n"
-				+ "2) Search for Specific Customers (by product name)\n"
-				+ "3) Search for Specific Customers (by product id)\n"
+				+ "2) Search for Specific Customers (by customer name)\n"
+				+ "3) Search for Specific Customers (by customer id)\n"
 				+ "4) Search for Specific Customers (by telephone number)\n"
 				+ "5) Add a new Customer\n"
 				+ "6) Edit Customer Telephone\n"
 				+ "7) Edit Customer Address\n"
-				+ "8) Return to Previous Menu\n"
+				+ "8) View Order History"
+				+ "9) View Specific Customer Order History"
+				+ "10) Return to Previous Menu\n"
 				+ "Option: ");
 	}
 	
@@ -114,6 +116,12 @@ public class Cashier extends User {
 					RegisteredCustomer.editCustomerAddressMenu();
 					break;
 				case 8:
+					//TODO method that displays order history
+					break;
+				case 9:
+					//TODO method that displays specific customer order history
+					break;
+				case 10:
 					return;
 				}
 			} catch (InputMismatchException e) {
