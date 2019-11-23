@@ -1,22 +1,23 @@
 import java.util.ArrayList;
 public class RegisteredCustomer extends Customer {
-	//instance variables
 	private int id;
+	//points each customer earns depending on his purchases
 	private int points;
 	// counts the number of Registered Customers created
 	private static int idCounter;
+	//an @Arraylist in which Customer information is temporarily saved
 	private static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
-	// new registered customer
+	// new registered customer creation
 	public RegisteredCustomer(String name, String address, int telephone, int points) {
 			super(name, address, telephone);
 			this.points = points;
 			this.id = ++idCounter;
-			//adding registered customer to arraylist
+			//adding registered customer to @Arraylist
 			customers.add(this);
 			idCounter++;
 	}
 	//Constructor for loading customers read from .csv file
-	//The id is already associated the customer
+	//The id is already associated with the customer, used when loading information from the database to the program
 	public RegisteredCustomer(String name, String address, int telephone, int id, int points) {
 		super(name, address, telephone);
 		this.id = id;
@@ -40,7 +41,7 @@ public class RegisteredCustomer extends Customer {
 	public String toString() {
 		return super.toString()+" id=" + id + ", points=" + points + "]";
 	}
-	//returns a customer from the Arraylist with a specific id
+	//returns a customer from the @Arraylist with a specific id
 	public static RegisteredCustomer searchbyId(int id) {
 		for (RegisteredCustomer i : customers) {
 			if (i.getId() == id) {
@@ -49,6 +50,7 @@ public class RegisteredCustomer extends Customer {
 		}
 		return null;
 	}
+	//creates a new registered customer from an @Arraylist
 	public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
 		int id, points, telephone;
 		String name, address;
