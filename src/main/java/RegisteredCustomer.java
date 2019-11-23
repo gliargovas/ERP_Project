@@ -64,8 +64,20 @@ public class RegisteredCustomer extends Customer {
 		}
 	}
 	public static void printAllCustomers() {
-		for (Customer c : customers) {
+		for (RegisteredCustomer c : customers) {
 			System.out.println(c);
 		}
 	}
+	public static void searchAndPrintRegisteredCustomersByName(String name) {
+		boolean found = false;
+		for (RegisteredCustomer c : customers) {
+			if (c.getCompanyName().toLowerCase().contains(name.toLowerCase())) {
+				found = true;
+				System.out.println(c);
+			}
+		}
+		if (found == false) {
+			System.out.println("No products with such name");
+		}
+	}	
 }
