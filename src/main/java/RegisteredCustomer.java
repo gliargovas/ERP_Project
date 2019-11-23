@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 public class RegisteredCustomer extends Customer {
 	private int id;
-	//points each customer earns depending on his purchases
+	//points each customer earns depending on his purchases TODO points algorithm
 	private int points;
-	// counts the number of Registered Customers created
+	// counts the number of registered customers created
 	private static int idCounter;
 	//an @Arraylist in which Customer information is temporarily saved
 	private static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
@@ -16,7 +16,7 @@ public class RegisteredCustomer extends Customer {
 			customers.add(this);
 			idCounter++;
 	}
-	//Constructor for loading customers read from .csv file
+	//Constructor for loading customers read from @.csv file
 	//The id is already associated with the customer, used when loading information from the database to the program
 	public RegisteredCustomer(String name, String address, int telephone, int id, int points) {
 		super(name, address, telephone);
