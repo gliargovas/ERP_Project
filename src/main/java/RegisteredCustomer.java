@@ -90,4 +90,14 @@ public class RegisteredCustomer extends Customer {
 			}
 				customers.remove(customers.indexOf(customer));
 		}
+		//checks if a Registered Customer already exists and if it does, increases his points
+		public static void addPoints(int id, int quantity) throws NoSuchElementException{
+			for (RegisteredCustomer i : customers) {
+				if(i.getId() == id) {
+					i.setPoints(i.getPoints() + quantity);
+					return;
+				}
+			}
+			throw new NoSuchElementException("Product with such id does not exist");
+		}
 }
