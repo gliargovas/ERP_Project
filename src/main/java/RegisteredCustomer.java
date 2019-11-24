@@ -130,7 +130,7 @@ public class RegisteredCustomer extends Customer {
 			new RegisteredCustomer(name,adress,telephone,points);
 			System.out.printf("Customer %s registered successfully!\n", name);
 		}
-		// contains the points change change menu
+		// contains the customer points change menu
 		public static void changeCustomerPointsMenu() {
 			Scanner in = new Scanner(System.in);
 			int id, points;
