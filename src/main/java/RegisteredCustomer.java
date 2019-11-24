@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
 public class RegisteredCustomer extends Customer {
 	private int id;
 	//points each customer earns depending on his purchases TODO points algorithm
@@ -42,7 +44,7 @@ public class RegisteredCustomer extends Customer {
 		return super.toString()+" id=" + id + ", points=" + points + "]";
 	}
 	//returns a customer by Id
-	public static RegisteredCustomer searchbyId(int id) {
+	public static RegisteredCustomer searchById(int id) {
 		for (RegisteredCustomer i : customers) {
 			if (i.getId() == id) {
 				return i;
@@ -77,7 +79,15 @@ public class RegisteredCustomer extends Customer {
 			}
 		}
 		if (found == false) {
-			System.out.println("No products with such name");
+			System.out.println("No customers with such name");
 		}
-	}	
+	}
+	// Deletes a customer from list
+		public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
+			RegisteredCustomer customer = searchById(id);
+			if (customer == null) {
+				throw new NoSuchElementException("Product with such id does not exist");
+			}
+				customers.remove(customers.indexOf(customer));
+		}
 }
