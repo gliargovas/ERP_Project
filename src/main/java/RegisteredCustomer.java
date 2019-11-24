@@ -104,13 +104,13 @@ public class RegisteredCustomer extends Customer {
 		}
 		// contains the registered customer creation menu TODO Customer menu at superclass
 		public static void registerNewCustomerMenu() {
-			String name, adress;
+			String name, address;
 			int telephone,points;
 			Scanner in = new Scanner(System.in);
 			System.out.print("Enter the customer's name: ");
 			name = in.nextLine();
-			System.out.print("Enter the customer's adress: ");
-			adress = (in.nextLine().toLowerCase());
+			System.out.print("Enter the customer's address: ");
+			address = (in.nextLine().toLowerCase());
 			System.out.print("Enter customer's telephone: ");
 			telephone = in.nextInt();
 			for (;;) {	
@@ -127,7 +127,7 @@ public class RegisteredCustomer extends Customer {
 					in.nextLine();
 				}
 			}
-			new RegisteredCustomer(name,adress,telephone,points);
+			new RegisteredCustomer(name,address,telephone,points);
 			System.out.printf("Customer %s registered successfully!\n", name);
 		}
 		// contains the customer points change menu
@@ -176,6 +176,32 @@ public class RegisteredCustomer extends Customer {
 					System.out.print("Enter the new name: ");
 					name = in.nextLine();
 					searchById(id).setName(name);
+					break;
+				} catch (NumberFormatException e){
+					System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				} catch (NoSuchElementException e) {
+					System.err.println(e.getMessage());
+					}
+				}
+		}
+		// contains the customer address change menu
+		public static void changeCustomerAddressMenu() {
+			Scanner in = new Scanner(System.in);
+			int id;
+			String input, address;
+			for(;;) {
+				id = 0;
+				try {
+					System.out.print("Enter the id of the registered customer you want to change\nTo cancel, press \"enter\": ");
+					input = in.nextLine();
+					if (input.equals("")) {
+						System.out.println("Process cancelled. Returning to previous menu...");
+						return;
+					}
+					id = Integer.parseInt(input);
+					System.out.print("Enter the new adress: ");
+					address = in.nextLine();
+					searchById(id).setAddress(address);
 					break;
 				} catch (NumberFormatException e){
 					System.err.println("Invalid input given. Id must be an integer, larger than 0");
