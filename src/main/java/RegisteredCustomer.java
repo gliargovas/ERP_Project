@@ -114,7 +114,7 @@ public class RegisteredCustomer extends Customer {
 			System.out.print("Enter customer's telephone: ");
 			telephone = in.nextInt();
 			for (;;) {	
-				System.out.print("Enter the product's price: ");
+				System.out.print("Enter customer's points: ");
 				try {
 					points = in.nextInt();
 					if (points <= 0) {
@@ -129,5 +129,33 @@ public class RegisteredCustomer extends Customer {
 			}
 			new RegisteredCustomer(name,adress,telephone,points);
 			System.out.printf("Customer %s registered successfully!\n", name);
+		}
+		// contains the points change change menu
+		public static void changeCustomerPointsMenu() {
+			Scanner in = new Scanner(System.in);
+			int id, points;
+			String input;
+			for(;;) {
+				id = 0;
+				try {
+					System.out.print("Enter the id of the registered customer you want to change\nTo cancel, press \"enter\": ");
+					input = in.nextLine();
+					if (input.equals("")) {
+						System.out.println("Process cancelled. Returning to previous menu...");
+						return;
+					}
+					id = Integer.parseInt(input);
+					System.out.print("Enter new points: ");
+					points = in.nextInt();
+					searchById(id).setPoints(points);
+					break;
+				} catch (NumberFormatException e){
+					System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				} catch (InputMismatchException e) {
+					System.err.println("Invalid input given. Points must be a number");
+				} catch (NoSuchElementException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		}
 }
