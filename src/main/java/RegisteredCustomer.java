@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class RegisteredCustomer extends Customer {
 	private int id;
@@ -98,6 +100,34 @@ public class RegisteredCustomer extends Customer {
 					return;
 				}
 			}
-			throw new NoSuchElementException("Product with such id does not exist");
+			throw new NoSuchElementException("Registered Customer with such id does not exist");
+		}
+		// contains the registered customer creation menu TODO Customer menu at superclass
+		public static void registerNewCustomerMenu() {
+			String name, adress;
+			int telephone,points;
+			Scanner in = new Scanner(System.in);
+			System.out.print("Enter the customer's name: ");
+			name = in.nextLine();
+			System.out.print("Enter the customer's adress: ");
+			adress = (in.nextLine().toLowerCase());
+			System.out.print("Enter customer's telephone: ");
+			telephone = in.nextInt();
+			for (;;) {	
+				System.out.print("Enter the product's price: ");
+				try {
+					points = in.nextInt();
+					if (points <= 0) {
+						System.out.println("Points must be larger than 0. Try again...");
+						continue;
+					}
+					break;
+				} catch(InputMismatchException e) {
+					System.err.println("Invalid input given. Points must be a number");
+					in.nextLine();
+				}
+			}
+			new RegisteredCustomer(name,adress,telephone,points);
+			System.out.printf("Customer %s registered successfully!\n", name);
 		}
 }
