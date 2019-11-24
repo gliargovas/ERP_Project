@@ -210,4 +210,32 @@ public class RegisteredCustomer extends Customer {
 					}
 				}
 		}
+		//contains customer telephone change menu
+		public static void changeCustomerTelephoneMenu() {
+			Scanner in = new Scanner(System.in);
+			int id, telephone;
+			String input;
+			for(;;) {
+				id = 0;
+				try {
+					System.out.print("Enter the id of the registered customer you want to change\nTo cancel, press \"enter\": ");
+					input = in.nextLine();
+					if (input.equals("")) {
+						System.out.println("Process cancelled. Returning to previous menu...");
+						return;
+					}
+					id = Integer.parseInt(input);
+					System.out.print("Enter new telephone: ");
+					telephone = in.nextInt();
+					searchById(id).setTelephone(telephone);
+					break;
+				} catch (NumberFormatException e){
+					System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				} catch (InputMismatchException e) {
+					System.err.println("Invalid input given. Telephone must be a number");
+				} catch (NoSuchElementException e) {
+					System.err.println(e.getMessage());
+					}
+				}
+		}	
 }
