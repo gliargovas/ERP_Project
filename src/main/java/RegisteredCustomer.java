@@ -155,7 +155,33 @@ public class RegisteredCustomer extends Customer {
 					System.err.println("Invalid input given. Points must be a number");
 				} catch (NoSuchElementException e) {
 					System.err.println(e.getMessage());
+					}
 				}
-			}
+		}
+		// contains the customer name change menu
+		public static void changeCustomerNameMenu() {
+			Scanner in = new Scanner(System.in);
+			int id;
+			String input, name;
+			for(;;) {
+				id = 0;
+				try {
+					System.out.print("Enter the id of the registered customer you want to change\nTo cancel, press \"enter\": ");
+					input = in.nextLine();
+					if (input.equals("")) {
+						System.out.println("Process cancelled. Returning to previous menu...");
+						return;
+					}
+					id = Integer.parseInt(input);
+					System.out.print("Enter the new name: ");
+					name = in.nextLine();
+					searchById(id).setName(name);
+					break;
+				} catch (NumberFormatException e){
+					System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				} catch (NoSuchElementException e) {
+					System.err.println(e.getMessage());
+					}
+				}
 		}
 }
