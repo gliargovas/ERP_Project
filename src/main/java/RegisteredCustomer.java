@@ -88,20 +88,31 @@ public class RegisteredCustomer extends Customer {
 		public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
 			RegisteredCustomer customer = searchById(id);
 			if (customer == null) {
-				throw new NoSuchElementException("Product with such id does not exist");
+				throw new NoSuchElementException("Customer with such id does not exist");
 			}
 				customers.remove(customers.indexOf(customer));
 		}
-		//checks if a Registered Customer already exists and if it does, increases his points
-		public static void addPoints(int id, int quantity) throws NoSuchElementException{
-			for (RegisteredCustomer i : customers) {
-				if(i.getId() == id) {
-					i.setPoints(i.getPoints() + quantity);
-					return;
-				}
+		//checks if a Registered Customer already exists and if it does, changes his points
+		public static void changePoints(int id, int points) throws NoSuchElementException, NumberFormatException{
+			if (points <= 0) {
+				throw new NumberFormatException("Points must be more or equal to 0");
 			}
-			throw new NoSuchElementException("Registered Customer with such id does not exist");
+			RegisteredCustomer customer = searchById(id);
+			if (customer == null) {
+				throw new NoSuchElementException("Customer with such id does not exist");
+			} else {
+			customer.setPoints(points);
+			}
 		}
+		//checks if a Registered Customer already exists and if it does, changes his name
+		public static void changeName(int id,String name) throws NoSuchElementException{
+			RegisteredCustomer customer = searchById(id);
+			if (customer == null) {
+				throw new NoSuchElementException("Customer with such id does not exist");
+			} else {
+				customer.setName(name);
+			}
+		}		
 		// contains the registered customer creation menu TODO Customer menu at superclass
 		public static void registerNewCustomerMenu() {
 			String name, address;
@@ -147,7 +158,7 @@ public class RegisteredCustomer extends Customer {
 					id = Integer.parseInt(input);
 					System.out.print("Enter new points: ");
 					points = in.nextInt();
-					searchById(id).setPoints(points);
+					changePoints(id,points);
 					break;
 				} catch (NumberFormatException e){
 					System.err.println("Invalid input given. Id must be an integer, larger than 0");
@@ -175,7 +186,7 @@ public class RegisteredCustomer extends Customer {
 					id = Integer.parseInt(input);
 					System.out.print("Enter the new name: ");
 					name = in.nextLine();
-					searchById(id).setName(name);
+					changeName(id,name);
 					break;
 				} catch (NumberFormatException e){
 					System.err.println("Invalid input given. Id must be an integer, larger than 0");
