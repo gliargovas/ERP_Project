@@ -5,7 +5,7 @@ import java.io.IOException;
 
     public class CSVReader {
 
-        //Method predicts sales of the month/week/etc according to the previous sales ("exponential smoothing" method)
+        //-Method predicts sales of the month/week/etc according to the previous sales ("exponential smoothing" method)
         public static double predictSales(){
             String csvFile = "(//Insert File Location path)"; //csv_file location, file with sales and predictions
             BufferedReader br = null;
