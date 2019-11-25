@@ -72,7 +72,7 @@ public class RegisteredCustomer extends Customer {
 			System.out.println(c);
 		}
 	}
-	public static void searchAndPrintRegisteredCustomersByName(String name) {
+	public static void searchAndPrintRegisteredCustomerByName(String name) {
 		boolean found = false;
 		for (RegisteredCustomer c : customers) {
 			if (c.getCompanyName().toLowerCase().contains(name.toLowerCase())) {
