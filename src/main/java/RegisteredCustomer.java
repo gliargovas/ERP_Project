@@ -112,6 +112,15 @@ public class RegisteredCustomer extends Customer {
 			} else {
 				customer.setName(name);
 			}
+		}
+			//checks if a Registered Customer already exists and if it does, changes his address
+			public static void changeAddress(int id,String address) throws NoSuchElementException{
+				RegisteredCustomer customer = searchById(id);
+				if (customer == null) {
+					throw new NoSuchElementException("Customer with such id does not exist");
+				} else {
+					customer.setAddress(address);
+				}
 		}		
 		// contains the registered customer creation menu TODO Customer menu at superclass
 		public static void registerNewCustomerMenu() {
@@ -212,7 +221,7 @@ public class RegisteredCustomer extends Customer {
 					id = Integer.parseInt(input);
 					System.out.print("Enter the new adress: ");
 					address = in.nextLine();
-					searchById(id).setAddress(address);
+					changeAddress(id,address);
 					break;
 				} catch (NumberFormatException e){
 					System.err.println("Invalid input given. Id must be an integer, larger than 0");
