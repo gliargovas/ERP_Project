@@ -43,9 +43,10 @@ public class Cashier extends User {
 				+ "5) Add a new Customer\n"
 				+ "6) Edit Customer Telephone\n"
 				+ "7) Edit Customer Address\n"
-				+ "8) View Order History"
-				+ "9) View Specific Customer Order History"
-				+ "10) Return to Previous Menu\n"
+				+ "8) Delete a Customer\n"
+				+ "9) View Order History"
+				+ "10) View Specific Customer Order History"
+				+ "11) Return to Previous Menu\n"
 				+ "Option: ");
 	}
 	
@@ -101,27 +102,30 @@ public class Cashier extends User {
 					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
 					break;
 				case 3:
-					RegisteredCustomer.searchAndPrintCustomersByNameMenu();
+					RegisteredCustomer.searchAndPrintRegisteredCustomerByNameMenu();
 					break;
 				case 4:
 					RegisteredCustomer.searchAndPrintCustomersByTelephoneMenu();
 					break;
 				case 5:
-					RegisteredCustomer.createNewCustomerMenu();
+					RegisteredCustomer.registerNewCustomerMenu();
 					break;
 				case 6:
-					RegisteredCustomer.editCustomerTelephoneMenu();
+					RegisteredCustomer.changeCustomerTelephoneMenu();
 					break;
 				case 7:
-					RegisteredCustomer.editCustomerAddressMenu();
+					RegisteredCustomer.changeCustomerAddressMenu();
 					break;
 				case 8:
-					//TODO method that displays order history
+					RegisteredCustomer.deleteCustomerMenu();
 					break;
 				case 9:
-					//TODO method that displays specific customer order history
+					//TODO method that displays order history
 					break;
 				case 10:
+					//TODO method that displays specific customer order history
+					break;
+				case 11:
 					return;
 				}
 			} catch (InputMismatchException e) {
