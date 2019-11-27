@@ -98,12 +98,24 @@ public class RegisteredCustomer extends Customer {
 	}
 	public static void searchAndPrintRegisteredCustomerById(int id) {
 		for (RegisteredCustomer c : customers) {
-			if (c.getId()==id) {
+			if (c.getId() == id) {
 				System.out.println(c);
 				return;
 			}
 		}
 			System.out.println("No customer with such Id");
+	}
+	public static void searchAndPrintRegisteredCustomerByTelephone(int telephone) {
+		boolean found = false;
+		for (RegisteredCustomer c : customers) {
+			if (c.getTelephone() == telephone) {
+				found = true;
+				System.out.println(c);
+			}
+		}
+		if (found == false) {
+			System.out.println("No customer with such telephone");
+		}
 	}
 	// Deletes a customer from list
 	public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
@@ -306,8 +318,6 @@ public class RegisteredCustomer extends Customer {
 				break;
 			} catch (NoSuchElementException e) {
 				System.err.println(e.getMessage());
-			} catch (Exception e) {
-				System.err.println("An error occured. Returning to previous menu");
 			}
 		}
 	}
@@ -356,7 +366,28 @@ public class RegisteredCustomer extends Customer {
 				searchAndPrintRegisteredCustomerById(id);
 				break;
 			} catch (NumberFormatException e){
-				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				System.err.println("Invalid input given. Id must be an integer");
+			}
+		}
+	}
+	public static void searchAndPrintCustomerByTelephoneMenu() {
+		Scanner in = new Scanner(System.in);
+		int telephone;
+		String input;
+		for(;;) {
+			telephone = 0;
+			try {
+				System.out.print("Enter the telephone of the registered customer you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				telephone = Integer.parseInt(input);
+				searchAndPrintRegisteredCustomerByTelephone(telephone);
+				break;
+			} catch (NumberFormatException e){
+				System.err.println("Invalid input given. Telephone must be an integer");
 			}
 		}
 	}
