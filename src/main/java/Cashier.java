@@ -59,6 +59,15 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
+	public static void printMenu() {
+		System.out.println("--- New Order Menu ---\n"
+				+ "Who does the order concern?\n"
+				+ "1) Already Registered Customer\n"
+				+ "2) Guest Customer (not registered)\n"
+				+ "3) Return To Previous Menu\n"
+				+ "Option: ");
+	}
+	
 	public void getProductMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -136,6 +145,33 @@ public class Cashier extends User {
 		}
 	}
 	
+	public void makeOrderMenu() {
+		Scanner in = new Scanner(System.in);
+		int ans;
+		for(;;) {
+			printProductMenu();
+			try {
+				ans = in.nextInt();
+				switch (ans) {
+				case 1:
+					Order.makeRegisteredCustomerOrder();
+					break;
+				case 2:
+					Order.makeGuestCustomerOrder();
+					break;
+				case 3:
+					return;
+				}
+			} catch (InputMismatchException e) {
+				System.err.println("Your option must be an integer number. Try again...");
+				// clear scanner buffer
+				in.nextLine();
+			}
+		}
+			
+		}
+	}
+	
 	@Override
 	public void getMenu() {
 		Scanner in = new Scanner(System.in);
@@ -152,7 +188,7 @@ public class Cashier extends User {
 					getCustomerMenu();
 					break;
 				case 3:
-					Order.makeOrder();
+					makeOrderMenu();
 				case 4:
 					return;
 				}
