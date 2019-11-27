@@ -117,6 +117,18 @@ public class RegisteredCustomer extends Customer {
 			System.out.println("No customer with such telephone");
 		}
 	}
+	public static void searchAndPrintRegisteredCustomerByPoints(int points) {
+		boolean found = false;
+		for (RegisteredCustomer c : customers) {
+			if (c.getTelephone() == points) {
+				found = true;
+				System.out.println(c);
+			}
+		}
+		if (found == false) {
+			System.out.println("No customer with such points");
+		}
+	}
 	// Deletes a customer from list
 	public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
 		RegisteredCustomer customer = searchById(id);
@@ -388,6 +400,27 @@ public class RegisteredCustomer extends Customer {
 				break;
 			} catch (NumberFormatException e){
 				System.err.println("Invalid input given. Telephone must be an integer");
+			}
+		}
+	}
+	public static void searchAndPrintCustomerByPointsMenu() {
+		Scanner in = new Scanner(System.in);
+		int points;
+		String input;
+		for(;;) {
+			points = 0;
+			try {
+				System.out.print("Enter the points of the registered customers you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				points = Integer.parseInt(input);
+				searchAndPrintRegisteredCustomerByPoints(points);
+				break;
+			} catch (NumberFormatException e){
+				System.err.println("Invalid input given. Points must be integers");
 			}
 		}
 	}
