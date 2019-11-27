@@ -84,6 +84,18 @@ public class RegisteredCustomer extends Customer {
 			System.out.println("No customers with such name");
 		}
 	}
+	public static void searchAndPrintRegisteredCustomerByAddresss(String address) {
+		boolean found = false;
+		for (RegisteredCustomer c : customers) {
+			if (c.getAddress().toLowerCase().contains(address.toLowerCase())) {
+				found = true;
+				System.out.println(c);
+			}
+		}
+		if (found == false) {
+			System.out.println("No customers with such address");
+		}
+	}
 	// Deletes a customer from list
 	public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
 		RegisteredCustomer customer = searchById(id);
@@ -290,4 +302,19 @@ public class RegisteredCustomer extends Customer {
 			}
 		}
 	}
+	public static void searchAndPrintCustomerByIdMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		for(;;) {
+				System.out.print("Enter the name of the registered customer you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				searchAndPrintRegisteredCustomerByName(input);
+				break;
+		}
+	}
 }
+	
