@@ -84,7 +84,7 @@ public class RegisteredCustomer extends Customer {
 			System.out.println("No customers with such name");
 		}
 	}
-	public static void searchAndPrintRegisteredCustomerByAddresss(String address) {
+	public static void searchAndPrintRegisteredCustomerByAddress(String address) {
 		boolean found = false;
 		for (RegisteredCustomer c : customers) {
 			if (c.getAddress().toLowerCase().contains(address.toLowerCase())) {
@@ -95,6 +95,15 @@ public class RegisteredCustomer extends Customer {
 		if (found == false) {
 			System.out.println("No customers with such address");
 		}
+	}
+	public static void searchAndPrintRegisteredCustomerById(int id) {
+		for (RegisteredCustomer c : customers) {
+			if (c.getId()==id) {
+				System.out.println(c);
+				return;
+			}
+		}
+			System.out.println("No customer with such Id");
 	}
 	// Deletes a customer from list
 	public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
@@ -302,7 +311,7 @@ public class RegisteredCustomer extends Customer {
 			}
 		}
 	}
-	public static void searchAndPrintCustomerByIdMenu() {
+	public static void searchAndPrintCustomerByNameMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
 		for(;;) {
@@ -316,5 +325,41 @@ public class RegisteredCustomer extends Customer {
 				break;
 		}
 	}
+	public static void searchAndPrintCustomerByAddressMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		for(;;) {
+				System.out.print("Enter the address of the registered customer you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				searchAndPrintRegisteredCustomerByAddress(input);
+				break;
+		}
+	}
+	public static void searchAndPrintCustomerByIdMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input;
+		for(;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the registered customer you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				searchAndPrintRegisteredCustomerById(id);
+				break;
+			} catch (NumberFormatException e){
+				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+			}
+		}
+	}
 }
+
 	
