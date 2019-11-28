@@ -151,7 +151,7 @@ public class Storage {
 				changeProductPrice(id, price);
 				break;
 			} catch (NumberFormatException e){
-				System.err.println("Invalid input given. Price must be an integer, larger than 0");
+				System.err.println("Invalid input given. Id must be an integer, larger than 0");
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid input given. Price must be a number");
 			} catch (NoSuchElementException e) {
