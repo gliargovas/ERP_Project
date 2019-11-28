@@ -134,7 +134,11 @@ public class FileHandler {
                 line.append(CSV_SEPARATOR);
                 line.append(order.getPrice());
                 line.append(CSV_SEPARATOR);
-                line.append(order.getCustomer.getId());
+                // the unregistered customers are saved to the Orders.csv with the id value of 0
+                if (order.getCustomer instanceof RegisteredCustomer)
+                	line.append(order.getCustomer.getId());
+                else
+                	line.append(0);
                 line.append(CSV_SEPARATOR);
                 for (int[] i : order.getBasket()) {
                  	line.append(CSV_SEPARATOR);
