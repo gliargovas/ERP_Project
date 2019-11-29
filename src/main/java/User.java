@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 public abstract class User {
 	
 	private final int idUser;
@@ -78,5 +79,14 @@ public abstract class User {
 				new Administrator(id, name, surname, username, password);
 			}
 		}
+	}
+	
+	public static User searchUserById(int id) throws NoSuchElementException {
+		for (User user : users) {
+			if (user.getIdUser() == id) {
+				return user;
+			}
+		}
+		throw new NoSuchElementException("User with such id does not exist");
 	}
 }
