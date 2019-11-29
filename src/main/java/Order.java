@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Order {
@@ -48,7 +49,7 @@ public class Order {
 		return totalCost;
 	}
 
-	public Customer CustomerId() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
@@ -146,17 +147,32 @@ public class Order {
 	}
 	
 	public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
-		int customerId, cashierId, 
+		int customerId, cashierId, orderNo;
+		double totalCost;
 		ArrayList<int[]> basket;
 		Date orderDate;
-		String name, address;
+		Customer customer;
+		Cashier cashier;
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
 		for (ArrayList<String> order: orders) {
-			id = Integer.parseInt(customer.get(0));
-			name = customer.get(1);
-			address = customer.get(2);
-			telephone = Integer.parseInt(customer.get(3));
-			points = Integer.parseInt(customer.get(4));
-			new RegisteredCustomer(name, address, telephone, id, points);
+			orderNo = Integer.parseInt(order.get(0));
+			orderDate = dateFormatter.parse(order.get(1));
+			totalCost = Double.parseDouble(order.get(2));
+			customerId = Integer.parseInt(order.get(3));
+			basket = new ArrayList<int[]>();
+			int[] temp;
+			if (customerId == 0)
+				customer = null;
+			else
+				customer = RegisterdCustomer.searchById();
+			cashierId = Integer.parseInt(order.get(4));
+			cashier = User.searchUserById(cashierId);
+			for (int i = 5 ; i < orders.size(); i += 2) {
+				temp[0] = Integer.parseInt(order.get(i));
+				temp[1] = Integer.parseInt(order.get(i+1));
+				basket.add(temp);
+			}
+			new Order(orderNo, orderDate, customer, cashier, totalCost, basket);
 		}
 	}
 }
