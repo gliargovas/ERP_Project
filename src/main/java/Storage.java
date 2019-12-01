@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Storage {
 	protected static ArrayList<Product> products = new ArrayList <Product>();
-	protected static ArrayList<Integer[]> productQuantities = new ArrayList <Integer[]> ();
-	private static ArrayList<Product> getProducts() {
+	protected static ArrayList<int[]> productQuantities = new ArrayList <int[]> ();
+	public static ArrayList<Product> getProducts() {
 		return products;
 	}
-	private static ArrayList<Integer[]> getProductQuantities() {
+	public static ArrayList<int[]> getProductQuantities() {
 		return productQuantities;
 	}
 	// Searches product by id
@@ -60,16 +60,16 @@ public class Storage {
 	
 	//makes a new association between a product and a quantity
 	public static void createProductQuantity(int id) {
-		Integer[] productQuantity = {id, 0};
+		int[] productQuantity = {id, 0};
 		productQuantities.add(productQuantity);
 	}
 	public static void createProductQuantity(int id, int quantity) {
-		Integer[] productQuantity = {id, quantity};
+		int[] productQuantity = {id, quantity};
 		productQuantities.add(productQuantity);
 	}
 	//returns the quantity of a specific product id
 	public static int getProductQuantity(int id) {
-		for (Integer[] i : productQuantities) {
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				return i[1];
 			}
@@ -79,7 +79,7 @@ public class Storage {
 	
 	//checks if a product already exists and if it does, increases its quantity
 	public static void addProductQuantity(int id, int quantity) throws NoSuchElementException{
-		for (Integer[] i : productQuantities) {
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				i[1] += quantity;
 				return;
@@ -89,7 +89,7 @@ public class Storage {
 	}
 	//checks if a product already exists and if it does, decreases its quantity
 	public static void removeProductQuantity(int id, int quantity) throws Exception, NoSuchElementException {
-		for (Integer[] i : productQuantities) {
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				if (i[1] - quantity < 0) {
 					throw new Exception("Not enough quantity");
