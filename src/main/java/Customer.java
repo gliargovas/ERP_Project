@@ -6,7 +6,7 @@ public class Customer {
 	//constructor
 	public Customer(String name, String address, int telephone) {
 		this.companyName = name;
-		this.address = address;
+		this.address = addres;
 		this.telephone = telephone;
 	}
 	//getters and setters
