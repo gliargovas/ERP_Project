@@ -204,5 +204,4 @@ public class Storage {
 			Storage.createProductQuantity(id, quantity);
 		}
 	}
-	
 }
