@@ -102,11 +102,11 @@ public class FileHandler {
            			line.append("Storekeeper");
            		} else if (user instanceof DataAnalyst) {
                		line.append("DataAnalyst");
-           		} else if (user instanceof Admin) {
+           		} else if (user instanceof Administrator) {
                		line.append("Admin");
            		}
            		line.append(CSV_SEPARATOR);
-           		line.append(user.getId());
+           		line.append(user.getIdUser());
            		line.append(CSV_SEPARATOR);
            		line.append(user.getName());
            		line.append(CSV_SEPARATOR);
@@ -128,17 +128,17 @@ public class FileHandler {
     		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Orders.csv"), "UTF-8"));
             for (Order order : orders) {
             	StringBuffer line = new StringBuffer();
-           		line.append(order.getOrderNumber());
+           		line.append(order.getOrderNo());
                 line.append(CSV_SEPARATOR);
                 line.append(order.getOrderDate());
                 line.append(CSV_SEPARATOR);
-                line.append(order.getPrice());
+                line.append(order.getTotalCost());
                 line.append(CSV_SEPARATOR);
                 // the unregistered customers are saved to the Orders.csv with the id value of 0
-                if (order.getCustomer instanceof RegisteredCustomer)
-                	line.append(order.getCustomer.getId());
+                if (order.getCustomer() instanceof RegisteredCustomer)
+                	line.append(((RegisteredCustomer)order.getCustomer()).getId());
                 else
-                	line.append(0);
+                	line.append("0");
                 line.append(CSV_SEPARATOR);
                 for (int[] i : order.getBasket()) {
                  	line.append(CSV_SEPARATOR);
