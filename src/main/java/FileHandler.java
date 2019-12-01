@@ -65,7 +65,7 @@ public class FileHandler {
         catch (IOException e){}
     }
     
-    public static void writeCustomerListToCsv(ArrayList<RegisteredCustomer> customers) {
+    public static void writeCustomerListToCSV(ArrayList<RegisteredCustomer> customers) {
         try
         {
         	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Customers.csv"), "UTF-8"));
