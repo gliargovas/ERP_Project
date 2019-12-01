@@ -204,4 +204,49 @@ public class Storage {
 			Storage.createProductQuantity(id, quantity);
 		}
 	}
+	
+	public static void searchAndPrintProductByIdMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		int id;
+		Product p;
+		for(;;) {
+			try {
+				System.out.print("Enter the id of the product you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				System.out.print(searchById(id).toStringWithQuantity());
+				break;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Id must be a non-negative integer. Try again...");
+			}
+		}
+	}
+	
+	public static void searchAndPrintProductsByNameMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		int id;
+		Product p;
+		for(;;) {
+			try {
+				System.out.print("Enter the name of the product you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				Storage.searchAndPrintProductsByName(input);
+				break;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Id must be a non-negative integer. Try again...");
+			}
+		}
+	}
 }

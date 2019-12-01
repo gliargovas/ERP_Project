@@ -38,8 +38,8 @@ public class Cashier extends User {
 		System.out.print("--- Customer Menu ---\n"
 				+ "1) View All Customers\n"
 				+ "2) Search for Specific Customers (by customer name)\n"
-				+ "3) Search for Specific Customers (by customer id)\n"
-				+ "4) Search for Specific Customers (by telephone number)\n"
+				+ "3) Search for Specific Customer (by customer id)\n"
+				+ "4) Search for Specific Customer (by telephone number)\n"
 				+ "5) Add a new Customer\n"
 				+ "6) Edit Customer Telephone\n"
 				+ "7) Edit Customer Address\n"
@@ -59,7 +59,7 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
-	public static void printMenu() {
+	public static void printNewOrderMenu() {
 		System.out.println("--- New Order Menu ---\n"
 				+ "Who does the order concern?\n"
 				+ "1) Already Registered Customer\n"
@@ -111,10 +111,10 @@ public class Cashier extends User {
 					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
 					break;
 				case 3:
-					RegisteredCustomer.searchAndPrintRegisteredCustomerByNameMenu();
+					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
 					break;
 				case 4:
-					RegisteredCustomer.searchAndPrintCustomersByTelephoneMenu();
+					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
 					break;
 				case 5:
 					RegisteredCustomer.registerNewCustomerMenu();
@@ -167,8 +167,6 @@ public class Cashier extends User {
 				// clear scanner buffer
 				in.nextLine();
 			}
-		}
-			
 		}
 	}
 	
