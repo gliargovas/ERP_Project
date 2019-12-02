@@ -46,13 +46,13 @@ public class RegisteredCustomer extends Customer {
 		return super.toString()+" id=" + id + ", points=" + points + "]";
 	}
 	//returns a customer by Id
-	public static RegisteredCustomer searchById(int id) {
+	public static RegisteredCustomer searchById(int id) throws NoSuchElementException {
 		for (RegisteredCustomer i : customers) {
 			if (i.getId() == id) {
 				return i;
 			}
 		}
-		return null;
+		throw new NoSuchElementException();
 	}
 	//creates a new registered customer from an @Arraylist
 	public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
