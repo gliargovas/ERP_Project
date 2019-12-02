@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -150,6 +152,37 @@ public class Order {
 		totalcost = calculateBasketCost(basket);
 		System.out.println("Order's total cost: " + totalCost);	
 	}
+	
+	//contains the prompts in order to make a registered customer order
+	public static void MakeRegisteredCustomerOrder() {
+		Scanner in = new Scanner(System.in);
+		String ans;
+		Customer customer;
+		int id;
+		for(;;) {
+			try {
+				System.out.print("Enter the id of the user the order is about. To cancel, press \"enter\": ");
+				if (ans.equals("")) {
+					System.out.println("Process cancelled, returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(ans);
+				customer = RegisteredCustomer.searchById(id);
+				//TODO Finish the method
+				
+			} catch (NoSuchElementException e) {
+				System.out.println("Customer with such id does not exist. Try again...");
+				continue;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input given. Try again...");
+				continue;
+			}
+		}
+	}
+	
+	public static void fillBasket() {
+	}
+	
 	
 	public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
 		int customerId, cashierId, orderNo;
