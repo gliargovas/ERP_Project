@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.text.ParseException;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 
 public class Order {
 	private final int orderNo;
-	private final Date orderDate;
+	private final String orderDate;
 	private final double totalCost;
 	private final Customer customer;
 	private final Cashier cashier;
@@ -16,7 +17,7 @@ public class Order {
 	private  static ArrayList<Order> orders=new ArrayList<Order>();
  	
 	//Create a new order
-	public Order(Date orderDate, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
+	public Order(String orderDate, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
 		this.orderNo = count++;
 		this.orderDate = orderDate;
 		this.totalCost = this.calculateBasketCost(basket);
@@ -28,7 +29,7 @@ public class Order {
 	
 	/*Constructor for already created products read from .csv file
 	There is non need to calculate the total cost again as it has been created*/
-	public Order(int orderNo, Date orderDate, double totalCost, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
+	public Order(int orderNo, String orderDate, double totalCost, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.totalCost = totalCost;
@@ -43,7 +44,7 @@ public class Order {
 		return orderNo;
 	}
 	
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 	
@@ -106,7 +107,7 @@ public class Order {
 	}
 		
 	//Prints a preview of the Order
-	public void previewOrder (Cashier cashier, Customer customer, ArrayList<int[]> basket) {
+	public static void previewOrder (Cashier cashier, Customer customer, ArrayList<int[]> basket) {
 		int cashierId = cashier.getIdUser();
 		double totalCost = 0;
 		System.out.println("Preview of Order");
@@ -154,22 +155,37 @@ public class Order {
 	}
 	
 	//contains the prompts in order to make a registered customer order
-	public static void MakeRegisteredCustomerOrder() {
+	public static void makeRegisteredCustomerOrder(Cashier cashier) {
 		Scanner in = new Scanner(System.in);
 		String ans;
 		Customer customer;
+		ArrayList<int[]> basket;
 		int id;
 		for(;;) {
 			try {
 				System.out.print("Enter the id of the user the order is about. To cancel, press \"enter\": ");
+				ans = in.nextLine();
 				if (ans.equals("")) {
 					System.out.println("Process cancelled, returning to previous menu...");
 					return;
 				}
 				id = Integer.parseInt(ans);
 				customer = RegisteredCustomer.searchById(id);
-				//TODO Finish the method
-				
+				basket = fillBasket();
+				Order.previewOrder(cashier, customer, basket);
+				System.out.print("Confirm order? (Y/N): ");
+				ans = in.nextLine();
+				for(;;) {
+					if (ans.toLowerCase().equals("Y") || ans.toLowerCase().equals("Yes")) {
+						Order.confirmOrder(cashier, customer, basket);
+						return;
+					} else if (ans.toLowerCase().equals("Y") || ans.toLowerCase().equals("Yes")) {
+						System.out.println("Process cancelled. Returning to previous menu...");
+						return;
+					}
+					System.out.println("Please enter either \"Yes\"(\"Y\") or \"No\"(\"N\").\n"
+							+ "Try again...");
+				}
 			} catch (NoSuchElementException e) {
 				System.out.println("Customer with such id does not exist. Try again...");
 				continue;
@@ -180,7 +196,63 @@ public class Order {
 		}
 	}
 	
-	public static void fillBasket() {
+	public static void confirmOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
+		for (int[] product : basket) {
+			try {
+				//remove the products from storage
+				Storage.removeProductQuantity(product[0], product[1]);
+			} catch (NoSuchElementException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		String orderDate = getCurrentDate();
+		new Order(orderDate, customer, cashier, basket);
+	}
+	
+	public static String getCurrentDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+		Date date = new Date();
+		return dateFormatter.format(date);
+	}
+	
+	//contains the prompts in order for the user to fill the order basket
+	public static ArrayList<int[]> fillBasket() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		ArrayList<int[]> tempBasket = new ArrayList<int[]>();
+		int[] idQuantity = new int[2];
+		int productId, quantity;
+		for (;;) {
+			try {
+				System.out.print("Enter the id of the product you want to buy.\n"
+						+ "Press only \"enter\" when you do not want to add any products: ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					return tempBasket;
+				}
+				productId = Integer.parseInt(input);
+				System.out.println("Enter the quantity of the product you want to shop");
+				quantity = in.nextInt();
+				if (Storage.checkIfQuantityIsEnough(productId, quantity) == true) {
+					idQuantity[0] = productId;
+					idQuantity[1] = quantity;
+					tempBasket.add(idQuantity);
+				} else {
+					System.out.println("There are not enough product units available.\n"
+							+ "Change the quantity or order more. Try Again...");
+					continue;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Product id must be an integer larger than 0. Try again...");
+			} catch (InputMismatchException e) {
+				System.out.println("The quantity must be an integer larger than 0. Try again...");
+				in.nextLine();
+			} catch (NoSuchElementException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	
@@ -188,19 +260,14 @@ public class Order {
 		int customerId, cashierId, orderNo;
 		double totalCost;
 		ArrayList<int[]> basket;
-		Date orderDate;
+		String orderDate;
 		Customer customer;
 		Cashier cashier;
 		int[] temp = null;
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 		for (ArrayList<String> order: orders) {
 			orderNo = Integer.parseInt(order.get(0));
-			try {
-				orderDate = dateFormatter.parse(order.get(1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-				continue;
-			}
+			orderDate = dateFormatter.format((order.get(1)));
 			totalCost = Double.parseDouble(order.get(2));
 			customerId = Integer.parseInt(order.get(3));
 			basket = new ArrayList<int[]>();
