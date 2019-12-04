@@ -15,7 +15,7 @@ public class Cashier extends User {
 		Cashier cashier;
 		for (User user : User.getUsers()) {
 			if (user instanceof Cashier) {
-				if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+				if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
 					cashier = (Cashier)user;
 					cashier.getMenu();
 					return;
@@ -28,8 +28,8 @@ public class Cashier extends User {
 	public static void printProductMenu() {
 		System.out.print("--- Product Menu ---\n"
 				+ "1) View All Products\n"
-				+ "2) Search for Specific Products (by product name)\n"
-				+ "3) Search for Specific Products (by product id)\n"
+				+ "2) Search for Specific Products (by product id)\n"
+				+ "3) Search for Specific Products (by product name)\n"
 				+ "4) Return to Previous Menu\n"
 				+ "Option: ");
 	}

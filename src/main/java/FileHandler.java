@@ -257,7 +257,7 @@ public class FileHandler {
     }
     
     public static ArrayList<ArrayList<String>> getUsersFromCsv() {
-		Scanner scanner=null;
+		Scanner scanner = null;
 		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     	try {
 			scanner = new Scanner(new File("./Users.csv"));

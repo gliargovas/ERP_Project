@@ -97,8 +97,8 @@ public class Storage {
 				i[1] -= quantity;
 				return;
 			}
-			throw new NoSuchElementException("Product with such id does not exist");
 		}
+		throw new NoSuchElementException("Product with such id does not exist");
 	}
 	// contains the product creation menu
 	public static void createNewProductMenu() {
@@ -126,7 +126,8 @@ public class Storage {
 				in.nextLine();
 			}
 		}
-		new Product(name, category, description, price);
+		Product prod = new Product(name, category, description, price);
+		createProductQuantity(prod.getProductId());
 		System.out.printf("Product %s created successfully!\n", name);
 	}
 	// contains the product price change menu
@@ -224,6 +225,10 @@ public class Storage {
 			}
 			catch (NumberFormatException e) {
 				System.out.println("Id must be a non-negative integer. Try again...");
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}
