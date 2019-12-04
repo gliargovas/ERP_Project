@@ -15,6 +15,23 @@ public class FileHandler {
 
     //CSV separator used: ;
     private static final String CSV_SEPARATOR = ";";
+    
+    public static void writeAllCountersToFile() {
+    	try {
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Counters.txt"), "UTF-8"));
+			StringBuffer line = new StringBuffer();
+			bw.write("User counter: "+ User.getUserIdCounter());
+			bw.write("Product counter: "+ Product.getIdCounter());
+			bw.write("Registered customer counter: " + RegisteredCustomer.getIdCounter());
+			bw.write("Order counter: " + Order.getIdCounter());
+			bw.write("Supplier counter: " + Supplier.getIdCounter());
+			bw.write("Storage order counter: " + StorageOrder.getIdCounter());
+		} 
+    	catch (UnsupportedEncodingException e) {} 
+    	catch (FileNotFoundException e) {}
+    	catch (IOException e) {}
+    }
+    
     public static void writeProductListToCSV(ArrayList<Product> products)
     {
         try
@@ -314,5 +331,18 @@ public class FileHandler {
         }
         return values;
     }
-    
+    private static ArrayList<String> getCountersFromTxt() {
+    	ArrayList<String> records = new ArrayList<String>();
+    	try {
+    		File file = new File("./Counters.txt");
+    		Scanner scanner = new Scanner(file);
+    		while (scanner.hasNext()) {
+    			records.add(scanner.nextLine());
+    		}
+    		scanner.close();
+    	} catch (FileNotFoundException e) {
+    		e.printStackTrace();
+    	}
+    	return records;
+    }
 }

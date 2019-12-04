@@ -68,7 +68,7 @@ public class Storage {
 		productQuantities.add(productQuantity);
 	}
 	//returns the quantity of a specific product id
-	public static int getProductQuantity(int id) {
+	public static int getProductQuantity(int id) throws NoSuchElementException{
 		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				return i[1];
@@ -226,6 +226,16 @@ public class Storage {
 				System.out.println("Id must be a non-negative integer. Try again...");
 			}
 		}
+	}
+	
+	public static boolean checkIfQuantityIsEnough(int id, int quantity) throws NoSuchElementException{
+		int productQuantity;
+		productQuantity = Storage.getProductQuantity(id);
+		if (productQuantity >= quantity) {
+			return true;
+		} else {
+			return false;
+		} 
 	}
 	
 	public static void searchAndPrintProductsByNameMenu() {
