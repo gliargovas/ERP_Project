@@ -154,10 +154,10 @@ public class Cashier extends User {
 				ans = in.nextInt();
 				switch (ans) {
 				case 1:
-					Order.makeRegisteredCustomerOrder(this);
+					Order.makeOrder(this, true);
 					break;
 				case 2:
-					Order.makeGuestCustomerOrder(this);
+					Order.makeOrder(this, false);
 					break;
 				case 3:
 					return;

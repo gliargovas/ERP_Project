@@ -33,6 +33,10 @@ public abstract class User {
 	}
 	
 	
+	public static int getUserIdCounter() {
+		return userIdCounter;
+	}
+
 	public int getIdUser() {
 		return idUser;
 	}

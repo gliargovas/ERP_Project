@@ -29,8 +29,12 @@ public class RegisteredCustomer extends Customer {
 		customers.add(this);
 	}
 	//getters and setters
+	
 	public int getPoints() {
 		return points;
+	}
+	public static int getIdCounter() {
+		return idCounter;
 	}
 	public void setPoints(int points) {
 		this.points = points;

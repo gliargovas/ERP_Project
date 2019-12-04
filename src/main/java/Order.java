@@ -68,6 +68,10 @@ public class Order {
 		return orders;
 	}
 	
+	public static int getIdCounter() {
+		return count;
+	}
+	
 	//Add product to basket 
 	public void addProductToBasket(int id, int quantity) {
 		int[] products= {id, quantity};
@@ -155,7 +159,7 @@ public class Order {
 	}
 	
 	//contains the prompts in order to make a registered customer order
-	public static void makeRegisteredCustomerOrder(Cashier cashier) {
+	public static void makeOrder(Cashier cashier, boolean isRegistered) {
 		Scanner in = new Scanner(System.in);
 		String ans;
 		Customer customer;
@@ -163,14 +167,20 @@ public class Order {
 		int id;
 		for(;;) {
 			try {
-				System.out.print("Enter the id of the user the order is about. To cancel, press \"enter\": ");
-				ans = in.nextLine();
-				if (ans.equals("")) {
-					System.out.println("Process cancelled, returning to previous menu...");
-					return;
+				if (isRegistered) {
+					System.out.println("*** Registered Customer Order Menu ***");
+					System.out.print("Enter the id of the user the order is about. To cancel, press \"enter\": ");
+					ans = in.nextLine();
+					if (ans.equals("")) {
+						System.out.println("Process cancelled, returning to previous menu...");
+						return;
+					}
+					id = Integer.parseInt(ans);
+					customer = RegisteredCustomer.searchById(id);
+				} else {
+					System.out.println("*** Guest Customer Order Menu ***");
+					customer = null;
 				}
-				id = Integer.parseInt(ans);
-				customer = RegisteredCustomer.searchById(id);
 				basket = fillBasket();
 				Order.previewOrder(cashier, customer, basket);
 				System.out.print("Confirm order? (Y/N): ");
@@ -254,7 +264,6 @@ public class Order {
 			}
 		}
 	}
-	
 	
 	public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
 		int customerId, cashierId, orderNo;

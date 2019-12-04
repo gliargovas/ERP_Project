@@ -49,6 +49,9 @@ public class Product {
 	public String getCategory() {
 		return category;
 	}
+	public static int getIdCounter() {
+		return idCounter;
+	}
 	// toString
 	@Override
 	public String toString() {
