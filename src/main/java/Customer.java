@@ -4,7 +4,7 @@ public class Customer {
 	private int telephone;
 	public Customer(String name, String address, int telephone) {
 		this.companyName = name;
-		this.address = address;
+		this.address = addres;
 		this.telephone = telephone;
 	}
 	public String getCompanyName() {
