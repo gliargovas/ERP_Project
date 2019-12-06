@@ -183,13 +183,14 @@ public class Order {
 				}
 				basket = fillBasket();
 				Order.previewOrder(cashier, customer, basket);
-				System.out.print("Confirm order? (Y/N): ");
-				ans = in.nextLine();
+				
 				for(;;) {
-					if (ans.toLowerCase().equals("Y") || ans.toLowerCase().equals("Yes")) {
+					System.out.print("Confirm order? (Y/N): ");
+					ans = in.nextLine();
+					if (ans.toLowerCase().equals("y") || ans.toLowerCase().equals("yes")) {
 						Order.confirmOrder(cashier, customer, basket);
 						return;
-					} else if (ans.toLowerCase().equals("Y") || ans.toLowerCase().equals("Yes")) {
+					} else if (ans.toLowerCase().equals("n") || ans.toLowerCase().equals("no")) {
 						System.out.println("Process cancelled. Returning to previous menu...");
 						return;
 					}

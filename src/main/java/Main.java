@@ -11,11 +11,11 @@ public class Main {
 	public static void printMainMenu() {
 		System.out.print("ERP SYSTEM\n\n"
 				+ "1) Login as a Cashier\n"
-				+ "2  Login as a Storekeeper"
-				+ "3) Login as a Data Analyst "
+				+ "2  Login as a Storekeeper\n"
+				+ "3) Login as a Data Analyst\n"
 				+ "4) Login as Administrator\n"
 				+ "5) Exit Application\n\n"
-				+ "\tAnswer: )");
+				+ "\tAnswer: ");
 	}
 	
 	public static void getMainMenu() {
@@ -40,7 +40,7 @@ public class Main {
 					administratorLogin();
 					break;
 				case 5:
-					saveAllListsToCsv();
+					//saveAllListsToCsv();
 					System.exit(0);
 					break;
 				default:

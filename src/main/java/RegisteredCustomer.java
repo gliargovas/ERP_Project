@@ -10,7 +10,7 @@ public class RegisteredCustomer extends Customer {
 	// counts the number of registered customers created
 	private static int idCounter;
 	//an @Arraylist in which Customer information is temporarily saved
-	private static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
+	protected static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
 	// new registered customer creation
 	public RegisteredCustomer(String name, String address, int telephone, int points) {
 			super(name, address, telephone);
@@ -18,7 +18,6 @@ public class RegisteredCustomer extends Customer {
 			this.id = ++idCounter;
 			//adding registered customer to @Arraylist
 			customers.add(this);
-			idCounter++;
 	}
 	//Constructor for loading customers read from @.csv file
 	//The id is already associated with the customer, used when loading information from the database to the program
@@ -183,27 +182,39 @@ public class RegisteredCustomer extends Customer {
 	// contains the registered customer creation menu TODO Customer menu at superclass
 	public static void registerNewCustomerMenu() {
 		String name, address;
-		int telephone,points;
+		int telephone, points;
 		Scanner in = new Scanner(System.in);
-		System.out.print("Enter the customer's name: ");
-		name = in.nextLine();
-		System.out.print("Enter the customer's address: ");
-		address = (in.nextLine().toLowerCase());
-		System.out.print("Enter customer's telephone: ");
-		telephone = in.nextInt();
-		for (;;) {	
-			System.out.print("Enter customer's points: ");
-			try {
-				points = in.nextInt();
-				if (points <= 0) {
-					System.out.println("Points must be larger than 0. Try again...");
-					continue;
+		for(;;) {
+			System.out.print("Enter the customer's name: ");
+			name = in.nextLine();
+			System.out.print("Enter the customer's address: ");
+			address = (in.nextLine().toLowerCase());
+			for (;;) {
+				try {
+					System.out.print("Enter customer's telephone: ");
+					telephone = in.nextInt();
+					break;
+				} catch(InputMismatchException e) {
+					System.err.println("Invalid input given. Telephone must be a number. Try again...");
+					in.nextLine();
 				}
-				break;
-			} catch(InputMismatchException e) {
-				System.err.println("Invalid input given. Points must be a number");
-				in.nextLine();
 			}
+			for (;;) {
+				try {
+					System.out.print("Enter customer's initial points: ");
+					points = in.nextInt();
+					if (points <= 0) {
+						System.err.println("Points must be larger than 0. Try again...");
+						continue;
+					}
+					break;
+				} catch (InputMismatchException e) {
+					System.err.println("Invalid input given. Points must be a number."
+							+ "Try again...");
+					in.nextLine();
+				}
+			}
+			break;
 		}
 		new RegisteredCustomer(name,address,telephone,points);
 		System.out.printf("Customer %s registered successfully!\n", name);
