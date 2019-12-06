@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class Cashier extends User {
 			if (user instanceof Cashier) {
 				if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
 					cashier = (Cashier)user;
+					System.out.printf("Welcome %s %s!\n", cashier.getName(), cashier.getSurname());
 					cashier.getMenu();
 					return;
 				}
@@ -44,14 +46,14 @@ public class Cashier extends User {
 				+ "6) Edit Customer Telephone\n"
 				+ "7) Edit Customer Address\n"
 				+ "8) Delete a Customer\n"
-				+ "9) View Order History"
-				+ "10) View Specific Customer Order History"
+				+ "9) View Order History\n"
+				+ "10) View Specific Customer Order History\n"
 				+ "11) Return to Previous Menu\n"
 				+ "Option: ");
 	}
 	
 	public static void printMenu() {
-		System.out.println("--- Cashier Menu ---\n"
+		System.out.print("--- Cashier Menu ---\n"
 				+ "1) Products\n"
 				+ "2) Customers\n"
 				+ "3) Make a New Customer Order\n"
@@ -60,7 +62,7 @@ public class Cashier extends User {
 	}
 	
 	public static void printNewOrderMenu() {
-		System.out.println("--- New Order Menu ---\n"
+		System.out.print("--- New Order Menu ---\n"
 				+ "Who does the order concern?\n"
 				+ "1) Already Registered Customer\n"
 				+ "2) Guest Customer (not registered)\n"
@@ -86,6 +88,7 @@ public class Cashier extends User {
 					Storage.searchAndPrintProductsByNameMenu();
 					break;
 				case 4:
+					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -108,10 +111,10 @@ public class Cashier extends User {
 					RegisteredCustomer.printAllCustomers();
 					break;
 				case 2:
-					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
+					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
 					break;
 				case 3:
-					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
+					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
 					break;
 				case 4:
 					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
@@ -135,6 +138,7 @@ public class Cashier extends User {
 					//TODO method that displays specific customer order history
 					break;
 				case 11:
+					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -149,7 +153,7 @@ public class Cashier extends User {
 		Scanner in = new Scanner(System.in);
 		int ans;
 		for(;;) {
-			printProductMenu();
+			printNewOrderMenu();
 			try {
 				ans = in.nextInt();
 				switch (ans) {
@@ -160,6 +164,7 @@ public class Cashier extends User {
 					Order.makeOrder(this, false);
 					break;
 				case 3:
+					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -187,7 +192,9 @@ public class Cashier extends User {
 					break;
 				case 3:
 					makeOrderMenu();
+					break;
 				case 4:
+					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
