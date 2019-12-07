@@ -1,5 +1,6 @@
 
 public class RegisteredCustomerMenuTest {
+	
 	public static void loadObjects() {
 		new RegisteredCustomer("nikos", "peloponisou 107", 2105024098, 100);
 		new RegisteredCustomer("maria", "peloponisou 10", 2105054468, 98);
@@ -18,4 +19,36 @@ public class RegisteredCustomerMenuTest {
 		new RegisteredCustomer("iggy", "valtetsiou 37", 2105024548, 165);
 		new RegisteredCustomer("pelopidas", "peloponisou 56", 2105432098, 650);
 		}
+	
+	public static void main(String[] args) {
+		loadObjects();
+		try {
+			System.out.println("\n\nChage customer address test\n");
+			RegisteredCustomer.changeCustomerAddressMenu();
+			System.out.println("\n\nChage customer name test\n");
+			RegisteredCustomer.changeCustomerNameMenu();
+			System.out.println("\n\nChage customer points test\n");
+			RegisteredCustomer.changeCustomerPointsMenu();
+			System.out.println("\n\nChage customer telephone test\n");
+			RegisteredCustomer.changeCustomerTelephoneMenu();
+			System.out.println("\n\nDelete customer test\n");
+			RegisteredCustomer.deleteCustomerMenu();
+			System.out.println("\n\nRegister new customer test\n");
+			RegisteredCustomer.registerNewCustomerMenu();
+			System.out.println("\n\nSearch and print customer by address test\n");
+			RegisteredCustomer.searchAndPrintCustomerByAddressMenu();
+			System.out.println("\n\nSearch and print customer by id test\n");
+			RegisteredCustomer.searchAndPrintCustomerByIdMenu();
+			System.out.println("\n\nSearch and print customer by name test\n");
+			RegisteredCustomer.searchAndPrintCustomerByNameMenu();
+			System.out.println("\n\nSearch and print customers by points test\n");
+			RegisteredCustomer.searchAndPrintCustomerByPointsMenu();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Exception occured test failed");
+			System.exit(1);
+		}
 	}
+	
+}
