@@ -1,15 +1,12 @@
 public class Customer {
-	//instance variables
 	private String companyName;
 	private String address;
 	private int telephone;
-	//constructor
 	public Customer(String name, String address, int telephone) {
 		this.companyName = name;
-		this.address = addres;
+		this.address = address;
 		this.telephone = telephone;
 	}
-	//getters and setters
 	public String getCompanyName() {
 		return companyName;
 	}

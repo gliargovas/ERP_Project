@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Storage {
 	protected static ArrayList<Product> products = new ArrayList <Product>();
-	protected static ArrayList<Integer[]> productQuantities = new ArrayList <Integer[]> ();
-	private static ArrayList<Product> getProducts() {
+	protected static ArrayList<int[]> productQuantities = new ArrayList <int[]> ();
+	public static ArrayList<Product> getProducts() {
 		return products;
 	}
-	private static ArrayList<Integer[]> getProductQuantities() {
+	public static ArrayList<int[]> getProductQuantities() {
 		return productQuantities;
 	}
 	// Searches product by id
@@ -60,16 +60,16 @@ public class Storage {
 	
 	//makes a new association between a product and a quantity
 	public static void createProductQuantity(int id) {
-		Integer[] productQuantity = {id, 0};
+		int[] productQuantity = {id, 0};
 		productQuantities.add(productQuantity);
 	}
 	public static void createProductQuantity(int id, int quantity) {
-		Integer[] productQuantity = {id, quantity};
+		int[] productQuantity = {id, quantity};
 		productQuantities.add(productQuantity);
 	}
 	//returns the quantity of a specific product id
-	public static int getProductQuantity(int id) {
-		for (Integer[] i : productQuantities) {
+	public static int getProductQuantity(int id) throws NoSuchElementException{
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				return i[1];
 			}
@@ -79,7 +79,7 @@ public class Storage {
 	
 	//checks if a product already exists and if it does, increases its quantity
 	public static void addProductQuantity(int id, int quantity) throws NoSuchElementException{
-		for (Integer[] i : productQuantities) {
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				i[1] += quantity;
 				return;
@@ -89,7 +89,7 @@ public class Storage {
 	}
 	//checks if a product already exists and if it does, decreases its quantity
 	public static void removeProductQuantity(int id, int quantity) throws Exception, NoSuchElementException {
-		for (Integer[] i : productQuantities) {
+		for (int[] i : productQuantities) {
 			if (i[0] == id) {
 				if (i[1] - quantity < 0) {
 					throw new Exception("Not enough quantity");
@@ -97,8 +97,8 @@ public class Storage {
 				i[1] -= quantity;
 				return;
 			}
-			throw new NoSuchElementException("Product with such id does not exist");
 		}
+		throw new NoSuchElementException("Product with such id does not exist");
 	}
 	// contains the product creation menu
 	public static void createNewProductMenu() {
@@ -126,7 +126,8 @@ public class Storage {
 				in.nextLine();
 			}
 		}
-		new Product(name, category, description, price);
+		Product prod = new Product(name, category, description, price);
+		createProductQuantity(prod.getProductId());
 		System.out.printf("Product %s created successfully!\n", name);
 	}
 	// contains the product price change menu
@@ -205,4 +206,62 @@ public class Storage {
 		}
 	}
 	
+	public static void searchAndPrintProductByIdMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		int id;
+		Product p;
+		for(;;) {
+			try {
+				System.out.print("Enter the id of the product you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				System.out.print(searchById(id).toStringWithQuantity());
+				break;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Id must be a non-negative integer. Try again...");
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	
+	public static boolean checkIfQuantityIsEnough(int id, int quantity) throws NoSuchElementException{
+		int productQuantity;
+		productQuantity = Storage.getProductQuantity(id);
+		if (productQuantity >= quantity) {
+			return true;
+		} else {
+			return false;
+		} 
+	}
+	
+	public static void searchAndPrintProductsByNameMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		int id;
+		Product p;
+		for(;;) {
+			try {
+				System.out.print("Enter the name of the product you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				Storage.searchAndPrintProductsByName(input);
+				break;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Id must be a non-negative integer. Try again...");
+			}
+		}
+	}
 }
