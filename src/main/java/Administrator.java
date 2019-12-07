@@ -12,8 +12,9 @@ public class Administrator extends User {
 		Administrator admin;
 		for (User user : User.getUsers()) {
 			if (user instanceof Administrator) {
-				if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+				if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
 					admin = (Administrator)user;
+					System.out.printf("Welcome %s %s!\n", admin.getName(), admin.getSurname());
 					admin.getMenu();
 					return;
 				}
@@ -24,6 +25,8 @@ public class Administrator extends User {
 
 	@Override
 	public void getMenu() {
+		//TODO Complete the method
+		System.out.println("Admin Menu");
 	}
 
 }

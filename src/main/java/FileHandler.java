@@ -179,15 +179,15 @@ public class FileHandler {
     		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("StorageOrders.csv"), "UTF-8"));
     		for (StorageOrder order : orders) {
     			StringBuffer line = new StringBuffer();
-        		line.append(order.getOrderNumber);
+        		line.append(order.getStorageOrderNumber());
                 line.append(CSV_SEPARATOR);
-                line.append(order.getOrderDate());
+                line.append(order.getStorageOrderDate());
                 line.append(CSV_SEPARATOR);
                 line.append(order.getTotalCost());
                 line.append(CSV_SEPARATOR);
-                line.append(order.getSupplier.getId());
+                line.append(order.getSupplier().getId());
                 line.append(CSV_SEPARATOR);
-                line.append(order.getStorekeeper.getId());
+                line.append(order.getStorekeeper().getIdUser());
                 for (int[] i : order.getSupplies()) {
                 	line.append(CSV_SEPARATOR);
                     line.append(i[0]);

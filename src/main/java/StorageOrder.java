@@ -11,7 +11,7 @@ public class StorageOrder {
 	private static ArrayList<int[]> supplies =new ArrayList<int[]>();
 	private static ArrayList<StorageOrder> orders = new ArrayList<StorageOrder>();
  	
-	public StorageOrder(int StorageOrderNumber, Date storageOrderDate, double totalCost, Storekkeper storekeeper, Supplier supplier) {
+	public StorageOrder(int StorageOrderNumber, Date storageOrderDate, double totalCost, Storekeeper storekeeper, Supplier supplier) {
 		storageOrderDate = storageOrderDate;
 		totalCost = totalCost;
 		this.Storekeeper = storekeeper;

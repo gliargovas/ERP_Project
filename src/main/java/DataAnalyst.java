@@ -11,8 +11,9 @@ public class DataAnalyst extends User {
 		DataAnalyst da;
 		for (User user : User.getUsers()) {
 			if (user instanceof DataAnalyst) {
-				if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+				if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
 					da = (DataAnalyst)user;
+					System.out.printf("Welcome %s %s!\n", da.getName(), da.getSurname());
 					da.getMenu();
 					return;
 				}
@@ -23,6 +24,7 @@ public class DataAnalyst extends User {
 	
 	@Override
 	public void getMenu() {
-		
+		//TODO Complete the method
+		System.out.println("Data Analyst Menu");
 	}
 }

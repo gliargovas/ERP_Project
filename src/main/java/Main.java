@@ -139,8 +139,8 @@ public class Main {
 		FileHandler.writeProductListToCSV(Storage.getProducts());
 		FileHandler.writeProductQuantitiesListToCSV(Storage.getProductQuantities());
 		FileHandler.writeUserListToCSV(User.getUsers());
-		FileHandler.writeToCSV(StorageOrder.getStorageOrders());
-		FileHandler.writeToCSV(Supplier.getSuppliers());
+		FileHandler.writeStorageOrderToCSV(StorageOrder.getOrders());
+		FileHandler.writeSupplierToCSV(Supplier.getSuppliers());
 		FileHandler.writeCustomerListToCSV(RegisteredCustomer.getCustomers());
 	}
 	
