@@ -339,7 +339,7 @@ public class RegisteredCustomer extends Customer {
   public static void changeCustomerPointsMenu() {
     Scanner in = new Scanner(System.in);
     int id;
-    String points;
+    int points;
     String input;
     for (; ; ) {
       id = 0;
