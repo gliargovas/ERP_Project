@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * The class represents a registered corporate customer of the ERP system
  * The class is responsible for creating a registered customer object and
- * storing it in an @ArrayList either by creating a completely new registered
- * customer or loading it from a @.csv file. It also contains methods for searching
+ * storing it in an ArrayList either by creating a completely new registered
+ * customer or loading it from a .csv file. It also contains methods for searching
  * and editing the contents of the customer list with specific criteria. There are also
  * methods that contain menus in order to use the above mentioned methods according
  * to user input.
@@ -42,7 +42,7 @@ public class RegisteredCustomer extends Customer {
   }
   
   /** 
-   * Constructor for loading customers read from @.csv file
+   * Constructor for loading customers read from .csv file
    * The id is already associated with the customer, used when loading information from the database
    * to the program 
    * 
@@ -99,7 +99,7 @@ public class RegisteredCustomer extends Customer {
     throw new NoSuchElementException();
   }
   
-  /** Creates a new registered customer from an @Arraylist. of strings by parsing its contents.
+  /** Creates a new registered customer from an Arraylist of strings by parsing its contents.
    * @param customers
    */
   public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {

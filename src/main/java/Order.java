@@ -129,7 +129,7 @@ public class Order {
 		for (int prod [] : basket) {
 			printProduct(prod [0], prod [1]);
 		}
-		double totalcost = calculateBasketCost(basket);
+		totalCost = calculateBasketCost(basket);
 		System.out.println("Order's total cost: " + totalCost);	
 	}
 	
@@ -233,30 +233,37 @@ public class Order {
 		Scanner in = new Scanner(System.in);
 		String input;
 		ArrayList<int[]> tempBasket = new ArrayList<int[]>();
-		int[] idQuantity = new int[2];
-		int productId, quantity;
+		int[] tempProduct = new int[2];
 		for (;;) {
 			try {
+				tempProduct = new int[2];
 				System.out.print("Enter the id of the product you want to buy.\n"
 						+ "Press only \"enter\" when you do not want to add any products: ");
 				input = in.nextLine();
 				if (input.equals("")) {
+					for (int [] i : tempBasket) {
+						System.out.println(i[0] +" | "+ i[1] ); 
+					}
 					return tempBasket;
 				}
-				productId = Integer.parseInt(input);
+				tempProduct[0] = Integer.parseInt(input);
 				System.out.println("Enter the quantity of the product you want to shop");
-				quantity = in.nextInt();
-				if (Storage.checkIfQuantityIsEnough(productId, quantity) == true) {
-					idQuantity[0] = productId;
-					idQuantity[1] = quantity;
-					tempBasket.add(idQuantity);
+				tempProduct[1] = in.nextInt();
+				in.nextLine();
+				if (Storage.checkIfQuantityIsEnough(tempProduct[0], tempProduct[1]) == true) {
+					System.out.println(tempProduct[0]+" "+ tempProduct[1]); 
+					tempBasket.add(tempProduct);
+					for (int [] i : tempBasket) {
+						System.out.println(i[0] +" | "+ i[1] ); 
+					}
+					
 				} else {
 					System.out.println("There are not enough product units available.\n"
 							+ "Change the quantity or order more. Try Again...");
-					continue;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Product id must be an integer larger than 0. Try again...");
+				in.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println("The quantity must be an integer larger than 0. Try again...");
 				in.nextLine();

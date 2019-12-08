@@ -1,5 +1,6 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Scanner;
+
 public class Storekeeper extends User{
 	public Storekeeper(String name, String surname, String username, String password) {
 		super(name, surname, username, password);
@@ -122,22 +123,22 @@ public class Storekeeper extends User{
 					RegisteredCustomer.printAllCustomers();
 					break;
 				case 2:
-					RegisteredCustomer.searchAndPrintCustomersByNameMenu();
+					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
 					break;
 				case 3:
 					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
 					break;
 				case 4:
-					RegisteredCustomer.searchAndPrintCustomersByTelephoneMenu();
+					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
 					break;
 				case 5:
-					RegisteredCustomer.createNewCustomerMenu();
+					RegisteredCustomer.registerNewCustomerMenu();
 					break;
 				case 6:
-					RegisteredCustomer.editCustomerTelephoneMenu();
+					RegisteredCustomer.changeCustomerTelephoneMenu();
 					break;
 				case 7:
-					RegisteredCustomer.editCustomerAddressMenu();
+					RegisteredCustomer.changeCustomerAddressMenu();
 					break;
 				case 8:
 					//TODO method that displays order history

@@ -55,9 +55,15 @@ public class FileHandler {
             bw.flush();
             bw.close();
         }
-        catch (UnsupportedEncodingException e) {}
-        catch (FileNotFoundException e){}
-        catch (IOException e){}
+        catch (UnsupportedEncodingException e) {
+        	e.printStackTrace();
+        }
+        catch (FileNotFoundException e){
+        	e.printStackTrace();
+        }
+        catch (IOException e){
+        	e.printStackTrace();
+        }
     }
     
     public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities)
@@ -227,7 +233,7 @@ public class FileHandler {
         catch (IOException e) {}
     }
     
-    //File Reader
+    //.csv file reader for loading the contents of the file to the main memory
     public static ArrayList<ArrayList<String>> getProductsFromCsv() {
 		Scanner scanner=null;
 		ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
