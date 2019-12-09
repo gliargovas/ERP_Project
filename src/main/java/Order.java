@@ -279,7 +279,7 @@ public class Order {
       System.out.println("Name: " + customerName);
       System.out.println("Address: " + customer.getAddress());
     } else {
-      System.out.println("Guest");
+      System.out.println("Guest or Deleted");
     }
     System.out.println("\n---Product Basket: ");
     for (int prod[] : basket) {
@@ -313,7 +313,7 @@ public class Order {
       System.out.println("Name: " + customerName);
       System.out.println("Address: " + this.getCustomer().getAddress());
     } else {
-      System.out.println("Guest");
+      System.out.println("Guest or Deleted");
     }
     System.out.println("\n---Product Basket: ");
     for (int prod[] : basket) {
@@ -502,7 +502,7 @@ public class Order {
     double totalCost;
     ArrayList<int[]> basket;
     String orderDate;
-    Customer customer;
+    Customer customer = null;
     Cashier cashier;
     int[] temp = null;
     for (ArrayList<String> order : orders) {
@@ -512,11 +512,22 @@ public class Order {
       totalCost = Double.parseDouble(order.get(2));
       customerId = Integer.parseInt(order.get(3));
       basket = new ArrayList<int[]>();
-      if (customerId == 0) customer = null;
-      else customer = RegisteredCustomer.searchById(customerId);
+      if (customerId == 0) {
+    	  customer = null;
+  	  } else {
+  		  try {
+  			  customer = RegisteredCustomer.searchById(customerId);
+  		  } catch (NoSuchElementException e) {
+  			  customer = null;
+  		  }
+  	  }
       cashierId = Integer.parseInt(order.get(4));
-      cashier = (Cashier) User.searchUserById(cashierId);
-      for (int i = 5; i < orders.size(); i += 2) {
+      try {
+    	  cashier = (Cashier) User.searchUserById(cashierId);
+      } catch (NoSuchElementException e) {
+    	  cashier = null;
+      }
+      for (int i = 5; i < order.size(); i += 2) {
     	temp = new int[2];
         temp[0] = Integer.parseInt(order.get(i));
         temp[1] = Integer.parseInt(order.get(i + 1));
