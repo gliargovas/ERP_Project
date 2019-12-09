@@ -13,8 +13,9 @@ public class Storekeeper extends User{
 		Storekeeper storekeeper;
 		for (User user : User.getUsers()) {
 			if (user instanceof Storekeeper) {
-				if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+				if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
 					storekeeper = (Storekeeper)user;
+					System.out.printf("Welcome %s %s!\n", storekeeper.getName(), storekeeper.getSurname());
 					storekeeper.getMenu();
 					return;
 				}
@@ -55,6 +56,7 @@ public class Storekeeper extends User{
 	}
 	@Override
 	public void getMenu() {
+		/*
 		int ch;
 		int yes=0;
 		Scanner sc=new Scanner(System.in); 
@@ -84,6 +86,7 @@ public class Storekeeper extends User{
 		}catch(Exception e) {
 			return;
 		}
+		*/
 	}		
 }
 
