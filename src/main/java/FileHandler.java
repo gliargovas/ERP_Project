@@ -163,6 +163,7 @@ public class FileHandler {
                 else
                 	line.append("0");
                 line.append(CSV_SEPARATOR);
+                line.append(order.getCashier().getIdUser());
                 for (int[] i : order.getBasket()) {
                  	line.append(CSV_SEPARATOR);
                     line.append(i[0]);

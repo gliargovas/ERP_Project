@@ -132,10 +132,10 @@ public class Cashier extends User {
 					RegisteredCustomer.deleteCustomerMenu();
 					break;
 				case 9:
-					//TODO method that displays order history
+					Order.printOrderHistory();
 					break;
 				case 10:
-					//TODO method that displays specific customer order history
+					Order.printOrderHistoryMenu();
 					break;
 				case 11:
 					in.close();
