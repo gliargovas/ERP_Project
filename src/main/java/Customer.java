@@ -1,3 +1,6 @@
+/*this class is used when there is no need of registering a customer,
+ * but we need some info in order to complete the order
+*/
 public class Customer {
 	private String companyName;
 	private String address;
