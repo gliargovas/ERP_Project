@@ -2,7 +2,6 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -29,7 +28,7 @@ public class Order {
   /** The counter of the created orders, used for generating new order ids */
   private static int count = 1;
   /** The order list that contains all the orders made */
-  private static ArrayList<Order> orders = new ArrayList<Order>();
+  protected static ArrayList<Order> orders = new ArrayList<Order>();
 
   /**
    * Constructor for creating a new order.
@@ -168,10 +167,12 @@ public class Order {
             "Enter the id of the customer for whom you want to print the order history: ");
         input = in.nextInt();
         printOrderHistory(input);
+        return;
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Id must be an integer. Try again...");
       } catch (Exception e) {
-        System.err.println("Something went wrong. Returning to previous menu");
+    	  e.printStackTrace();
+    	  System.err.println("Something went wrong. Returning to previous menu");
         return;
       }
     }
@@ -185,11 +186,11 @@ public class Order {
   public static void printOrderHistory(int id) {
     int counter = 0;
     for (Order order : orders) {
-      if (id == order.getCashier().getIdUser()) {
+      if (order.getCustomer() != null && ((RegisteredCustomer) order.getCustomer()).getId() == id) {
         if (counter == 0) {
-          System.out.printf("-> Order #%d\n", ++counter);
-          System.out.printf("Printing orders of the customer with id %d:\n\n", id);
+          System.out.printf("Printing orders of the customer with id %d\n\n:", id);
         }
+        System.out.printf("-> Order #%d\n", ++counter);
         order.printOrderFormatted();
       }
     }
@@ -271,6 +272,7 @@ public class Order {
     System.out.println("***Preview of Order***");
     System.out.println();
     System.out.println("---Cashier's Code: " + cashierId);
+    System.out.println();
     System.out.println("---Customer's data");
     if (customer instanceof RegisteredCustomer) {
       String customerName = customer.getCompanyName();
@@ -279,10 +281,10 @@ public class Order {
     } else {
       System.out.println("Guest");
     }
-
     System.out.println("\n---Product Basket: ");
     for (int prod[] : basket) {
       printProduct(prod[0], prod[1]);
+      System.out.println();
     }
     System.out.println();
     totalCost = calculateBasketCost(basket);
@@ -291,35 +293,35 @@ public class Order {
 
   /** Prints the order after it has been confirmed, in the appropriate format. */
   public void printFinalOrder() {
-    System.out.println("***Final Order Report***");
+    System.out.println("\n***Final Order Report***");
     this.printOrderFormatted();
-    System.out.println("***End of report***");
+    System.out.println("***End of report***\n");
   }
 
   /** Prints the order in the appropriate format. */
   public void printOrderFormatted() {
     int cashierId = cashier.getIdUser();
     double totalcost = 0;
-    System.out.println("***Final Order Report***");
     System.out.println();
     System.out.println();
-    System.out.println("---OrderNo: " + orderNo);
+    System.out.println("---Order id: " + this.getOrderNo());
+    System.out.println("---Order Date: " + this.getOrderDate());
     System.out.println("---Cashier's Code: " + cashierId);
     System.out.println("---Customer's data");
     if (customer instanceof RegisteredCustomer) {
       String customerName = customer.getCompanyName();
       System.out.println("Name: " + customerName);
-      System.out.println("Address: " + customer.getAddress());
+      System.out.println("Address: " + this.getCustomer().getAddress());
     } else {
       System.out.println("Guest");
     }
     System.out.println("\n---Product Basket: ");
     for (int prod[] : basket) {
       printProduct(prod[0], prod[1]);
+      System.out.println();
     }
     totalcost = calculateBasketCost(basket);
     System.out.println("---Order's total cost: " + totalCost);
-    System.out.println("***End of report***");
   }
 
   /**
@@ -407,7 +409,7 @@ public class Order {
    * @return
    */
   public static String getCurrentDate() {
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
     Date date = new Date();
     return dateFormatter.format(date);
   }
@@ -422,6 +424,7 @@ public class Order {
     String input;
     ArrayList<int[]> tempBasket = new ArrayList<int[]>();
     int[] tempProduct = new int[2];
+    boolean alreadyExists;
     for (; ; ) {
       try {
         tempProduct = new int[2];
@@ -439,13 +442,13 @@ public class Order {
         System.out.println("Enter the quantity of the product you want to shop");
         tempProduct[1] = in.nextInt();
         in.nextLine();
-        if (!(checkIfProductAlreadyExistsAndAddToBasket(tempProduct[0], tempProduct[1], tempBasket))
-            && Storage.checkIfQuantityIsEnough(tempProduct[0], tempProduct[1]) == true) {
+        alreadyExists = checkIfProductAlreadyExistsAndAddToBasket(tempProduct[0], tempProduct[1], tempBasket);
+        if (alreadyExists == false && Storage.checkIfQuantityIsEnough(tempProduct[0], tempProduct[1]) == true) {
           tempBasket.add(tempProduct);
         } else {
           System.out.println(
               "There are not enough product units available.\n"
-                  + "Change the quantity or order more. Try Again...");
+                  + "Try Again...");
         }
       } catch (NumberFormatException e) {
         System.out.println("Product id must be an integer larger than 0. Try again...");
@@ -470,22 +473,23 @@ public class Order {
    * @return
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(
-      int id, int quantity, ArrayList<int[]> basket) {
+    int id, int quantity, ArrayList<int[]> basket) {
     int combinedQuantity;
     for (int[] line : basket) {
       if (line[0] == id) {
         combinedQuantity = line[1] + quantity;
         if (Storage.checkIfQuantityIsEnough(id, combinedQuantity) == true) {
           line[1] = combinedQuantity;
-          return false;
+          
         } else {
           System.out.println(
               "There are not enough product units available.\n"
                   + "Change the quantity or order more. Try Again...");
         }
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   /**
@@ -501,10 +505,10 @@ public class Order {
     Customer customer;
     Cashier cashier;
     int[] temp = null;
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
     for (ArrayList<String> order : orders) {
+      basket = new ArrayList<int[]>();
       orderNo = Integer.parseInt(order.get(0));
-      orderDate = dateFormatter.format((order.get(1)));
+      orderDate = order.get(1);
       totalCost = Double.parseDouble(order.get(2));
       customerId = Integer.parseInt(order.get(3));
       basket = new ArrayList<int[]>();
@@ -513,6 +517,7 @@ public class Order {
       cashierId = Integer.parseInt(order.get(4));
       cashier = (Cashier) User.searchUserById(cashierId);
       for (int i = 5; i < orders.size(); i += 2) {
+    	temp = new int[2];
         temp[0] = Integer.parseInt(order.get(i));
         temp[1] = Integer.parseInt(order.get(i + 1));
         basket.add(temp);
