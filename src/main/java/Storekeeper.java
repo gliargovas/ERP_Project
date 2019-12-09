@@ -1,5 +1,6 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Scanner;
+
 public class Storekeeper extends User{
 	public Storekeeper(String name, String surname, String username, String password) {
 		super(name, surname, username, password);
@@ -56,37 +57,104 @@ public class Storekeeper extends User{
 	}
 	@Override
 	public void getMenu() {
-		/*
 		int ch;
-		int yes=0;
 		Scanner sc=new Scanner(System.in); 
-		try{ 
-			while(yes==0){ 
+		for(;;) {
 		  	printMenu();
-	        System.out.print("Enter your choice:"); 
-	        ch=sc.nextInt();
-	        sc.nextLine();
-	        switch(ch){ 
-	        case 1: 
-	        	getStorageMenu();
-	        	break; 
-	        case 2: 
-	        	getSupplierMenu();
-	        	break; 
-	        case 3: 
-	        	StorageOrder.makeStorageOrder();
-	        	break; 
-	        case 4:
-	        	return;
-	        default: System.out.println("Invalid choice!"); 
-	        } 
-	        System.out.print("Continue? Press 0 to continue:"); 
-	        yes=sc.nextInt();
-	        }
-		}catch(Exception e) {
-			return;
+		  	try { 
+		  		ch=sc.nextInt();
+		  		switch(ch){ 
+		  		case 1: 
+		  			getStorageMenu();
+		  			break; 
+		  		case 2: 
+		  			getSupplierMenu();
+		  			break; 
+		  		case 3: 
+		  			//StorageOrder.makeStorageOrder();
+		  			break; 
+		  		case 4:
+		  			return;
+		  		default: System.out.println("Invalid choice!"); 
+		  		} 
+			}catch(Exception e) {
+				System.err.println("Your option must be an integer number. Try again...");
+				// clear scanner buffer
+				sc.nextLine();
+			}
 		}
-		*/
-	}		
+	}
+	public void getStorageMenu() {
+		Scanner in = new Scanner(System.in);
+		int ans;
+		for(;;) {
+			printStorageMenu();
+			try {
+				ans = in.nextInt();
+				switch (ans) {
+				case 1:
+					Storage.printAllProductsWithQuantities();
+					break;
+				case 2:
+					Storage.searchAndPrintProductsByNameMenu();
+					break;
+				case 3:
+					Storage.searchAndPrintProductByIdMenu();
+					break;
+				case 4:
+					return;
+				}
+			} catch (InputMismatchException e) {
+				System.err.println("Your option must be an integer number. Try again...");
+				// clear scanner buffer
+				in.nextLine();
+			}
+		}
+	}
+	public void getSupplierMenu() {
+		Scanner in = new Scanner(System.in);
+		int ans;
+		for(;;) {
+			printCustomerMenu();
+			try {
+				ans = in.nextInt();
+				switch (ans) {
+				case 1:
+					RegisteredCustomer.printAllCustomers();
+					break;
+				case 2:
+					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
+					break;
+				case 3:
+					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
+					break;
+				case 4:
+					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
+					break;
+				case 5:
+					RegisteredCustomer.registerNewCustomerMenu();
+					break;
+				case 6:
+					RegisteredCustomer.changeCustomerTelephoneMenu();
+					break;
+				case 7:
+					RegisteredCustomer.changeCustomerAddressMenu();
+					break;
+				case 8:
+					//TODO method that displays order history
+					break;
+				case 9:
+					//TODO method that displays specific customer order history
+					break;
+				case 10:
+					return;
+				}
+			} catch (InputMismatchException e) {
+				System.err.println("Your option must be an integer number. Try again...");
+				// clear scanner buffer
+				in.nextLine();
+			}
+		}
+	}
 }
 

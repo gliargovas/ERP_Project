@@ -21,6 +21,7 @@ public class Storage {
 		}
 		return null;
 	}
+	
 	public static void printAllProductsWithQuantities() {
 		for (Product product : products) {
 			System.out.println(product.toStringWithQuantity());
