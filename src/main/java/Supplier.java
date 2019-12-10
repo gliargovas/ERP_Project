@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 public class Supplier {
 	private String Name;
 	private int Id;
@@ -6,7 +10,7 @@ public class Supplier {
 	private String Address;
 	private static int idCounter;
 	private static ArrayList<Supplier> Suppliers = new ArrayList<Supplier>();
-	
+
 	public Supplier(String name, String address, int tel, int id) {
 		super();
 		Name = name;
@@ -15,7 +19,8 @@ public class Supplier {
 		Address = address;
 		Suppliers.add(this);
 	}
-	public Supplier(String name,int tel, String address) {
+
+	public Supplier(String name, int tel, String address) {
 		Name = name;
 		Id = ++idCounter;
 		Tel = tel;
@@ -23,47 +28,59 @@ public class Supplier {
 		Suppliers.add(this);
 		idCounter++;
 	}
+
 	public String getName() {
 		return Name;
 	}
+
 	public void setName(String name) {
 		Name = name;
 	}
+
 	public int getId() {
 		return Id;
 	}
+
 	public void setId(int id) {
 		Id = id;
 	}
+
 	public int getTel() {
 		return Tel;
 	}
+
 	public void setTel(int tel) {
 		Tel = tel;
 	}
+
 	public String getAddress() {
 		return Address;
 	}
+
 	public void setAddress(String address) {
 		Address = address;
 	}
+
 	public static ArrayList<Supplier> getSuppliers() {
 		return Suppliers;
 	}
+
 	public static void alltheSuppliers() {
 		for (Supplier k : Suppliers) {
 			k.toString();
 		}
 	}
+
 	public static boolean deleteSupplier(int id) {
-		for(Supplier i : Suppliers) {
-			if(i.getId() == id) {
+		for (Supplier i : Suppliers) {
+			if (i.getId() == id) {
 				Suppliers.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
+
 	public static Supplier searchbyId(int id) {
 		for (Supplier i : Suppliers) {
 			if (i.getId() == id) {
@@ -73,23 +90,289 @@ public class Supplier {
 		System.out.println("There is no such element");
 		return null;
 	}
+
 	public static void createSuppliersFromList(ArrayList<ArrayList<String>> Suppliers) {
 		int Id, Tel;
 		String Name, Address;
-		for (ArrayList<String> supplier: Suppliers) {
+		for (ArrayList<String> supplier : Suppliers) {
 			Id = Integer.parseInt(supplier.get(0));
 			Name = supplier.get(1);
 			Address = supplier.get(2);
 			Tel = Integer.parseInt(supplier.get(3));
-			new Supplier(Name, Address,Tel, Id);
+			new Supplier(Name, Address, Tel, Id);
 		}
 	}
+
+	public static void searchAndPrintSupplierByName(String name) {
+		boolean found = false;
+		for (Supplier s : Suppliers) {
+			if (s.getName().toLowerCase().contains(name.toLowerCase())) {
+				found = true;
+				System.out.println(s);
+			}
+			if (found == false) {
+				System.out.println("No suppliers with such name");
+			}
+		}
+	}
+
+	public static void searchAndPrintSupplierByAddress(String address) {
+		boolean found = false;
+		for (Supplier s : Suppliers) {
+			if (s.getAddress().toLowerCase().contains(address.toLowerCase())) {
+				found = true;
+				System.out.println(s);
+			}
+		}
+		if (found == false) {
+			System.out.println("No suppliers with such address");
+		}
+	}
+
+	public static void searchAndPrintSupplierById(int id) {
+		for (Supplier s : Suppliers) {
+			if (s.getId() == id) {
+				System.out.println(s);
+				return;
+			}
+		}
+		System.out.println("No suppliers with such Id");
+	}
+
+	public static void searchAndPrintSupplierByTelephone(int tel) {
+		boolean found = false;
+		for (Supplier s : Suppliers) {
+			if (s.getTel() == tel) {
+				found = true;
+				System.out.println(s);
+			}
+		}
+		if (found == false) {
+			System.out.println("No suppliers with such telephone");
+		}
+	}
+
+	public static void changeName(int id, String name) throws NoSuchElementException {
+		Supplier supplier = searchbyId(id);
+		if (supplier == null) {
+			throw new NoSuchElementException("Supplier with such id does not exist");
+		} else {
+			supplier.setName(name);
+		}
+	}
+
+	public static void changeAddress(int id, String address) throws NoSuchElementException {
+		Supplier supplier = searchbyId(id);
+		if (supplier == null) {
+			throw new NoSuchElementException("Customer with such id does not exist");
+		} else {
+			supplier.setAddress(address);
+		}
+	}
+
+	public static void changeTelephone(int id, int tel) throws NoSuchElementException {
+		Supplier supplier = searchbyId(id);
+		if (supplier == null) {
+			throw new NoSuchElementException("Suppliers with such id does not exist");
+		} else {
+			supplier.setTel(tel);
+		}
+	}
+
+	public static void registerSupplierMenu() {
+		String name, address;
+		int tel;
+		Scanner in = new Scanner(System.in);
+		System.out.print("Enter the supplier's name: ");
+		name = in.nextLine();
+		System.out.print("Enter the supplier's address: ");
+		address = (in.nextLine().toLowerCase());
+		System.out.print("Enter supplier's telephone: ");
+		tel = in.nextInt();
+		new Supplier(name, tel, address);
+		System.out.printf("Supplier %s registered successfully!\n", name);
+	}
+
+	public static void changeCustomerNameMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input, name;
+		for (;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the supplier you want to change\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				System.out.print("Enter the new name: ");
+				name = in.nextLine();
+				changeName(id, name);
+				break;
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+
+	public static void changeSupplierAddressMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input, address;
+		for (;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the supplier you want to change\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				System.out.print("Enter the new adress: ");
+				address = in.nextLine();
+				changeAddress(id, address);
+				break;
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+
+	// contains customer telephone change menu
+	public static void changeSupplierTelephoneMenu() {
+		Scanner in = new Scanner(System.in);
+		int id, tel;
+		String input;
+		for (;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the supplier you want to change\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals("")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				System.out.print("Enter new telephone: ");
+				tel = in.nextInt();
+				changeTelephone(id, tel);
+				break;
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+			} catch (InputMismatchException e) {
+				System.err.println("Invalid input given. Telephone must be a number");
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+
+	public static void deleteSupplierMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input;
+		for (;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the supplier you want to delete\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				deleteSupplier(id);
+				break;
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+
+	public static void searchAndPrintSupplierByNameMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		for (;;) {
+			System.out.print("Enter the name of the supplier you want to print\nTo cancel, press \"enter\": ");
+			input = in.nextLine();
+			if (input.equals(" ")) {
+				System.out.println("Process cancelled. Returning to previous menu...");
+				return;
+			}
+			searchAndPrintSupplierByName(input);
+			break;
+		}
+	}
+
+	public static void searchAndPrintSupplierByAddressMenu() {
+		Scanner in = new Scanner(System.in);
+		String input;
+		for (;;) {
+			System.out.print("Enter the address of the supplier you want to print\nTo cancel, press \"enter\": ");
+			input = in.nextLine();
+			if (input.equals(" ")) {
+				System.out.println("Process cancelled. Returning to previous menu...");
+				return;
+			}
+			searchAndPrintSupplierByAddress(input);
+			break;
+		}
+	}
+
+	public static void searchAndPrintSupplierByIdMenu() {
+		Scanner in = new Scanner(System.in);
+		int id;
+		String input;
+		for (;;) {
+			id = 0;
+			try {
+				System.out.print("Enter the id of the supplier you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				id = Integer.parseInt(input);
+				searchAndPrintSupplierById(id);
+				break;
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid input given. Id must be an integer");
+			}
+		}
+	}
+
+	public static void searchAndPrintSupplierByTelephoneMenu() {
+		Scanner in = new Scanner(System.in);
+		int tel;
+		String input;
+		for (;;) {
+			tel = 0;
+			try {
+				System.out.print("Enter the telephone of the supplier you want to print\nTo cancel, press \"enter\": ");
+				input = in.nextLine();
+				if (input.equals(" ")) {
+					System.out.println("Process cancelled. Returning to previous menu...");
+					return;
+				}
+				tel = Integer.parseInt(input);
+				searchAndPrintSupplierByTelephone(tel);
+				break;
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid input given. Telephone must be an integer");
+			}
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Supplier [Name=" + Name + ", Id=" + Id + ", Tel=" + Tel + ", Address=" + Address + "]";
 	}
-	 
-	
-	
 
 }
