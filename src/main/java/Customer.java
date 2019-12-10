@@ -28,7 +28,6 @@ public class Customer {
 	//toString Method
 	@Override
 	public String toString() {
-		return "Customer [compunyName =" + companyName + ", address=" + address + ", telephone=" + telephone
-				+ "]";
+		return String.format("Name: %s | Address: %s | Telephone: %d ", this.getCompanyName(), this.getAddress(), this.getTelephone());
 	}
 }

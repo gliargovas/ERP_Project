@@ -82,7 +82,7 @@ public class RegisteredCustomer extends Customer {
 
   @Override
   public String toString() {
-    return super.toString() + " id=" + id + ", points=" + points + "]";
+    return String.format( "Id: %d | %s | Points: %d", this.getId(), super.toString(), this.getPoints());
   }
   
   /** Returns a customer with a given id.
@@ -96,7 +96,7 @@ public class RegisteredCustomer extends Customer {
         return i;
       }
     }
-    throw new NoSuchElementException();
+    return null;
   }
   
   /** Creates a new registered customer from an Arraylist of strings by parsing its contents.
@@ -231,7 +231,7 @@ public class RegisteredCustomer extends Customer {
    */
   public static void changePoints(int id, int points)
       throws NoSuchElementException, NumberFormatException {
-    if (points <= 0) {
+    if (points < 0) {
       throw new NumberFormatException("Points must be more or equal to 0");
     }
     RegisteredCustomer customer = searchById(id);
@@ -355,14 +355,16 @@ public class RegisteredCustomer extends Customer {
         id = Integer.parseInt(input);
         System.out.print("Enter new points: ");
         points = in.nextInt();
+        in.nextLine();
         changePoints(id, points);
         break;
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Points must be a number");
+        in.nextLine();
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -395,7 +397,7 @@ public class RegisteredCustomer extends Customer {
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -427,7 +429,7 @@ public class RegisteredCustomer extends Customer {
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -454,14 +456,16 @@ public class RegisteredCustomer extends Customer {
         id = Integer.parseInt(input);
         System.out.print("Enter new telephone: ");
         telephone = in.nextInt();
+        in.nextLine();
         changeTelephone(id, telephone);
         break;
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Telephone must be a number");
+        in.nextLine();
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -489,7 +493,7 @@ public class RegisteredCustomer extends Customer {
         deleteRegisteredCustomer(id);
         break;
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }

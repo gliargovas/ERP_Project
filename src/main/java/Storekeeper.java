@@ -25,10 +25,11 @@ public class Storekeeper extends User{
 		throw new Exception("Invalid Credentials");
 	}
 	private void printMenu() {
-		System.out.println("--- Storekeeper Menu ---\n"
+		System.out.print("--- Storekeeper Menu ---\n"
 				+ "1) Storage\n"
 				+ "2) Suppliers\n"
 				+ "3) Make a new Storage Ressuply Order\n"
+				+ "4) Logout and Return to Main Menu\n"
 				+ "Option: ");
 	}
 	
@@ -58,11 +59,11 @@ public class Storekeeper extends User{
 	@Override
 	public void getMenu() {
 		int ch;
-		Scanner sc=new Scanner(System.in); 
+		Scanner in = new Scanner(System.in); 
 		for(;;) {
 		  	printMenu();
 		  	try { 
-		  		ch=sc.nextInt();
+		  		ch = in.nextInt();
 		  		switch(ch){ 
 		  		case 1: 
 		  			getStorageMenu();
@@ -75,12 +76,11 @@ public class Storekeeper extends User{
 		  			break; 
 		  		case 4:
 		  			return;
-		  		default: System.out.println("Invalid choice!"); 
 		  		} 
-			}catch(Exception e) {
-				System.err.println("Your option must be an integer number. Try again...");
+			} catch (InputMismatchException e) {
+				System.err.println("Your option must be an integer number. TTry again...");
 				// clear scanner buffer
-				sc.nextLine();
+				in.nextLine();
 			}
 		}
 	}
@@ -120,25 +120,25 @@ public class Storekeeper extends User{
 				ans = in.nextInt();
 				switch (ans) {
 				case 1:
-					RegisteredCustomer.printAllCustomers();
+					Supplier.printAllSuppliers();
 					break;
 				case 2:
-					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
+					Supplier.searchAndPrintSupplierBynameMenu();
 					break;
 				case 3:
-					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
+					Supplier.searchAndPrintSupplierByidMenu();
 					break;
 				case 4:
-					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
+					Supplier.searchAndPrintSupplierByTelephoneMenu();
 					break;
 				case 5:
-					RegisteredCustomer.registerNewCustomerMenu();
+					Supplier.registerNewSupplierMenu();
 					break;
 				case 6:
-					RegisteredCustomer.changeCustomerTelephoneMenu();
+					Supplier.changeSupplierTelephoneMenu();
 					break;
 				case 7:
-					RegisteredCustomer.changeCustomerAddressMenu();
+					Supplier.changeSupplierAddressMenu();
 					break;
 				case 8:
 					//TODO method that displays order history

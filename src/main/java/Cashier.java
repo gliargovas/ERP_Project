@@ -88,7 +88,6 @@ public class Cashier extends User {
 					Storage.searchAndPrintProductsByNameMenu();
 					break;
 				case 4:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -138,7 +137,6 @@ public class Cashier extends User {
 					Order.printOrderHistoryMenu();
 					break;
 				case 11:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -164,7 +162,6 @@ public class Cashier extends User {
 					Order.makeOrder(this, false);
 					break;
 				case 3:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -194,7 +191,6 @@ public class Cashier extends User {
 					makeOrderMenu();
 					break;
 				case 4:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {

@@ -169,7 +169,7 @@ public class Supplier {
 	public static void changeTelephone(int id, int tel) throws NoSuchElementException {
 		Supplier supplier = searchById(id);
 		if (supplier == null) {
-			throw new NoSuchElementException("suppliers with such id does not exist");
+			throw new NoSuchElementException("Suppliers with such id do not exist");
 		} else {
 			supplier.setTel(tel);
 		}
@@ -210,7 +210,7 @@ public class Supplier {
 			} catch (NumberFormatException e) {
 				System.err.println("Invalid input given. id must be an integer, larger than 0");
 			} catch (NoSuchElementException e) {
-				System.err.println(e.getMessage());
+				System.err.println("Suppliers with such id do not exist");
 			}
 		}
 	}
@@ -236,7 +236,7 @@ public class Supplier {
 			} catch (NumberFormatException e) {
 				System.err.println("Invalid input given. id must be an integer, larger than 0");
 			} catch (NoSuchElementException e) {
-				System.err.println(e.getMessage());
+				System.err.println("Suppliers with such id do not exist");
 			}
 		}
 	}
@@ -265,7 +265,7 @@ public class Supplier {
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid input given. telephone must be a number");
 			} catch (NoSuchElementException e) {
-				System.err.println(e.getMessage());
+				System.err.println("Suppliers with such id do not exist");
 			}
 		}
 	}
@@ -287,7 +287,7 @@ public class Supplier {
 				deleteSupplier(id);
 				break;
 			} catch (NoSuchElementException e) {
-				System.err.println(e.getMessage());
+				System.err.println("Suppliers with such id do not exist");
 			}
 		}
 	}
