@@ -4,85 +4,81 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Supplier {
-	private String Name;
-	private int Id;
-	private int Tel;
-	private String Address;
+	private String name;
+	private int id;
+	private int tel;
+	private String address;
 	private static int idCounter;
-	private static ArrayList<Supplier> Suppliers = new ArrayList<Supplier>();
+	private static ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 
 	public Supplier(String name, String address, int tel, int id) {
 		super();
-		Name = name;
-		Id = id;
-		Tel = tel;
-		Address = address;
-		Suppliers.add(this);
+		this.name = name;
+		this.id = id;
+		this.tel = tel;
+		this.address = address;
+		suppliers.add(this);
 	}
 
 	public Supplier(String name, int tel, String address) {
-		Name = name;
-		Id = ++idCounter;
-		Tel = tel;
-		Address = address;
-		Suppliers.add(this);
-		idCounter++;
+		this.name = name;
+		this.id = ++idCounter;
+		this.tel = tel;
+		this.address = address;
+		suppliers.add(this);
 	}
 
 	public String getName() {
-		return Name;
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setName(String name) {
-		Name = name;
-	}
 
 	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
+		return id;
 	}
 
 	public int getTel() {
-		return Tel;
+		return tel;
 	}
 
 	public void setTel(int tel) {
-		Tel = tel;
+		this.tel = tel;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
-	public static ArrayList<Supplier> getSuppliers() {
-		return Suppliers;
+	public static ArrayList<Supplier> getsuppliers() {
+		return suppliers;
 	}
 
-	public static void alltheSuppliers() {
-		for (Supplier k : Suppliers) {
-			k.toString();
+	public static void printAllSuppliers() {
+		for (Supplier k : suppliers) {
+			System.out.println(k.toString());
 		}
 	}
 
 	public static boolean deleteSupplier(int id) {
-		for (Supplier i : Suppliers) {
+		for (Supplier i : suppliers) {
 			if (i.getId() == id) {
-				Suppliers.remove(i);
+				suppliers.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static Supplier searchbyId(int id) {
-		for (Supplier i : Suppliers) {
+	public static Supplier searchById(int id) {
+		for (Supplier i : suppliers) {
 			if (i.getId() == id) {
 				return i;
 			}
@@ -91,21 +87,21 @@ public class Supplier {
 		return null;
 	}
 
-	public static void createSuppliersFromList(ArrayList<ArrayList<String>> Suppliers) {
-		int Id, Tel;
-		String Name, Address;
-		for (ArrayList<String> supplier : Suppliers) {
-			Id = Integer.parseInt(supplier.get(0));
-			Name = supplier.get(1);
-			Address = supplier.get(2);
-			Tel = Integer.parseInt(supplier.get(3));
-			new Supplier(Name, Address, Tel, Id);
+	public static void createSuppliersFromList(ArrayList<ArrayList<String>> suppliers) {
+		int id, tel;
+		String name, address;
+		for (ArrayList<String> supplier : suppliers) {
+			id = Integer.parseInt(supplier.get(0));
+			name = supplier.get(1);
+			address = supplier.get(2);
+			tel = Integer.parseInt(supplier.get(3));
+			new Supplier(name, address, tel, id);
 		}
 	}
-
-	public static void searchAndPrintSupplierByName(String name) {
+	
+	public static void searchAndPrintSupplierByname(String name) {
 		boolean found = false;
-		for (Supplier s : Suppliers) {
+		for (Supplier s : suppliers) {
 			if (s.getName().toLowerCase().contains(name.toLowerCase())) {
 				found = true;
 				System.out.println(s);
@@ -116,9 +112,9 @@ public class Supplier {
 		}
 	}
 
-	public static void searchAndPrintSupplierByAddress(String address) {
+	public static void searchAndPrintSupplierByaddress(String address) {
 		boolean found = false;
-		for (Supplier s : Suppliers) {
+		for (Supplier s : suppliers) {
 			if (s.getAddress().toLowerCase().contains(address.toLowerCase())) {
 				found = true;
 				System.out.println(s);
@@ -129,19 +125,19 @@ public class Supplier {
 		}
 	}
 
-	public static void searchAndPrintSupplierById(int id) {
-		for (Supplier s : Suppliers) {
+	public static void searchAndPrintSupplierByid(int id) {
+		for (Supplier s : suppliers) {
 			if (s.getId() == id) {
 				System.out.println(s);
 				return;
 			}
 		}
-		System.out.println("No suppliers with such Id");
+		System.out.println("No suppliers with such id");
 	}
 
-	public static void searchAndPrintSupplierByTelephone(int tel) {
+	public static void searchAndPrintSupplierBytelephone(int tel) {
 		boolean found = false;
-		for (Supplier s : Suppliers) {
+		for (Supplier s : suppliers) {
 			if (s.getTel() == tel) {
 				found = true;
 				System.out.println(s);
@@ -153,7 +149,7 @@ public class Supplier {
 	}
 
 	public static void changeName(int id, String name) throws NoSuchElementException {
-		Supplier supplier = searchbyId(id);
+		Supplier supplier = searchById(id);
 		if (supplier == null) {
 			throw new NoSuchElementException("Supplier with such id does not exist");
 		} else {
@@ -162,7 +158,7 @@ public class Supplier {
 	}
 
 	public static void changeAddress(int id, String address) throws NoSuchElementException {
-		Supplier supplier = searchbyId(id);
+		Supplier supplier = searchById(id);
 		if (supplier == null) {
 			throw new NoSuchElementException("Customer with such id does not exist");
 		} else {
@@ -171,15 +167,15 @@ public class Supplier {
 	}
 
 	public static void changeTelephone(int id, int tel) throws NoSuchElementException {
-		Supplier supplier = searchbyId(id);
+		Supplier supplier = searchById(id);
 		if (supplier == null) {
-			throw new NoSuchElementException("Suppliers with such id does not exist");
+			throw new NoSuchElementException("suppliers with such id does not exist");
 		} else {
 			supplier.setTel(tel);
 		}
 	}
 
-	public static void registerSupplierMenu() {
+	public static void registerNewSupplierMenu() {
 		String name, address;
 		int tel;
 		Scanner in = new Scanner(System.in);
@@ -212,7 +208,7 @@ public class Supplier {
 				changeName(id, name);
 				break;
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				System.err.println("Invalid input given. id must be an integer, larger than 0");
 			} catch (NoSuchElementException e) {
 				System.err.println(e.getMessage());
 			}
@@ -238,7 +234,7 @@ public class Supplier {
 				changeAddress(id, address);
 				break;
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				System.err.println("Invalid input given. id must be an integer, larger than 0");
 			} catch (NoSuchElementException e) {
 				System.err.println(e.getMessage());
 			}
@@ -265,9 +261,9 @@ public class Supplier {
 				changeTelephone(id, tel);
 				break;
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid input given. Id must be an integer, larger than 0");
+				System.err.println("Invalid input given. id must be an integer, larger than 0");
 			} catch (InputMismatchException e) {
-				System.err.println("Invalid input given. Telephone must be a number");
+				System.err.println("Invalid input given. telephone must be a number");
 			} catch (NoSuchElementException e) {
 				System.err.println(e.getMessage());
 			}
@@ -296,7 +292,7 @@ public class Supplier {
 		}
 	}
 
-	public static void searchAndPrintSupplierByNameMenu() {
+	public static void searchAndPrintSupplierBynameMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
 		for (;;) {
@@ -306,12 +302,12 @@ public class Supplier {
 				System.out.println("Process cancelled. Returning to previous menu...");
 				return;
 			}
-			searchAndPrintSupplierByName(input);
+			searchAndPrintSupplierByname(input);
 			break;
 		}
 	}
 
-	public static void searchAndPrintSupplierByAddressMenu() {
+	public static void searchAndPrintSupplierByaddressMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
 		for (;;) {
@@ -321,12 +317,12 @@ public class Supplier {
 				System.out.println("Process cancelled. Returning to previous menu...");
 				return;
 			}
-			searchAndPrintSupplierByAddress(input);
+			searchAndPrintSupplierByaddress(input);
 			break;
 		}
 	}
 
-	public static void searchAndPrintSupplierByIdMenu() {
+	public static void searchAndPrintSupplierByidMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
 		String input;
@@ -340,10 +336,10 @@ public class Supplier {
 					return;
 				}
 				id = Integer.parseInt(input);
-				searchAndPrintSupplierById(id);
+				searchAndPrintSupplierByid(id);
 				break;
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid input given. Id must be an integer");
+				System.err.println("Invalid input given. id must be an integer");
 			}
 		}
 	}
@@ -362,17 +358,17 @@ public class Supplier {
 					return;
 				}
 				tel = Integer.parseInt(input);
-				searchAndPrintSupplierByTelephone(tel);
+				searchAndPrintSupplierBytelephone(tel);
 				break;
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid input given. Telephone must be an integer");
+				System.err.println("Invalid input given. telephone must be an integer");
 			}
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "Supplier [Name=" + Name + ", Id=" + Id + ", Tel=" + Tel + ", Address=" + Address + "]";
+		return "Supplier [name=" + name + ", id=" + id + ", tel=" + tel + ", address=" + address + "]";
 	}
 
 }
