@@ -171,8 +171,8 @@ public class Order {
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Id must be an integer. Try again...");
       } catch (Exception e) {
-    	  e.printStackTrace();
-    	  System.err.println("Something went wrong. Returning to previous menu");
+        e.printStackTrace();
+        System.err.println("Something went wrong. Returning to previous menu");
         return;
       }
     }
@@ -301,7 +301,6 @@ public class Order {
   /** Prints the order in the appropriate format. */
   public void printOrderFormatted() {
     int cashierId = cashier.getIdUser();
-    double totalcost = 0;
     System.out.println();
     System.out.println();
     System.out.println("---Order id: " + this.getOrderNo());
@@ -317,10 +316,13 @@ public class Order {
     }
     System.out.println("\n---Product Basket: ");
     for (int prod[] : basket) {
-      printProduct(prod[0], prod[1]);
+      try {
+        printProduct(prod[0], prod[1]);
+      } catch (NoSuchElementException e) {
+        System.out.println("This product has been removed from the storage.");
+      }
       System.out.println();
     }
-    totalcost = calculateBasketCost(basket);
     System.out.println("---Order's total cost: " + totalCost);
   }
 
@@ -442,13 +444,13 @@ public class Order {
         System.out.println("Enter the quantity of the product you want to shop");
         tempProduct[1] = in.nextInt();
         in.nextLine();
-        alreadyExists = checkIfProductAlreadyExistsAndAddToBasket(tempProduct[0], tempProduct[1], tempBasket);
-        if (alreadyExists == false && Storage.checkIfQuantityIsEnough(tempProduct[0], tempProduct[1]) == true) {
+        alreadyExists =
+            checkIfProductAlreadyExistsAndAddToBasket(tempProduct[0], tempProduct[1], tempBasket);
+        if (alreadyExists == false
+            && Storage.checkIfQuantityIsEnough(tempProduct[0], tempProduct[1]) == true) {
           tempBasket.add(tempProduct);
         } else {
-          System.out.println(
-              "There are not enough product units available.\n"
-                  + "Try Again...");
+          System.out.println("There are not enough product units available.\n" + "Try Again...");
         }
       } catch (NumberFormatException e) {
         System.out.println("Product id must be an integer larger than 0. Try again...");
@@ -473,14 +475,14 @@ public class Order {
    * @return
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(
-    int id, int quantity, ArrayList<int[]> basket) {
+      int id, int quantity, ArrayList<int[]> basket) {
     int combinedQuantity;
     for (int[] line : basket) {
       if (line[0] == id) {
         combinedQuantity = line[1] + quantity;
         if (Storage.checkIfQuantityIsEnough(id, combinedQuantity) == true) {
           line[1] = combinedQuantity;
-          
+
         } else {
           System.out.println(
               "There are not enough product units available.\n"
@@ -513,22 +515,22 @@ public class Order {
       customerId = Integer.parseInt(order.get(3));
       basket = new ArrayList<int[]>();
       if (customerId == 0) {
-    	  customer = null;
-  	  } else {
-  		  try {
-  			  customer = RegisteredCustomer.searchById(customerId);
-  		  } catch (NoSuchElementException e) {
-  			  customer = null;
-  		  }
-  	  }
+        customer = null;
+      } else {
+        try {
+          customer = RegisteredCustomer.searchById(customerId);
+        } catch (NoSuchElementException e) {
+          customer = null;
+        }
+      }
       cashierId = Integer.parseInt(order.get(4));
       try {
-    	  cashier = (Cashier) User.searchUserById(cashierId);
+        cashier = (Cashier) User.searchUserById(cashierId);
       } catch (NoSuchElementException e) {
-    	  cashier = null;
+        cashier = null;
       }
       for (int i = 5; i < order.size(); i += 2) {
-    	temp = new int[2];
+        temp = new int[2];
         temp[0] = Integer.parseInt(order.get(i));
         temp[1] = Integer.parseInt(order.get(i + 1));
         basket.add(temp);

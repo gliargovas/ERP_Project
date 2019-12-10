@@ -3,16 +3,41 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * The class represents the storage of the ERP system. It is responsible for
+ * handling the products and their quantities.
+ * 
+ * @version 1.0
+ * @author George Liargovas
+ *
+ */
 public class Storage {
+	/** ArrayList where the products available in the storage are stored */
 	protected static ArrayList<Product> products = new ArrayList <Product>();
+	/** ArrayList where the quantities of the products available in the storage are stored */
 	protected static ArrayList<int[]> productQuantities = new ArrayList <int[]> ();
+	
+	/**
+	 *  Returns the product list. 
+	 * @return
+	 */
 	public static ArrayList<Product> getProducts() {
 		return products;
 	}
+	
+	/**
+	 * Returns a list with the combination of product id and available quantity.
+	 * @return
+	 */
 	public static ArrayList<int[]> getProductQuantities() {
 		return productQuantities;
 	}
-	// Searches product by id
+	
+	/**
+	 * Returns a Product object from the product list with a specific id.
+	 * @param id
+	 * @return
+	 */
 	public static Product searchById(int id) {
 		for (Product product : getProducts()) {
 			if (product.getProductId() == id) {
@@ -22,15 +47,24 @@ public class Storage {
 		return null;
 	}
 	
+	/** Prints all the products with their available quantities in storage */
 	public static void printAllProductsWithQuantities() {
 		for (Product product : products) {
 			System.out.println(product.toStringWithQuantity());
 		}
 	}
+	
+	/**
+	 * Adds a new product to the product list.
+	 * @param product
+	 */
 	public static void addProductToList(Product product) {
 		products.add(product);
 	}
-	// Searches and prints all products that contain a specific string in their name 
+	/**
+	 * Searches and prints all products that contain a specific string in their name.
+	 * @param name
+	 */
 	public static void searchAndPrintProductsByName(String name) {
 		boolean found = false;
 		for (Product p : products) {
@@ -43,7 +77,12 @@ public class Storage {
 			System.out.println("No products with such name");
 		}
 	}
-	// Deletes a product from list
+	
+	/**
+	 * Removes the product with the given id from the product list.
+	 * @param id
+	 * @throws NoSuchElementException
+	 */
 	private static void deleteProduct(int id) throws NoSuchElementException {
 		Product product = searchById(id);
 		if (product == null) {
@@ -51,7 +90,8 @@ public class Storage {
 		}
 		products.remove(products.indexOf(product));
 	}
-	// Prints all products
+	
+	/** Prints all the products in the product list */
 	public static void printAllProducts() {
 		System.out.println("Product List");
 		for (Product p : getProducts()) {
@@ -59,16 +99,31 @@ public class Storage {
 		}
 	}
 	
-	//makes a new association between a product and a quantity
+	/**
+	 * Makes a new association between a product and a quantity with the default quantity as 0.
+	 * @param id
+	 */
 	public static void createProductQuantity(int id) {
 		int[] productQuantity = {id, 0};
 		productQuantities.add(productQuantity);
 	}
+	/**
+	 * Makes a new association between a product and a quantity, with
+	 * the given starting quantity.
+	 * @param id
+	 * @param quantity
+	 */
 	public static void createProductQuantity(int id, int quantity) {
 		int[] productQuantity = {id, quantity};
 		productQuantities.add(productQuantity);
 	}
-	//returns the quantity of a specific product id
+	
+	/**
+	 * Returns the quantity of a specific product in the storage with a given id.
+	 * @param id
+	 * @return
+	 * @throws NoSuchElementException
+	 */
 	public static int getProductQuantity(int id) throws NoSuchElementException{
 		for (int[] i : productQuantities) {
 			if (i[0] == id) {
@@ -78,7 +133,12 @@ public class Storage {
 		throw new NoSuchElementException("Product with such id does not exist");
 	}
 	
-	//checks if a product already exists and if it does, increases its quantity
+	/**
+	 * Checks if a product with a given quantity already exists and if it does, increases its quantity.
+	 * @param id
+	 * @param quantity
+	 * @throws NoSuchElementException
+	 */
 	public static void addProductQuantity(int id, int quantity) throws NoSuchElementException{
 		for (int[] i : productQuantities) {
 			if (i[0] == id) {
@@ -88,7 +148,14 @@ public class Storage {
 		}
 		throw new NoSuchElementException("Product with such id does not exist");
 	}
-	//checks if a product already exists and if it does, decreases its quantity
+	
+	/**
+	 * Checks if a product with a given quantity already exists and if it does, decreases its quantity.
+	 * @param id
+	 * @param quantity
+	 * @throws Exception
+	 * @throws NoSuchElementException
+	 */
 	public static void removeProductQuantity(int id, int quantity) throws Exception, NoSuchElementException {
 		for (int[] i : productQuantities) {
 			if (i[0] == id) {
@@ -101,7 +168,8 @@ public class Storage {
 		}
 		throw new NoSuchElementException("Product with such id does not exist");
 	}
-	// contains the product creation menu
+	
+	/** Contains the user prompts for creating a new product. */
 	public static void createNewProductMenu() {
 		String name, category, description;
 		double price;
@@ -131,7 +199,8 @@ public class Storage {
 		createProductQuantity(prod.getProductId());
 		System.out.printf("Product %s created successfully!\n", name);
 	}
-	// contains the product price change menu
+	
+	/** Contains the user prompts for changing a product's price. */
 	public static void changeProductPriceMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
@@ -161,7 +230,14 @@ public class Storage {
 			}
 		}
 	}
-	// changes a specific product's price 
+	
+	/**
+	 * Sets a specific product's price, with the given id to the given price.
+	 * @param id
+	 * @param price
+	 * @throws NoSuchElementException
+	 * @throws NumberFormatException
+	 */
 	private static void changeProductPrice(int id, double price) throws NoSuchElementException, NumberFormatException{
 		if (price <= 0) {
 			throw new NumberFormatException("Price must be larger than 0");
@@ -172,6 +248,7 @@ public class Storage {
 		} else product.setSalePrice(price);
 	}
 	
+	/** Contains the user prompts for deleting a product from the product list. */
 	public static void deleteProductMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
@@ -197,7 +274,12 @@ public class Storage {
 			}
 		}
 	}
-	//Adds productQuantity elements in productQuantities list that have been read from a .csv file
+	
+	/**
+	 * Creates productQuantity elements and adds them to the productQuantities list
+	 * by parsing the contents of an ArrayList.
+	 * @param idQuantities
+	 */
 	public static void createProductQuantitiesFromList(ArrayList<ArrayList<String>> idQuantities) {
 		int id, quantity;
 		for (ArrayList<String> idQuantity: idQuantities) {
@@ -207,6 +289,7 @@ public class Storage {
 		}
 	}
 	
+	/** Contains the user prompts for searching and printing a product from the product list by its id. */
 	public static void searchAndPrintProductByIdMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
@@ -234,6 +317,14 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * Checks if a product with a given id, has at least the given amount of units available in the storage.
+	 * Returns true in case the quantity is enough, otherwise, returns false.
+	 * @param id
+	 * @param quantity
+	 * @return
+	 * @throws NoSuchElementException
+	 */
 	public static boolean checkIfQuantityIsEnough(int id, int quantity) throws NoSuchElementException{
 		int productQuantity;
 		productQuantity = Storage.getProductQuantity(id);
@@ -244,6 +335,7 @@ public class Storage {
 		} 
 	}
 	
+	/** Contains the user prompts for searching and printing a product from the product list by its name. */
 	public static void searchAndPrintProductsByNameMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
