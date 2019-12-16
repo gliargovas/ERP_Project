@@ -19,11 +19,21 @@ public class LoginTest {
 		new Administrator ("AName4","Surname4","auser2","apass2");	
 		new Administrator ("AName4","Surname4","auser3","apass3");	
 		new Administrator ("AName4","Surname4","auser4","apass4");	
+		new Product("Mack Book Air", "Computer", "Pear's macbook air computer", 800);
+		new Product("Mack Book Pro", "Computer", "Pear's macbook pro computer", 2200);
+		new Product("iMack", "Computer", "Pear's iMac computer", 2000);
+		new Product("Lled spx", "Computer", "L", 3100);
+		new Product("Lled computer", "Computr", "Lled iMac computer", 3000);
+		new Product("Lled inspire", "Computer", "Lled computer", 1000);
+		new Product("HP Spectrum", "Computer", "Hp High End PC", 1900);
+		new Product("Table", "Furniture", "Table", 50);
+		new Product("Chair", "Furniture", "Chair", 70);
 	}
 	
 	public static void main (String args[]) {
 		loadUsers();
 		// 1st test: correct credentials entered for all users
+		System.out.println("*Begin test 1"); 
 		try {
 			System.out.println("Start");
 			Cashier.login("cuser3", "cpass3");
@@ -35,10 +45,11 @@ public class LoginTest {
 				e.printStackTrace();
 				System.exit(1);
 		}
+		System.out.println("--> Test 1 passed!" ); 
 		// end of 1st test
 		
 		// 2nd test: wrong credentials given
-		System.out.println("Begin test 2");
+		System.out.println("*Begin test 2");
 		try {
 			Cashier.login("cuser3", "cpass4");
 			System.err.println("Test 2 on cashier failed");
@@ -49,6 +60,7 @@ public class LoginTest {
 				System.exit(0);
 			}
 		}
+		System.out.println("--> Test 2 on cashier passed!" ); 
 		try {
 			Storekeeper.login("cuser3", "cpass3");
 			System.err.println("Test 2 on storekeeper failed");
@@ -59,6 +71,7 @@ public class LoginTest {
 				System.exit(0);
 			}
 		}
+		System.out.println("--> Test 2 on storekeeper passed!" ); 
 		try {
 			DataAnalyst.login("dauser11", "dapass1");
 			System.err.println("Test 2 on data analyst failed");
@@ -69,6 +82,7 @@ public class LoginTest {
 				System.exit(0);
 			}
 		}
+		System.out.println("--> Test 2 on data analyst passed!" ); 
 		try {
 			Administrator.login("auser1", "auser13");
 			System.err.println("Test 2 on administrator failed");
@@ -79,6 +93,7 @@ public class LoginTest {
 				System.exit(0);
 			}
 		}
+		System.out.println("--> Test 2 on administrator passed!" ); 
 		System.out.println("All tests ok!");
 		// end of 2nd test
 		System.exit(0);

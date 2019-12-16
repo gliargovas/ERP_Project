@@ -8,7 +8,8 @@ public class Supplier {
 	private int id;
 	private int tel;
 	private String address;
-	private static int idCounter;
+	
+	private static int idCounter = FileHandler.getSupplierCounterFromFile();
 	private static ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 
 	public Supplier(String name, String address, int tel, int id) {
@@ -59,6 +60,10 @@ public class Supplier {
 
 	public static ArrayList<Supplier> getsuppliers() {
 		return suppliers;
+	}
+	
+	public static int getIdCounter() {
+		return idCounter;
 	}
 
 	public static void printAllSuppliers() {
@@ -183,8 +188,18 @@ public class Supplier {
 		name = in.nextLine();
 		System.out.print("Enter the supplier's address: ");
 		address = (in.nextLine().toLowerCase());
-		System.out.print("Enter supplier's telephone: ");
-		tel = in.nextInt();
+		for (;;) {
+			try {
+				// wait just enough so as to display the exception message in the correct order
+				Thread.sleep(10);
+				System.out.print("Enter supplier's telephone: ");
+				tel = in.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				System.err.println("Price must be an integer number. Try again...");
+				in.nextLine();
+			} catch (InterruptedException e) {}
+		}
 		new Supplier(name, tel, address);
 		System.out.printf("Supplier %s registered successfully!\n", name);
 	}

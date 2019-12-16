@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class StorageOrder {
-  private static int counter = 0;
+  private static int counter = FileHandler.getStorageOrderCounterFromFile();
   private final int storageOrderNumber;
   private final String storageOrderDate;
   private final double totalCost;
@@ -24,13 +24,14 @@ public class StorageOrder {
    * @param storekeeper
    */
   public StorageOrder(
-      String storageOrderDate, Supplier supplier, Storekeeper storekeeper, ArrayList<int[]> supplies) {
+      String storageOrderDate, Supplier supplier, Storekeeper storekeeper, ArrayList<int[]> supplies, double totalCost) {
     this.storageOrderNumber = ++counter;
     this.storageOrderDate = storageOrderDate;
     this.supplies = supplies;
-    this.totalCost = calculateBasketCost(supplies);
+    this.totalCost = totalCost;
     this.supplier = supplier;
     this.storekeeper = storekeeper;
+    orders.add(this);
   }
 
   /**
@@ -55,6 +56,7 @@ public class StorageOrder {
     this.totalCost = totalCost;
     this.supplier = supplier;
     this.storekeeper = storekeeper;
+    orders.add(this);
   }
 
   public String getStorageOrderDate() {
@@ -83,6 +85,10 @@ public class StorageOrder {
 
   public static ArrayList<StorageOrder> getOrders() {
     return orders;
+  }
+  
+  public static int getIdCounter() {
+	return counter;  
   }
 
   /** Prints all the storage orders */
@@ -139,38 +145,6 @@ public class StorageOrder {
       System.out.printf("Customer with id %d has not made any orders\n", id);
     }
   }
-  
-  /**
-   * Calculates the cost of a product and quantity combination.
-   *
-   * @param id
-   * @param quantity
-   * @return
-   */
-  public static double calculateCost(int id, int quantity) {
-    Product prod = Storage.searchById(id);
-    double price = prod.getSalePrice();
-    double cost = price * quantity;
-    return cost;
-  }
-
-  /**
-   * Calculates the total cost of a storage order supplies.
-   *
-   * @param basket
-   * @return
-   */
-  public static double calculateBasketCost(ArrayList<int[]> basket) {
-    double totalCost = 0;
-    double productCost;
-    Product prod;
-    for (int[] product : basket) {
-      prod = Storage.searchById(product[0]);
-      productCost = prod.getSalePrice() * product[1];
-      totalCost += productCost;
-    }
-    return totalCost;
-  }
 
   /**
    * Prints a product's information with a given id, in the format used to print the storage order
@@ -182,10 +156,9 @@ public class StorageOrder {
   public static void printProduct(int id, int quantity) {
     Product prod = Storage.searchById(id);
     String name = prod.getName();
-    double price = calculateCost(id, quantity);
     System.out.printf(
-        "Product id: %d | Product name: %s | Quantity: %d | Price: %.02f",
-        prod.getProductId(), prod.getName(), quantity, price);
+        "Product id: %d | Product name: %s | Quantity: %d",
+        prod.getProductId(), prod.getName(), quantity);
   }
 
   /**
@@ -196,9 +169,8 @@ public class StorageOrder {
    * @param supplies
    */
   public static void previewOrder(
-      Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies) {
+      Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
     int storekeeperId = storekeeper.getIdUser();
-    double totalCost = 0;
     System.out.println("***Preview of Storage Order***");
     System.out.println();
     System.out.println("---Storekeeper's Code: " + storekeeperId);
@@ -216,7 +188,6 @@ public class StorageOrder {
       System.out.println();
     }
     System.out.println();
-    totalCost = calculateBasketCost(supplies);
     System.out.println("---Storage order's total cost: " + totalCost);
   }
 
@@ -260,37 +231,57 @@ public class StorageOrder {
    * @param storekeeper
    * @param isRegistered
    */
-  public static void makeOrder(Storekeeper storekeeper, boolean isRegistered) {
+  public static void makeOrder(Storekeeper storekeeper) {
     Scanner in = new Scanner(System.in);
     String ans;
+    double totalCost;
     Supplier supplier;
     ArrayList<int[]> supplies;
     int id;
     for (; ; ) {
       try {
-        if (isRegistered) {
-          System.out.println("*** Storage Order Menu ***");
-          System.out.print(
+        for(;;) {
+        	System.out.println("*** Storage Order Menu ***");
+            System.out.print(
               "Enter the id of the supplier the order is about. " + "To cancel, press \"enter\": ");
-          ans = in.nextLine();
-          if (ans.equals("")) {
-            System.out.println("Process cancelled, returning to previous menu...");
-            return;
-          }
-          id = Integer.parseInt(ans);
-          supplier = Supplier.searchById(id);
-        } else {
-          System.out.println("*** Guest Customer Order Menu ***");
-          supplier = null;
+            ans = in.nextLine();
+            if (ans.equals("")) {
+              System.out.println("Process cancelled, returning to previous menu...");
+              return;
+            }
+            id = Integer.parseInt(ans);
+            supplier = Supplier.searchById(id);
+            if (supplier == null) {
+            	System.out.println("Registered customer with such id does not exist. Try again..." ); 
+                continue;
+            }
+            break;
         }
         supplies = fillBasket();
-        StorageOrder.previewOrder(storekeeper, supplier, supplies);
-
+        for (;;) {
+        	try {
+        		System.out.print("Enter the total cost of the order: ");
+        		totalCost = in.nextDouble();
+        		in.nextLine();
+        		if (totalCost > 0) {
+        			break;
+        		}
+        		else {
+        			System.out.println("Price must be larger than 0. Try again..." );
+        			continue;
+        		}
+        	}
+        	catch (InputMismatchException e) {
+        		System.err.println("Please enter a number. Try again..."); 
+        	}
+        	
+        }
+        StorageOrder.previewOrder(storekeeper, supplier, supplies, totalCost);
         for (; ; ) {
           System.out.print("Confirm storge order? (Y/N): ");
           ans = in.nextLine();
           if (ans.toLowerCase().equals("y") || ans.toLowerCase().equals("yes")) {
-            StorageOrder.confirmOrder(storekeeper, supplier, supplies);
+            StorageOrder.confirmOrder(storekeeper, supplier, supplies, totalCost);
             return;
           } else if (ans.toLowerCase().equals("n") || ans.toLowerCase().equals("no")) {
             System.out.println("Process cancelled. Returning to previous menu...");
@@ -300,7 +291,7 @@ public class StorageOrder {
               "Please enter either \"Yes\"(\"Y\") or \"No\"(\"N\").\n" + "Try again...");
         }
       } catch (NoSuchElementException e) {
-        System.out.println("Customer with such id does not exist. Try again...");
+        System.out.println("Supplier with such id does not exist. Try again...");
         continue;
       } catch (NumberFormatException e) {
         System.out.println("Invalid input given. Try again...");
@@ -335,7 +326,11 @@ public class StorageOrder {
 	        in.nextLine();
 	        alreadyExists = checkIfProductAlreadyExistsAndAddQuantity(tempProduct[0], tempProduct[1], tempBasket);
 	        if (alreadyExists == false) {
-	          tempBasket.add(tempProduct);
+	        	if (Storage.searchById(tempProduct[0]) != null) {
+	        		tempBasket.add(tempProduct);
+	        	} else {
+	        		throw new NoSuchElementException();
+	        	}
 	        }
 	      } catch (NumberFormatException e) {
 	        System.out.println("Product id must be an integer larger than 0. Try again...");
@@ -349,6 +344,14 @@ public class StorageOrder {
 	    }
 	  }
   
+  /**
+   * Checks if a given product id exists in the given ArrayList. If it does, the existing's product quantity is
+   * increased, otherwise, a new entry with the new id and quantity is created on the ArrayList
+   * @param id
+   * @param quantity
+   * @param supplies
+   * @return
+   */
   public static boolean checkIfProductAlreadyExistsAndAddQuantity(int id, int quantity, ArrayList<int[]> supplies) {
 	    for (int[] line : supplies) {
 	      if (line[0] == id) {
@@ -368,7 +371,7 @@ public class StorageOrder {
    * @param basket
    */
   public static void confirmOrder(
-      Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies) {
+      Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
     for (int[] product : supplies) {
       try {
         // add products to storage
@@ -380,7 +383,7 @@ public class StorageOrder {
       }
     }
     String orderDate = getCurrentDate();
-    StorageOrder newOrder = new StorageOrder(orderDate, supplier, storekeeper, supplies);
+    StorageOrder newOrder = new StorageOrder(orderDate, supplier, storekeeper, supplies, totalCost);
     newOrder.printFinalOrder();
   }
 
@@ -390,7 +393,7 @@ public class StorageOrder {
    * @return
    */
   public static String getCurrentDate() {
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     Date date = new Date();
     return dateFormatter.format(date);
   }

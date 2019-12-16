@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		loadAllListsFromCsv();
+		//loadAllListsFromCsv();
 		getMainMenu();
 	}
 
@@ -40,9 +40,9 @@ public class Main {
 					administratorLogin();
 					break;
 				case 5:
-					//saveAllListsToCsv();
-					System.exit(0);
-					break;
+					saveAllListsToCsv();
+					in.close();
+					return;
 				default:
 					System.out.println("Prease enter a valid option. Try again...");
 				}
@@ -133,24 +133,22 @@ public class Main {
 		}
 	}
 	
-	private static void saveAllListsToCsv() {
-		//TODO Complete the method when all the classes have been connected
+	public static void saveAllListsToCsv() {
 		FileHandler.writeOrderListToCSV(Order.getOrders());
 		FileHandler.writeProductListToCSV(Storage.getProducts());
 		FileHandler.writeProductQuantitiesListToCSV(Storage.getProductQuantities());
 		FileHandler.writeUserListToCSV(User.getUsers());
 		FileHandler.writeStorageOrderToCSV(StorageOrder.getOrders());
-		FileHandler.writeSupplierToCSV(Supplier.getSuppliers());
+		FileHandler.writeSupplierToCSV(Supplier.getsuppliers());
 		FileHandler.writeCustomerListToCSV(RegisteredCustomer.getCustomers());
 	}
 	
-	private static void loadAllListsFromCsv() {
-		// TODO Complete the method when all the classes have been connected
+	public static void loadAllListsFromCsv() {
 		User.createUsersFromList(FileHandler.getUsersFromCsv());
 		Product.createProductsFromList(FileHandler.getProductsFromCsv());
 		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
-		StorageOrder.createOrdersFromList(FileHandler.getStorageOrdersFromCsv());
-		Supplier.createStorageOrdersFromList(FileHandler.getSuppliersFromCsv());
+		StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
+		Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
 		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
 		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
 	}

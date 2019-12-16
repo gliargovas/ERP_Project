@@ -6,11 +6,11 @@ public abstract class User {
 	private final String name;
 	private final String surname;
 	private final String username;
-	private final String password;
+	private String password;
 	
 	private static ArrayList <User> users = new ArrayList<User>();
 	
-	private static int userIdCounter = 0;
+	private static int userIdCounter = FileHandler.getUserCounterFromFile();
 	
 	//constructor for new users
 	public User(String name, String surname, String username, String password) {

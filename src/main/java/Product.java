@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Product {
 	// Counts the number of objects created
-	private static int idCounter;
+	private static int idCounter = FileHandler.getProductCounterFromFile();
 	// Instance variables
 	private final int productId;
 	private final String name;

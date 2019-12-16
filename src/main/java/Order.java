@@ -18,7 +18,7 @@ public class Order {
   /** Date and time the order was made */
   private final String orderDate;
   /** Total cost of the order in euro currency */
-  private final double totalCost;
+  private double totalCost;
   /** The customer that made the order */
   private final Customer customer;
   /** The user that made the order */
@@ -26,7 +26,7 @@ public class Order {
   /** Contains the combination of the product id and quantity of all the products */
   private ArrayList<int[]> basket = new ArrayList<int[]>();
   /** The counter of the created orders, used for generating new order ids */
-  private static int count = 1;
+  private static int count = FileHandler.getOrderCounterFromFile();
   /** The order list that contains all the orders made */
   protected static ArrayList<Order> orders = new ArrayList<Order>();
 
@@ -100,6 +100,10 @@ public class Order {
    */
   public double getTotalCost() {
     return totalCost;
+  }
+  
+  public void setTotalCost(double totalCost) {
+	  this.totalCost = totalCost;
   }
 
   /**
@@ -342,18 +346,25 @@ public class Order {
       try {
         if (isRegistered) {
           System.out.println("*** Registered Customer Order Menu ***");
-          System.out.print(
-              "Enter the id of the user the order is about. " + "To cancel, press \"enter\": ");
-          ans = in.nextLine();
-          if (ans.equals("")) {
-            System.out.println("Process cancelled, returning to previous menu...");
-            return;
-          }
-          id = Integer.parseInt(ans);
-          customer = RegisteredCustomer.searchById(id);
+          for (;;) {
+            System.out.print("Enter the id of the registered cutomer the order is about. "
+              + "To cancel, press \"enter\": ");
+            ans = in.nextLine();
+            if (ans.equals("")) {
+              System.out.println("Process cancelled, returning to previous menu...");
+                return;
+            }
+            id = Integer.parseInt(ans);
+            customer = RegisteredCustomer.searchById(id);
+            if (customer == null) {
+              System.out.println("Registered customer with such id does not exist. Try again..." ); 
+              continue;
+            }
+            break;
+          } 
         } else {
-          System.out.println("*** Guest Customer Order Menu ***");
-          customer = null;
+        System.out.println("*** Guest Customer Order Menu ***");
+        customer = null;
         }
         basket = fillBasket();
         Order.previewOrder(cashier, customer, basket);
@@ -402,7 +413,21 @@ public class Order {
     }
     String orderDate = getCurrentDate();
     Order newOrder = new Order(orderDate, customer, cashier, basket);
+    if (customer instanceof RegisteredCustomer && newOrder.checkPointDiscount((RegisteredCustomer)customer) == true) {
+    	newOrder.setTotalCost(0.9 * newOrder.getTotalCost());
+    }
     newOrder.printFinalOrder();
+  }
+  
+  public boolean checkPointDiscount(RegisteredCustomer c) {
+	  ((RegisteredCustomer)(this.getCustomer())).setPoints((int) Math.round(((this.getTotalCost() * 5))));
+	  System.out.println("With this purchase " + Math.round(this.getTotalCost() * 5) +" points were earned!");
+	  if (c.getPoints() >= 10000) {
+		  System.out.println("Order has been discounted by 10% by redeeming 10000 points!");
+		  c.setPoints(c.getPoints() - 10000);
+		  return true;
+	  }
+	  return false;
   }
 
   /**
@@ -411,7 +436,7 @@ public class Order {
    * @return
    */
   public static String getCurrentDate() {
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     Date date = new Date();
     return dateFormatter.format(date);
   }
@@ -435,9 +460,6 @@ public class Order {
                 + "Press only \"enter\" when you do not want to add any products: ");
         input = in.nextLine();
         if (input.equals("")) {
-          for (int[] i : tempBasket) {
-            System.out.println(i[0] + " | " + i[1]);
-          }
           return tempBasket;
         }
         tempProduct[0] = Integer.parseInt(input);

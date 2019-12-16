@@ -22,7 +22,7 @@ public class RegisteredCustomer extends Customer {
   /** points each customer earns depending on his purchases */
   private int points;
   // counts the number of registered customers created
-  private static int idCounter;
+  private static int idCounter = FileHandler.getRegisteredCustomerCounterFromFile();
   // an @Arraylist in which Customer information is temporarily saved
   protected static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
   
