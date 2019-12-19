@@ -41,7 +41,9 @@ public class Main {
 					break;
 				case 5:
 					saveAllListsToCsv();
+					FileHandler.writeAllCountersToFile();
 					in.close();
+					Thread.sleep(100);
 					return;
 				default:
 					System.out.println("Prease enter a valid option. Try again...");
@@ -53,6 +55,7 @@ public class Main {
 			}
 			catch (Exception e) {
 				System.out.println("An error occured. Try again...");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -146,11 +149,11 @@ public class Main {
 	public static void loadAllListsFromCsv() {
 		User.createUsersFromList(FileHandler.getUsersFromCsv());
 		Product.createProductsFromList(FileHandler.getProductsFromCsv());
-		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
-		StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
-		Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
-		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
 		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
+		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
+		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
+		Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
+		StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
 	}
 
 }

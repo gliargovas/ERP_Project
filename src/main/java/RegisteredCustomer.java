@@ -243,7 +243,7 @@ public class RegisteredCustomer extends Customer {
   }
   
   /**
-   * checks if a Registered Customer already exists and if it does, changes his name
+   * Checks if a Registered Customer already exists and if it does, changes his name
    * @param id
    * @param name
    * @throws NoSuchElementException

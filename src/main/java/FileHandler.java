@@ -24,17 +24,148 @@ public class FileHandler {
     try {
       BufferedWriter bw =
           new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Counters.txt"), "UTF-8"));
-      StringBuffer line = new StringBuffer();
       bw.write("User counter: " + User.getUserIdCounter());
+      bw.newLine();
       bw.write("Product counter: " + Product.getIdCounter());
+      bw.newLine();
       bw.write("Registered customer counter: " + RegisteredCustomer.getIdCounter());
+      bw.newLine();
       bw.write("Order counter: " + Order.getIdCounter());
+      bw.newLine();
       bw.write("Supplier counter: " + Supplier.getIdCounter());
+      bw.newLine();
       bw.write("Storage order counter: " + StorageOrder.getIdCounter());
+      bw.newLine();
+      bw.flush();
+      bw.close();
     } catch (UnsupportedEncodingException e) {
+    	e.printStackTrace();
     } catch (FileNotFoundException e) {
+    	e.printStackTrace();
     } catch (IOException e) {
+    	e.printStackTrace();
     }
+  }
+  
+  public static int getUserCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {;
+				if (line.contains("User counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(14));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
+  }
+  
+  public static int getProductCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {;
+				if (line.contains("Product counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(17));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
+  }
+  
+  public static int getRegisteredCustomerCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {
+				if (line.contains("Registered customer counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(29));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
+  }
+  
+  
+  public static int getOrderCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {;
+				if (line.contains("Order counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(15));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
+  }
+  
+  public static int getSupplierCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {;
+				if (line.contains("Supplier counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(18));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
+  }
+  
+  public static int getStorageOrderCounterFromFile() {
+	  BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"./Counters.txt"));
+			String line = reader.readLine();
+			while (line != null) {;
+				if (line.contains("Storage order counter:")) {
+					reader.close();
+					return Integer.parseInt(line.substring(23));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return 0;
   }
 
   /**
@@ -162,6 +293,9 @@ public class FileHandler {
         line.append(CSV_SEPARATOR);
         line.append(user.getSurname());
         line.append(CSV_SEPARATOR);
+        line.append(user.getUsername());
+        line.append(CSV_SEPARATOR);
+        line.append(user.getPassword());
         bw.write(line.toString());
         bw.newLine();
       }
@@ -241,9 +375,9 @@ public class FileHandler {
           line.append(i[0]);
           line.append(CSV_SEPARATOR);
           line.append(i[1]);
-          bw.write(line.toString());
-          bw.newLine();
         }
+        bw.write(line.toString());
+        bw.newLine();
       }
       bw.flush();
       bw.close();
@@ -267,6 +401,8 @@ public class FileHandler {
       for (Supplier supplier : suppliers) {
         StringBuffer line = new StringBuffer();
         line.append(supplier.getId());
+        line.append(CSV_SEPARATOR);
+        line.append(supplier.getName());
         line.append(CSV_SEPARATOR);
         line.append(supplier.getAddress());
         line.append(CSV_SEPARATOR);

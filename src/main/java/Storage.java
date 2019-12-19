@@ -310,9 +310,11 @@ public class Storage {
 			catch (NumberFormatException e) {
 				System.out.println("Id must be a non-negative integer. Try again...");
 			}
+			catch (NullPointerException e) {
+				System.out.println("Customer with such id does not exist. Try again...");
+			}
 			catch (Exception e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage());
+				System.out.println("An error has occured. Try again..." ); 
 			}
 		}
 	}

@@ -5,6 +5,11 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author gliar
+ *
+ */
 public class StorageOrder {
   private static int counter = FileHandler.getStorageOrderCounterFromFile();
   private final int storageOrderNumber;
@@ -18,10 +23,10 @@ public class StorageOrder {
   /**
    * Constructor for creating a new order.
    *
-   * @param storageOrderDate
-   * @param totalCost
-   * @param supplier
-   * @param storekeeper
+   * @param storageOrderDate the date as a String when the order was created in "dd/MM/yyyy hh:mm:ss" format
+   * @param totalCost the total cost of the basket products as double, in the same currency as the products
+   * @param supplier the Supplier object of the order
+   * @param storekeeper the Storekeeper object of the order, who made the order 
    */
   public StorageOrder(
       String storageOrderDate, Supplier supplier, Storekeeper storekeeper, ArrayList<int[]> supplies, double totalCost) {
@@ -38,11 +43,11 @@ public class StorageOrder {
    * Constructor for already created products read from .csv file. There is non need to calculate
    * the total cost again as it has been created.
    *
-   * @param StorageOrderNumber
-   * @param storageOrderDate
-   * @param totalCost
-   * @param supplier
-   * @param storekeeper
+   * @param StorageOrderNumber the id number that was assigned to the order when it was first created
+   * @param storageOrderDate the date as a String when the order was created in "dd/MM/yyyy hh:mm:ss" format
+   * @param totalCost the total cost of the basket products as double, in the same currency as the products
+   * @param supplier the Supplier object of the order
+   * @param storekeeper the Storekeeper object of the order, who made the order 
    */
   public StorageOrder(
       int StorageOrderNumber,
@@ -58,40 +63,76 @@ public class StorageOrder {
     this.storekeeper = storekeeper;
     orders.add(this);
   }
-
+  
+  /**
+   * Returns the storage order date
+   * @return the storageOrderDate
+   */
   public String getStorageOrderDate() {
     return storageOrderDate;
   }
 
+  /**
+   * Returns the order's total cost
+   * @return the totalCost
+   */
   public double getTotalCost() {
     return totalCost;
   }
 
+  /**
+   * Returns the order's supplier object
+   * @return Supplier object
+   */
   public Supplier getSupplier() {
     return supplier;
   }
 
+  /**
+   * Returns the order's storekeeper object
+   * @return Storekeeper object
+   */
   public Storekeeper getStorekeeper() {
     return storekeeper;
   }
 
+  /**
+   * Returns the order's unique number
+   * @return storage order number
+   */
   public int getStorageOrderNumber() {
     return storageOrderNumber;
   }
 
+  /**
+   * Returns the order's list of supplies that were resupplied
+   * @return
+   */
   public ArrayList<int[]> getSupplies() {
     return supplies;
   }
 
+  /**
+   * Returns the arrayList which contains the orders storage
+   * @return ArrayList with StorageOrder objects
+   */
   public static ArrayList<StorageOrder> getOrders() {
     return orders;
   }
   
+  /**
+   * Returns the counter of the storage orders created
+   * @return counter of orders as an int
+   */
   public static int getIdCounter() {
 	return counter;  
   }
+  
+  
 
-  /** Prints all the storage orders */
+  @Override public String toString(){return "StorageOrder [storageOrderNumber=" + storageOrderNumber + ", storageOrderDate=" + storageOrderDate + ", totalCost=" + totalCost + ", supplier=" + supplier + ", storekeeper=" + storekeeper + ", supplies=" + supplies + "]";}
+
+/** Prints all the storage orders */
   public static void printStorageOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
@@ -229,7 +270,6 @@ public class StorageOrder {
    * Contains the prompts in order to make a storage order.
    *
    * @param storekeeper
-   * @param isRegistered
    */
   public static void makeOrder(Storekeeper storekeeper) {
     Scanner in = new Scanner(System.in);
@@ -417,6 +457,7 @@ public class StorageOrder {
       orderDate = order.get(1);
       totalCost = Double.parseDouble(order.get(2));
       supplierId = Integer.parseInt(order.get(3));
+      System.out.println(supplierId);
       storekeeperId = Integer.parseInt(order.get(4));
       try {
           supplier = Supplier.searchById(supplierId);
