@@ -169,6 +169,11 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Searches the supplier and prints him according to the name that is given
+	 * 
+	 * @param name, String type
+	 */
 	public static void searchAndPrintSupplierByName(String name) {
 		boolean found = false;
 		for (Supplier s : Suppliers) {
@@ -182,6 +187,11 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Searches the supplier and prints him according to the address that is given
+	 * 
+	 * @param address, String type
+	 */
 	public static void searchAndPrintSupplierByAddress(String address) {
 		boolean found = false;
 		for (Supplier s : Suppliers) {
@@ -195,6 +205,11 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Searches the Supplier and prints him according to the id that is given
+	 * 
+	 * @param id, integer type
+	 */
 	public static void searchAndPrintSupplierById(int id) {
 		for (Supplier s : Suppliers) {
 			if (s.getId() == id) {
@@ -205,6 +220,9 @@ public class Supplier {
 		System.out.println("No suppliers with such Id");
 	}
 
+	/**
+	 * Searches and prints the supplier according to the telephone that is given
+	 */
 	public static void searchAndPrintSupplierByTelephone(int tel) {
 		boolean found = false;
 		for (Supplier s : Suppliers) {
@@ -218,6 +236,14 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Changes the Name of the Name of the supplier from the list according to the
+	 * id and name that is given
+	 * 
+	 * @param id
+	 * @param name
+	 * @throws NoSuchElementException
+	 */
 	public static void changeName(int id, String name) throws NoSuchElementException {
 		Supplier supplier = searchbyId(id);
 		if (supplier == null) {
@@ -227,6 +253,14 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Changes the address of the supplier according to the id and the address that
+	 * is given
+	 * 
+	 * @param id
+	 * @param address
+	 * @throws NoSuchElementException
+	 */
 	public static void changeAddress(int id, String address) throws NoSuchElementException {
 		Supplier supplier = searchbyId(id);
 		if (supplier == null) {
@@ -236,6 +270,14 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Changes the telephone of the supplier according to th id and telephone that
+	 * is given
+	 * 
+	 * @param id
+	 * @param tel
+	 * @throws NoSuchElementException
+	 */
 	public static void changeTelephone(int id, int tel) throws NoSuchElementException {
 		Supplier supplier = searchbyId(id);
 		if (supplier == null) {
@@ -245,6 +287,10 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Creates the registration of the supplier according to the values given from
+	 * the user
+	 */
 	public static void registerSupplierMenu() {
 		String name, address;
 		int tel;
@@ -259,6 +305,10 @@ public class Supplier {
 		System.out.printf("Supplier %s registered successfully!\n", name);
 	}
 
+	/**
+	 * Changes the name of the supplier at the menu according to the id that is
+	 * given
+	 */
 	public static void changeCustomerNameMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
@@ -285,6 +335,11 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Changes the address of the supplier at the menu according to the id that is
+	 * given
+	 * 
+	 */
 	public static void changeSupplierAddressMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
@@ -311,6 +366,10 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * changes the telephone of the supplier at the menu according to the id that is
+	 * given
+	 */
 	// contains customer telephone change menu
 	public static void changeSupplierTelephoneMenu() {
 		Scanner in = new Scanner(System.in);
@@ -340,6 +399,10 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Deletes the supplier at the menu according to the id that is given
+	 * 
+	 */
 	public static void deleteSupplierMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
