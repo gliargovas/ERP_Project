@@ -8,40 +8,67 @@
  */
 
 public class Customer {
+	/** the name of the customer */
 	private String companyName;
+	/** the customer's address */
 	private String address;
+	/** the customer's telephone */
 	private int telephone;
 	/**
-	   * Constructor for creating a new non-registered customer.
-	   * @param name
-	   * @param address
-	   * @param telephone
-	   */
+	 * Constructor for creating a new non-registered customer.
+	 * @param name
+	 * @param address
+	 * @param telephone
+	 */
 	public Customer(String name, String address, int telephone) {
 		this.companyName = name;
 		this.address = address;
 		this.telephone = telephone;
 	}
+	/**
+	 * returns customer's name
+	 * @return
+	 */
 	public String getCompanyName() {
 		return companyName;
 	}
+	/**
+	 * sets the customer name to the value of the variable received
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.companyName = name;
 	}
+	/**
+	 * returns customer's address
+	 * @return
+	 */
 	public String getAddress() {
 		return address;
 	}
+	/**
+	 * sets the customer address to the value of the variable received
+	 * @param adress
+	 */
 	public void setAddress(String adress) {
 		this.address = adress;
 	}
+	/**
+	 * returns customer's telephone
+	 * @return
+	 */
 	public int getTelephone() {
 		return telephone;
 	}
+	/**
+	 * sets the customer telephone to the value of the variable received
+	 * @param telephone
+	 */
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
 	/**
-	 * toString Method
+	 * returns the current customer object in String format
 	 */
 	@Override
 	public String toString() {
