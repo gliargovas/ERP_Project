@@ -509,7 +509,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the id of the registered customer you want to delete\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
