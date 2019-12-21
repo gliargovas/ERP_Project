@@ -518,6 +518,8 @@ public class RegisteredCustomer extends Customer {
         break;
       } catch (NoSuchElementException e) {
         System.err.println("Customer with such id does not exist");
+      } catch (NumberFormatException e) {
+        System.err.println("Invalid input given. Id must be an integer");
       }
     }
   }
