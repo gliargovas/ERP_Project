@@ -67,6 +67,7 @@ public class RegisteredCustomer extends Customer {
   public int getPoints() {
     return points;
   }
+ 
   /**
    * returns the id counter
    * @return
@@ -74,6 +75,7 @@ public class RegisteredCustomer extends Customer {
   public static int getIdCounter() {
     return idCounter;
   }
+ 
   /**
    * sets the registered customer points to the value of the variable received
    * @param points
@@ -81,6 +83,7 @@ public class RegisteredCustomer extends Customer {
   public void setPoints(int points) {
     this.points = points;
   }
+ 
   /**
    * returns the customer id
    * @return
@@ -96,6 +99,7 @@ public class RegisteredCustomer extends Customer {
   public static ArrayList<RegisteredCustomer> getCustomers() {
     return customers;
   }
+  
   /**
    * returns the current registered customer object in String format
    * @return
