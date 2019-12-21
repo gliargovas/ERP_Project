@@ -32,35 +32,72 @@ public abstract class User {
 		users.add(this);
 	}
 	
-	
+	/**
+	 * Returns the Id counter of the User
+	 * @return id
+	 */
 	public static int getUserIdCounter() {
 		return userIdCounter;
 	}
-
+	
+	/**
+	 * Returns the Id of the User
+	 * @return id
+	 */
 	public int getIdUser() {
 		return idUser;
 	}
+	
+	/**
+	 * Returns the name of the User
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Returns the Surname of the User
+	 * @return surname
+	 */
 	public String getSurname() {
 		return surname;
 	}
+	
+	/**
+	 * Returns the Username of the User
+	 * @return username
+	 */
 	public String getUsername() {
 		return username;
 	}
+	
+	/**
+	 * Returns the Password of the User
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}
+	
+	/**
+	 * Returns all the users from the List users
+	 * @return users
+	 */
 	public static ArrayList<User> getUsers() {
 		return users;
 	}
+	
 	@Override
 	public String toString() {
 		return String.format("ID: %d  Name: %s  Surname: %s  Username: %s", getIdUser(), getName(), getSurname(), getUsername());
 	}
 	public abstract void getMenu();
 	
+	/**
+	 * Creates the users from the list according to the type
+	 * @param users
+	 */
 	public static void createUsersFromList(ArrayList<ArrayList<String>> users) {
 		//TODO: Change fileHandler writeToCsv(User) administrator names and add username & password
 		int id;
@@ -85,6 +122,12 @@ public abstract class User {
 		}
 	}
 	
+	/**
+	 * Searches the user according to the id that is given
+	 * @param id
+	 * @return User
+	 * @throws NoSuchElementException
+	 */
 	public static User searchUserById(int id) throws NoSuchElementException {
 		for (User user : users) {
 			if (user.getIdUser() == id) {
