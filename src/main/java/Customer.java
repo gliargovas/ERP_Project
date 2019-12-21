@@ -25,6 +25,7 @@ public class Customer {
 		this.address = address;
 		this.telephone = telephone;
 	}
+	
 	/**
 	 * returns customer's name
 	 * @return
@@ -32,6 +33,7 @@ public class Customer {
 	public String getCompanyName() {
 		return companyName;
 	}
+	
 	/**
 	 * sets the customer name to the value of the variable received
 	 * @param name
@@ -39,6 +41,7 @@ public class Customer {
 	public void setName(String name) {
 		this.companyName = name;
 	}
+	
 	/**
 	 * returns customer's address
 	 * @return
@@ -46,6 +49,7 @@ public class Customer {
 	public String getAddress() {
 		return address;
 	}
+	
 	/**
 	 * sets the customer address to the value of the variable received
 	 * @param adress
@@ -53,6 +57,7 @@ public class Customer {
 	public void setAddress(String adress) {
 		this.address = adress;
 	}
+	
 	/**
 	 * returns customer's telephone
 	 * @return
@@ -60,6 +65,7 @@ public class Customer {
 	public int getTelephone() {
 		return telephone;
 	}
+	
 	/**
 	 * sets the customer telephone to the value of the variable received
 	 * @param telephone
@@ -67,6 +73,7 @@ public class Customer {
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
+	
 	/**
 	 * returns the current customer object in String format
 	 */
