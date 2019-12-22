@@ -47,6 +47,10 @@ public class FileHandler {
     }
   }
   
+  /**
+   * Retrieves the user counter stored in "Counters.txt".
+   * @return userCounter as int
+   */
   public static int getUserCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -67,6 +71,10 @@ public class FileHandler {
 	  return 0;
   }
   
+  /**
+   * Retrieves the product counter stored in "Counters.txt".
+   * @return productCounter as int
+   */
   public static int getProductCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -87,6 +95,10 @@ public class FileHandler {
 	  return 0;
   }
   
+  /**
+   * Retrieves the registered customer counter stored in "Counters.txt".
+   * @return registeredCustomerCounter as int 
+   */
   public static int getRegisteredCustomerCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -107,7 +119,10 @@ public class FileHandler {
 	  return 0;
   }
   
-  
+  /**
+   * Retrieves the order counter stored in "Counters.txt".
+   * @return orderCounter as int 
+   */
   public static int getOrderCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -128,6 +143,10 @@ public class FileHandler {
 	  return 0;
   }
   
+  /**
+   * Retrieves the supplier counter stored in "Counters.txt".
+   * @return supplierCounter as int 
+   */
   public static int getSupplierCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -148,6 +167,10 @@ public class FileHandler {
 	  return 0;
   }
   
+  /**
+   * Retrieves the storage order counter stored in "Counters.txt".
+   * @return storageOrderCounter as int 
+   */
   public static int getStorageOrderCounterFromFile() {
 	  BufferedReader reader;
 		try {
@@ -172,7 +195,7 @@ public class FileHandler {
    * Writes the product list stored in the memory, to a file named "Products.csv", in .csv format
    * and UTF-8 encoding.
    *
-   * @param products
+   * @param products ArrayList<product> that contains the products created by the ERP
    */
   public static void writeProductListToCSV(ArrayList<Product> products) {
     try {
@@ -208,7 +231,8 @@ public class FileHandler {
    * Writes the ProductQuantities list stored in the memory, to a file named
    * "ProductQuantities.csv", in .csv format and UTF-8 encoding.
    *
-   * @param productQuantities
+   * @param productQuantities ArrayList<int[]> that contains the ids and the quantities
+   * of the products in the storage 
    */
   public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities) {
     try {
@@ -236,7 +260,7 @@ public class FileHandler {
    * Writes the Registered Customer list stored in the memory, to a file named "Customers.csv", in
    * .csv format and UTF-8 encoding.
    *
-   * @param customers
+   * @param customers ArrayList that contains the registered customer objects created by the ERP
    */
   public static void writeCustomerListToCSV(ArrayList<RegisteredCustomer> customers) {
     try {
@@ -269,7 +293,7 @@ public class FileHandler {
    * Writes the User list stored in the memory, to a file named "Users.csv", in .csv format and
    * UTF-8 encoding.
    *
-   * @param users
+   * @param users ArrayList that contains the user objects created by the ERP 
    */
   public static void writeUserListToCSV(ArrayList<User> users) {
     try {
@@ -311,7 +335,7 @@ public class FileHandler {
    * Writes the order list stored in the memory, to a file named "Orders.csv", in .csv format and
    * UTF-8 encoding.
    *
-   * @param orders
+   * @param orders ArrayList that contains the user order objects created by the ERP 
    */
   public static void writeOrderListToCSV(ArrayList<Order> orders) {
     try {
@@ -352,7 +376,7 @@ public class FileHandler {
    * Writes the storage order list stored in the memory, to a file named "StorageOrders.csv", in
    * .csv format and UTF-8 encoding.
    *
-   * @param orders
+   * @param orders ArrayList that contains the storage order objects created by the ERP 
    */
   public static void writeStorageOrderToCSV(ArrayList<StorageOrder> orders) {
     try {
@@ -391,7 +415,7 @@ public class FileHandler {
    * Writes the supplier list stored in the memory, to a file named "Suppliers.csv", in .csv format
    * and UTF-8 encoding.
    *
-   * @param suppliers
+   * @param suppliers ArrayList that contains the supplier objects created by the ERP file
    */
   public static void writeSupplierToCSV(ArrayList<Supplier> suppliers) {
     try {
@@ -423,7 +447,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Products.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Products.csv file
    */
   public static ArrayList<ArrayList<String>> getProductsFromCsv() {
     Scanner scanner = null;
@@ -444,7 +468,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "ProductQuantities.csv" file to the
    * main memory as an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the ProductQuantities.csv file
    */
   public static ArrayList<ArrayList<String>> getProductQuantityFromCsv() {
     Scanner scanner = null;
@@ -465,7 +489,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Users.csv" file to the main memory as
    * an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Users.csv file
    */
   public static ArrayList<ArrayList<String>> getUsersFromCsv() {
     Scanner scanner = null;
@@ -486,7 +510,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Customers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Customers.csv file
    */
   public static ArrayList<ArrayList<String>> getRegisteredCustomersFromCsv() {
     Scanner scanner = null;
@@ -507,7 +531,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Orders.csv" file to the main memory as
    * an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Order.csv file
    */
   public static ArrayList<ArrayList<String>> getOrdersFromCsv() {
     Scanner scanner = null;
@@ -528,7 +552,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "StorageOrders.csv" file to the main
    * memory as an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the StorageOrders.csv
    */
   public static ArrayList<ArrayList<String>> getStorageOrdersFromCsv() {
     Scanner scanner = null;
@@ -549,7 +573,7 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Suppliers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Suppliers.csv file
    */
   public static ArrayList<ArrayList<String>> getSuppliersFromCsv() {
     Scanner scanner = null;
@@ -569,8 +593,8 @@ public class FileHandler {
   /**
    * A String parser used for reading a single line of a .csv file using the ";" delimiter.
    *
-   * @param line
-   * @return
+   * @param line of the .csv file that contains separators
+   * @return ArrayList<String> that contains the split line according to the separators
    */
   private static ArrayList<String> getRecordFromLine(String line) {
     ArrayList<String> values = new ArrayList<String>();
@@ -580,25 +604,5 @@ public class FileHandler {
       values.add(rowScanner.next());
     }
     return values;
-  }
-
-  /**
-   * File reader for getting the contents of the "Counters.txt" file as an ArrayList of strings.
-   *
-   * @return
-   */
-  private static ArrayList<String> getCountersFromTxt() {
-    ArrayList<String> records = new ArrayList<String>();
-    try {
-      File file = new File("./Counters.txt");
-      Scanner scanner = new Scanner(file);
-      while (scanner.hasNext()) {
-        records.add(scanner.nextLine());
-      }
-      scanner.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-    return records;
   }
 }
