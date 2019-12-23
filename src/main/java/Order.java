@@ -139,9 +139,9 @@ public class Order {
   }
 
   /**
-   * Returns the id counter
+   * Returns the products id counter
    *
-   * @return
+   * @return The count of products' id, type Integer
    */
   public static int getIdCounter() {
     return count;
