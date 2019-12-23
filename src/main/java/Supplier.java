@@ -2,7 +2,18 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+/**
+ * The class represents a supplier of the ERP system
+ * The class is responsible for creating a supplier object and
+ * storing it in an ArrayList either by creating a completely new supplier
+ *  or loading it from a .csv file. It also contains methods for searching
+ * and editing the contents of the suppliers list with specific criteria. There are also
+ * methods that contain menus in order to use the above mentioned methods according
+ * to user input.
+ * 
+ * @author chris
+ *
+ */
 public class Supplier {
 	private String Name;
 	private int Id;
@@ -10,7 +21,13 @@ public class Supplier {
 	private String Address;
 	private static int idCounter;
 	private static ArrayList<Supplier> Suppliers = new ArrayList<Supplier>();
-
+/**
+ * Constructor for loading objects from .csv file
+ * @param name
+ * @param address
+ * @param tel
+ * @param id
+ */
 	public Supplier(String name, String address, int tel, int id) {
 		super();
 		Name = name;
@@ -19,7 +36,12 @@ public class Supplier {
 		Address = address;
 		Suppliers.add(this);
 	}
-
+/**
+ * Constructor for creating new Supplier objects
+ * @param name
+ * @param tel
+ * @param address
+ */
 	public Supplier(String name, int tel, String address) {
 		Name = name;
 		Id = ++idCounter;
