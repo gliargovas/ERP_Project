@@ -78,7 +78,7 @@ public class Order {
   /**
    * Returns the order number.
    *
-   * @return
+   * @return order number, type integer
    */
   public int getOrderNo() {
     return orderNo;
@@ -87,7 +87,7 @@ public class Order {
   /**
    * Returns the order date.
    *
-   * @return
+   * @return the order date, type String
    */
   public String getOrderDate() {
     return orderDate;
@@ -96,7 +96,7 @@ public class Order {
   /**
    * Returns the order total cost.
    *
-   * @return
+   * @return the order total cost, type double
    */
   public double getTotalCost() {
     return totalCost;
@@ -105,7 +105,7 @@ public class Order {
   /**
    * Returns the order's Customer object.
    *
-   * @return
+   * @return customer's Customer object, type Customer
    */
   public Customer getCustomer() {
     return customer;
@@ -114,7 +114,7 @@ public class Order {
   /**
    * Returns the order's Cashier object.
    *
-   * @return
+   * @return the order's Cashier, type Cashier
    */
   public Cashier getCashier() {
     return cashier;
@@ -123,7 +123,7 @@ public class Order {
   /**
    * Returns the ArrayList that represents the order's basket.
    *
-   * @return
+   * @return an ArrayList of Products, type integer
    */
   public ArrayList<int[]> getBasket() {
     return basket;
@@ -132,7 +132,7 @@ public class Order {
   /**
    * Returns the ArrayList that the order objects are stored.
    *
-   * @return
+   * @return an ArrayList of the previous Orders, type Order
    */
   public static ArrayList<Order> getOrders() {
     return orders;
@@ -147,7 +147,8 @@ public class Order {
     return count;
   }
 
-  /** Prints all the orders */
+  /**
+   * Prints all the orders */
   public static void printOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
@@ -216,7 +217,7 @@ public class Order {
    *
    * @param id
    * @param quantity
-   * @return
+   * @return the total cost of a product, type double
    */
   public static double calculateCost(int id, int quantity) {
     Product prod = Storage.searchById(id);
@@ -229,7 +230,7 @@ public class Order {
    * Calculates the total cost of an order's basket.
    *
    * @param basket
-   * @return
+   * @return total cost of the Basket, type double
    */
   public static double calculateBasketCost(ArrayList<int[]> basket) {
     double totalCost = 0;
@@ -408,7 +409,7 @@ public class Order {
   /**
    * Utility method that returns the system's date and time as a String.
    *
-   * @return
+   * @return the specific form of date, type String
    */
   public static String getCurrentDate() {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
@@ -419,7 +420,7 @@ public class Order {
   /**
    * Contains the prompts in order for the user to fill the order basket.
    *
-   * @return
+   * @return the temporary Basket, type integer
    */
   public static ArrayList<int[]> fillBasket() {
     Scanner in = new Scanner(System.in);
@@ -472,7 +473,7 @@ public class Order {
    * @param id
    * @param quantity
    * @param basket
-   * @return
+   * @return if the product is available, type boolean
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(
       int id, int quantity, ArrayList<int[]> basket) {
