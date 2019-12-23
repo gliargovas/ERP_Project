@@ -424,7 +424,9 @@ public class Supplier {
 			}
 		}
 	}
-
+/**
+ * Searches and prints the Supplier according to the name that is given
+ */
 	public static void searchAndPrintSupplierByNameMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
@@ -439,7 +441,9 @@ public class Supplier {
 			break;
 		}
 	}
-
+/**
+ * Searches and prints the Supplier according to the address that is given
+ */
 	public static void searchAndPrintSupplierByAddressMenu() {
 		Scanner in = new Scanner(System.in);
 		String input;
@@ -454,7 +458,9 @@ public class Supplier {
 			break;
 		}
 	}
-
+/**
+ * Searches and prints the Supplier according to the id that is given
+ */
 	public static void searchAndPrintSupplierByIdMenu() {
 		Scanner in = new Scanner(System.in);
 		int id;
@@ -476,7 +482,9 @@ public class Supplier {
 			}
 		}
 	}
-
+/**
+ *Searches and prints the Supplier according to the telephone that is given
+ */
 	public static void searchAndPrintSupplierByTelephoneMenu() {
 		Scanner in = new Scanner(System.in);
 		int tel;
@@ -498,7 +506,9 @@ public class Supplier {
 			}
 		}
 	}
-
+/**
+ * Returns the current Supplier object in String format
+ */
 	@Override
 	public String toString() {
 		return "Supplier [Name=" + Name + ", Id=" + Id + ", Tel=" + Tel + ", Address=" + Address + "]";
