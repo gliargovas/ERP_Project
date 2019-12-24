@@ -18,12 +18,13 @@ import java.util.Scanner;
  */
 
 public class RegisteredCustomer extends Customer {
-  private int id;
+  /** the unique id of each registered customer*/
+	private int id;
   /** points each customer earns depending on his purchases */
   private int points;
-  // counts the number of registered customers created
+  /** counts the number of registered customers created */
   private static int idCounter = FileHandler.getRegisteredCustomerCounterFromFile();
-  // an @Arraylist in which Customer information is temporarily saved
+  /** an @Arraylist in which Customer information is temporarily saved*/
   protected static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
   
   /**
@@ -37,7 +38,7 @@ public class RegisteredCustomer extends Customer {
     super(name, address, telephone);
     this.points = points;
     this.id = ++idCounter;
-    // adding registered customer to @Arraylist
+    //** adding registered customer to @Arraylist */
     customers.add(this);
   }
   
@@ -59,27 +60,50 @@ public class RegisteredCustomer extends Customer {
     customers.add(this);
   }
   
-  // getters and setters
+  /**
+   * returns the customer points
+   * @return
+   */
   public int getPoints() {
     return points;
   }
-
+ 
+  /**
+   * returns the id counter
+   * @return
+   */
   public static int getIdCounter() {
     return idCounter;
   }
-
+ 
+  /**
+   * sets the registered customer points to the value of the variable received
+   * @param points
+   */
   public void setPoints(int points) {
     this.points = points;
   }
-
+ 
+  /**
+   * returns the customer id
+   * @return
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * returns the @Arraylist of registered customers
+   * @return
+   */
   public static ArrayList<RegisteredCustomer> getCustomers() {
     return customers;
   }
-
+  
+  /**
+   * returns the current registered customer object in String format
+   * @return
+   */
   @Override
   public String toString() {
     return String.format( "Id: %d | %s | Points: %d", this.getId(), super.toString(), this.getPoints());
@@ -99,7 +123,7 @@ public class RegisteredCustomer extends Customer {
     return null;
   }
   
-  /** Creates a new registered customer from an Arraylist of strings by parsing its contents.
+  /** Creates a new registered customer from an @Arraylist of strings by parsing its contents.
    * @param customers
    */
   public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
@@ -485,7 +509,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the id of the registered customer you want to delete\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -494,6 +518,8 @@ public class RegisteredCustomer extends Customer {
         break;
       } catch (NoSuchElementException e) {
         System.err.println("Customer with such id does not exist");
+      } catch (NumberFormatException e) {
+        System.err.println("Invalid input given. Id must be an integer");
       }
     }
   }
@@ -554,7 +580,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the id of the registered customer you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -582,7 +608,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the telephone of the registered customer you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -610,7 +636,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the points of the registered customers you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
