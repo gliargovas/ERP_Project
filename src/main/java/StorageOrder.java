@@ -56,31 +56,52 @@ public class StorageOrder {
     this.supplier = supplier;
     this.storekeeper = storekeeper;
   }
-
+/**
+ * Returns the Date of the order
+ * @return storageOrderDate, type String
+ */
   public String getStorageOrderDate() {
     return storageOrderDate;
   }
-
+/**
+ * Returns the total cost
+ * @return TotalCost, type double
+ */
   public double getTotalCost() {
     return totalCost;
   }
-
+/**
+ * Returns the object supplier
+ * @return the supplier
+ */
   public Supplier getSupplier() {
     return supplier;
   }
-
+/**
+ * Returns the object Storekeeper
+ * @return storekeeper
+ */
   public Storekeeper getStorekeeper() {
     return storekeeper;
   }
-
+/**
+ * Returns the Number of the Order
+ * @return storageOrderNumber, type int
+ */
   public int getStorageOrderNumber() {
     return storageOrderNumber;
   }
-
+/**
+ * Returns the supplies from the list
+ * @return supplies
+ */
   public ArrayList<int[]> getSupplies() {
     return supplies;
   }
-
+/**
+ * Returns the orders from the list
+ * @return orders
+ */
   public static ArrayList<StorageOrder> getOrders() {
     return orders;
   }
@@ -311,7 +332,7 @@ public class StorageOrder {
   
   /**
    * Contains the prompts in order for the user to fill the order basket
-   * @return
+   * @return tempBasket 
    */
   public static ArrayList<int[]> fillBasket() {
 	    Scanner in = new Scanner(System.in);
@@ -348,7 +369,13 @@ public class StorageOrder {
 	      }
 	    }
 	  }
-  
+  /**
+   * Checks if the Product exists and adds the quantity that is needed
+   * @param id
+   * @param quantity
+   * @param supplies
+   * @return false or true
+   */
   public static boolean checkIfProductAlreadyExistsAndAddQuantity(int id, int quantity, ArrayList<int[]> supplies) {
 	    for (int[] line : supplies) {
 	      if (line[0] == id) {
@@ -387,7 +414,7 @@ public class StorageOrder {
   /**
    * Utility method that returns the system's date and time as a String.
    *
-   * @return
+   * @return date
    */
   public static String getCurrentDate() {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
@@ -435,4 +462,3 @@ public class StorageOrder {
     }
   }
 }
-
