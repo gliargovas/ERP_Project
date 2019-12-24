@@ -1,3 +1,4 @@
+package ERP_Core;
 public class DataAnalyst extends User {
 	public DataAnalyst(String name, String surname, String username, String password) {
 		super(name, surname, username, password);

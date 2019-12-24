@@ -1,3 +1,4 @@
+package ERP_Core;
 import java.util.ArrayList;
 /**
  * This is the class with product constructors , setters , getters and toString methods

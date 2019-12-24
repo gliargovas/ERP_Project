@@ -1,3 +1,8 @@
+import ERP_Core.Administrator;
+import ERP_Core.Cashier;
+import ERP_Core.DataAnalyst;
+import ERP_Core.Product;
+import ERP_Core.Storekeeper;
 
 public class LoginTest {
 

@@ -1,3 +1,4 @@
+package ERP_Core;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 public abstract class User {
@@ -78,6 +79,14 @@ public abstract class User {
 	 */
 	public String getPassword() {
 		return password;
+	}
+	
+	/**
+	 * Changes the value of the user's password
+	 * @param password the new password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	/**

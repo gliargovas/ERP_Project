@@ -1,3 +1,4 @@
+package ERP_Core;
 /**
  * The class represents a non-registered corporate customer of the ERP system
  * The class is responsible for creating a non-registered customer object and is used
