@@ -18,12 +18,13 @@ import java.util.Scanner;
  */
 
 public class RegisteredCustomer extends Customer {
-  private int id;
+  /** the unique id of each registered customer*/
+	private int id;
   /** points each customer earns depending on his purchases */
   private int points;
-  // counts the number of registered customers created
-  private static int idCounter;
-  // an @Arraylist in which Customer information is temporarily saved
+  /** counts the number of registered customers created */
+  private static int idCounter = FileHandler.getRegisteredCustomerCounterFromFile();
+  /** an @Arraylist in which Customer information is temporarily saved*/
   protected static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
   
   /**
@@ -37,7 +38,7 @@ public class RegisteredCustomer extends Customer {
     super(name, address, telephone);
     this.points = points;
     this.id = ++idCounter;
-    // adding registered customer to @Arraylist
+    //** adding registered customer to @Arraylist */
     customers.add(this);
   }
   
@@ -59,30 +60,53 @@ public class RegisteredCustomer extends Customer {
     customers.add(this);
   }
   
-  // getters and setters
+  /**
+   * returns the customer points
+   * @return
+   */
   public int getPoints() {
     return points;
   }
-
+ 
+  /**
+   * returns the id counter
+   * @return
+   */
   public static int getIdCounter() {
     return idCounter;
   }
-
+ 
+  /**
+   * sets the registered customer points to the value of the variable received
+   * @param points
+   */
   public void setPoints(int points) {
     this.points = points;
   }
-
+ 
+  /**
+   * returns the customer id
+   * @return
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * returns the @Arraylist of registered customers
+   * @return
+   */
   public static ArrayList<RegisteredCustomer> getCustomers() {
     return customers;
   }
-
+  
+  /**
+   * returns the current registered customer object in String format
+   * @return
+   */
   @Override
   public String toString() {
-    return super.toString() + " id=" + id + ", points=" + points + "]";
+    return String.format( "Id: %d | %s | Points: %d", this.getId(), super.toString(), this.getPoints());
   }
   
   /** Returns a customer with a given id.
@@ -96,10 +120,10 @@ public class RegisteredCustomer extends Customer {
         return i;
       }
     }
-    throw new NoSuchElementException();
+    return null;
   }
   
-  /** Creates a new registered customer from an Arraylist of strings by parsing its contents.
+  /** Creates a new registered customer from an @Arraylist of strings by parsing its contents.
    * @param customers
    */
   public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
@@ -231,7 +255,7 @@ public class RegisteredCustomer extends Customer {
    */
   public static void changePoints(int id, int points)
       throws NoSuchElementException, NumberFormatException {
-    if (points <= 0) {
+    if (points < 0) {
       throw new NumberFormatException("Points must be more or equal to 0");
     }
     RegisteredCustomer customer = searchById(id);
@@ -243,7 +267,7 @@ public class RegisteredCustomer extends Customer {
   }
   
   /**
-   * checks if a Registered Customer already exists and if it does, changes his name
+   * Checks if a Registered Customer already exists and if it does, changes his name
    * @param id
    * @param name
    * @throws NoSuchElementException
@@ -355,14 +379,16 @@ public class RegisteredCustomer extends Customer {
         id = Integer.parseInt(input);
         System.out.print("Enter new points: ");
         points = in.nextInt();
+        in.nextLine();
         changePoints(id, points);
         break;
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Points must be a number");
+        in.nextLine();
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -395,7 +421,7 @@ public class RegisteredCustomer extends Customer {
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -427,7 +453,7 @@ public class RegisteredCustomer extends Customer {
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -454,14 +480,16 @@ public class RegisteredCustomer extends Customer {
         id = Integer.parseInt(input);
         System.out.print("Enter new telephone: ");
         telephone = in.nextInt();
+        in.nextLine();
         changeTelephone(id, telephone);
         break;
       } catch (NumberFormatException e) {
         System.err.println("Invalid input given. Id must be an integer, larger than 0");
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Telephone must be a number");
+        in.nextLine();
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
       }
     }
   }
@@ -481,7 +509,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the id of the registered customer you want to delete\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -489,7 +517,9 @@ public class RegisteredCustomer extends Customer {
         deleteRegisteredCustomer(id);
         break;
       } catch (NoSuchElementException e) {
-        System.err.println(e.getMessage());
+        System.err.println("Customer with such id does not exist");
+      } catch (NumberFormatException e) {
+        System.err.println("Invalid input given. Id must be an integer");
       }
     }
   }
@@ -550,7 +580,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the id of the registered customer you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -578,7 +608,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the telephone of the registered customer you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }
@@ -606,7 +636,7 @@ public class RegisteredCustomer extends Customer {
             "Enter the points of the registered customers you want to print\n"
             + "To cancel, press \"enter\": ");
         input = in.nextLine();
-        if (input.equals(" ")) {
+        if (input.equals("")) {
           System.out.println("Process cancelled. Returning to previous menu...");
           return;
         }

@@ -2,6 +2,16 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class represents a cashier made in the ERP system.
+ * The class is responsible for creating a new Cashier
+ * printing products' menu, customer's menu, cashier's menu and new order's menu.
+ * It contains methods that implement the  product, customer and order's menu. 
+ * It also has a method that creates order's menu.
+ *
+ * @version 1.0
+ * @author George Liargovas
+ */
 public class Cashier extends User {
 	
 	public Cashier(String name, String surname, String username, String password) {
@@ -11,7 +21,11 @@ public class Cashier extends User {
 	public Cashier(int idUser, String name, String surname, String username, String password) {
 		super(idUser, name, surname, username, password);
 	}
-	
+	/**
+	   * Login Method for Cashiers.
+	   * @param username the username of the Cashier
+	   * @param password the password of the Cashier
+	   */
 	public static void login(String username, String password) throws Exception {
 		Cashier cashier;
 		for (User user : User.getUsers()) {
@@ -27,6 +41,9 @@ public class Cashier extends User {
 		throw new Exception("Invalid Credentials");
 	}
 	
+	/** Prints product's Menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu */
 	public static void printProductMenu() {
 		System.out.print("--- Product Menu ---\n"
 				+ "1) View All Products\n"
@@ -36,6 +53,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
+	/** The customer's menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu */
 	public static void printCustomerMenu() {
 		System.out.print("--- Customer Menu ---\n"
 				+ "1) View All Customers\n"
@@ -52,6 +72,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
+	/**The cashier's menu. Several options are available. 
+	 *  When the return option is selected, the user is logged out and
+	 *  returned to the main menu */
 	public static void printMenu() {
 		System.out.print("--- Cashier Menu ---\n"
 				+ "1) Products\n"
@@ -61,6 +84,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
+	/** The order's menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu. */
 	public static void printNewOrderMenu() {
 		System.out.print("--- New Order Menu ---\n"
 				+ "Who does the order concern?\n"
@@ -70,6 +96,7 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
+	/** Émplementation product's Menu */
 	public void getProductMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -88,7 +115,6 @@ public class Cashier extends User {
 					Storage.searchAndPrintProductsByNameMenu();
 					break;
 				case 4:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -99,6 +125,7 @@ public class Cashier extends User {
 		}
 	}
 	
+	/** Émplementation customer's Menu */
 	public void getCustomerMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -138,7 +165,6 @@ public class Cashier extends User {
 					Order.printOrderHistoryMenu();
 					break;
 				case 11:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -149,6 +175,7 @@ public class Cashier extends User {
 		}
 	}
 	
+	/** Create Order Menu */
 	public void makeOrderMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -164,7 +191,6 @@ public class Cashier extends User {
 					Order.makeOrder(this, false);
 					break;
 				case 3:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -175,6 +201,7 @@ public class Cashier extends User {
 		}
 	}
 	
+	/** Émplementation Menu */
 	@Override
 	public void getMenu() {
 		Scanner in = new Scanner(System.in);
@@ -194,7 +221,6 @@ public class Cashier extends User {
 					makeOrderMenu();
 					break;
 				case 4:
-					in.close();
 					return;
 				}
 			} catch (InputMismatchException e) {

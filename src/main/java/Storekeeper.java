@@ -1,15 +1,44 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class represents the Store keeper. The store keeper got the ability to 
+ * view information about the products and the suppliers. There is also the 
+ * ability to edit and create new suppliers and to make a new resupply order.
+ * 
+ * @version 1.0
+ * @author Nick Mavromaras
+ * @author George Liargovas
+ */
 public class Storekeeper extends User{
+	/**
+	 * The constructor for creating a new Storekeeper object.
+	 * @param name the name of the Storekeeper
+	 * @param surname the surname of the Storekeeper
+	 * @param username the username of the Storekeeper
+	 * @param password the password of the Storekeeper
+	 */
 	public Storekeeper(String name, String surname, String username, String password) {
 		super(name, surname, username, password);
 	}
-	
+	/**
+	 * The constructor for loading a previously created Storekeeper object to the ERP system.
+	 * @param idUser the id given to the Storekeeper the first time he was created.
+	 * @param name the name of the Storekeeper
+	 * @param surname the surname of the Storekeeper
+	 * @param username the username of the Storekeeper
+	 * @param password the password of the Storekeeper
+	 */
 	public Storekeeper(int idUser, String name, String surname, String username, String password) {
 		super(idUser, name, surname, username, password);
 	}
-	
+	/**
+	 * Checks if the given user credentials exist in the list and if they do, the user is logged in and the
+	 * specific user menu is called.
+	 * @param username the user's username as a String
+	 * @param password the user's password as a String
+	 * @throws Exception Exception in case the credentials do not match for any Storekeeper in the list
+	 */
 	public static void login(String username, String password) throws Exception {
 		Storekeeper storekeeper;
 		for (User user : User.getUsers()) {
@@ -24,45 +53,55 @@ public class Storekeeper extends User{
 		}
 		throw new Exception("Invalid Credentials");
 	}
+	/** Prints the Store keeper's menu */
 	private void printMenu() {
-		System.out.println("--- Storekeeper Menu ---\n"
+		System.out.print("--- Storekeeper Menu ---\n"
 				+ "1) Storage\n"
 				+ "2) Suppliers\n"
 				+ "3) Make a new Storage Ressuply Order\n"
+				+ "4) Logout and Return to Main Menu\n"
 				+ "Option: ");
 	}
-	
-	public static void printStorageMenu() {
+	/**Prints the product menu*/
+	public void printStorageMenu() {
 		System.out.print("--- Product Menu ---\n"
 				+ "1) View All Products\n"
-				+ "2) Search for Specific Products (by product name)\n"
-				+ "3) Search for Specific Products (by product id)\n"
-				+ "4) Return to Previous Menu\n"
+				+ "2) Search for specific products (by product name)\n"
+				+ "3) Search for specific products (by product id)\n"
+				+ "4) Add a new product\n"
+				+ "5) Delete an existing product\n"
+				+ "6) Return to previous menu\n" 
 				+ "Option: ");
 	}
-	
-	public static void printCustomerMenu() {
+	/**Prints the suppliers menu*/
+	public void printCustomerMenu() {
 		System.out.print("--- Supplier Menu ---\n"
-				+ "1) View All Customers\n"
-				+ "2) Search for Specific Suppliers (by name)\n"
-				+ "3) Search for Specific Suppliers (by Supplier id)\n"
-				+ "4) Search for Specific Suppliers (by telephone number)\n"
-				+ "5) Add a new Supplier\n"
-				+ "6) Edit Supplier Telephone\n"
-				+ "7) Edit Supplier Address\n"
-				+ "8) View Storage Ressuply Order History\n"
-				+ "9) View Specific Storage Ressuply Order History from Specific Supplier\n"
-				+ "10) Return to Previous Menu\n"
+				+ "1)  View All Suppliers\n"
+				+ "2)  Search for Specific Suppliers (by name)\n"
+				+ "3)  Search for Specific Suppliers (by Supplier id)\n"
+				+ "4)  Search for Specific Suppliers (by telephone number)\n"
+				+ "5)  Add a new Supplier\n"
+				+ "6)  Delete a Supplier\n"
+				+ "7)  Edit Supplier Telephone\n"
+				+ "8)  Edit Supplier Address\n"
+				+ "9)  View Storage Ressuply Order History\n"
+				+ "10) View Specific Storage Ressuply Order History from Specific Supplier\n"
+				+ "11) Return to Previous Menu\n"
 				+ "Option: ");
 	}
+	/**
+	 * The Storekeeper's menu. Several options are available.
+	 * When the return option is selected, the user is logged out and
+	 * returned to the main menu
+	 */
 	@Override
 	public void getMenu() {
 		int ch;
-		Scanner sc=new Scanner(System.in); 
+		Scanner in = new Scanner(System.in); 
 		for(;;) {
-		  	printMenu();
+		  	this.printMenu();
 		  	try { 
-		  		ch=sc.nextInt();
+		  		ch = in.nextInt();
 		  		switch(ch){ 
 		  		case 1: 
 		  			getStorageMenu();
@@ -71,24 +110,28 @@ public class Storekeeper extends User{
 		  			getSupplierMenu();
 		  			break; 
 		  		case 3: 
-		  			//StorageOrder.makeStorageOrder();
+		  			StorageOrder.makeOrder(this);
 		  			break; 
 		  		case 4:
 		  			return;
-		  		default: System.out.println("Invalid choice!"); 
 		  		} 
-			}catch(Exception e) {
-				System.err.println("Your option must be an integer number. Try again...");
+			} catch (InputMismatchException e) {
+				System.err.println("Your option must be an integer number. TTry again...");
 				// clear scanner buffer
-				sc.nextLine();
+				in.nextLine();
 			}
 		}
 	}
+	/**
+	 * The product menu. Several options are available.
+	 * When the return option is selected, the user is
+	 * returned to the previous menu
+	 */
 	public void getStorageMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
 		for(;;) {
-			printStorageMenu();
+			this.printStorageMenu();
 			try {
 				ans = in.nextInt();
 				switch (ans) {
@@ -101,7 +144,13 @@ public class Storekeeper extends User{
 				case 3:
 					Storage.searchAndPrintProductByIdMenu();
 					break;
-				case 4:
+				case 4: 
+					Storage.createNewProductMenu();
+					break;
+				case 5:
+					Storage.deleteProductMenu();
+					break;
+				case 6:
 					return;
 				}
 			} catch (InputMismatchException e) {
@@ -111,42 +160,50 @@ public class Storekeeper extends User{
 			}
 		}
 	}
+	/**
+	 * The suppliers menu. Several options are available.
+	 * When the return option is selected, the user is
+	 * returned to the previous menu
+	 */
 	public void getSupplierMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
 		for(;;) {
-			printCustomerMenu();
+			this.printCustomerMenu();
 			try {
 				ans = in.nextInt();
 				switch (ans) {
 				case 1:
-					RegisteredCustomer.printAllCustomers();
+					Supplier.printAllSuppliers();
 					break;
 				case 2:
-					RegisteredCustomer.searchAndPrintCustomerByNameMenu();
+					Supplier.searchAndPrintSupplierBynameMenu();
 					break;
 				case 3:
-					RegisteredCustomer.searchAndPrintCustomerByIdMenu();
+					Supplier.searchAndPrintSupplierByidMenu();
 					break;
 				case 4:
-					RegisteredCustomer.searchAndPrintCustomerByTelephoneMenu();
+					Supplier.searchAndPrintSupplierByTelephoneMenu();
 					break;
 				case 5:
-					RegisteredCustomer.registerNewCustomerMenu();
+					Supplier.registerNewSupplierMenu();
 					break;
 				case 6:
-					RegisteredCustomer.changeCustomerTelephoneMenu();
+					Supplier.deleteSupplierMenu();
 					break;
 				case 7:
-					RegisteredCustomer.changeCustomerAddressMenu();
+					Supplier.changeSupplierTelephoneMenu();
 					break;
 				case 8:
-					//TODO method that displays order history
+					Supplier.changeSupplierAddressMenu();
 					break;
 				case 9:
-					//TODO method that displays specific customer order history
+					StorageOrder.printStorageOrderHistory();
 					break;
 				case 10:
+					StorageOrder.printOrderHistoryMenu();
+					break;
+				case 11:
 					return;
 				}
 			} catch (InputMismatchException e) {

@@ -4,10 +4,13 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		loadAllListsFromCsv();
+		//loadAllListsFromCsv();
 		getMainMenu();
 	}
-
+	
+	/**
+	 * Prints the main menu of the ERP SYSTEM
+	 */
 	public static void printMainMenu() {
 		System.out.print("ERP SYSTEM\n\n"
 				+ "1) Login as a Cashier\n"
@@ -18,6 +21,9 @@ public class Main {
 				+ "\tAnswer: ");
 	}
 	
+	/**
+	 * Select the type you want to connect to 
+	 */
 	public static void getMainMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -40,9 +46,11 @@ public class Main {
 					administratorLogin();
 					break;
 				case 5:
-					//saveAllListsToCsv();
-					System.exit(0);
-					break;
+					saveAllListsToCsv();
+					FileHandler.writeAllCountersToFile();
+					in.close();
+					Thread.sleep(100);
+					return;
 				default:
 					System.out.println("Prease enter a valid option. Try again...");
 				}
@@ -53,10 +61,14 @@ public class Main {
 			}
 			catch (Exception e) {
 				System.out.println("An error occured. Try again...");
+				e.printStackTrace();
 			}
 		}
 	}
 	
+	/**
+	 * Login as a Cashier
+	 */
 	public static void cashierLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -76,6 +88,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Storekeeper
+	 */
 	public static void storekeeperLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -95,6 +110,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Data Analyst
+	 */
 	public static void dataAnalystLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -114,6 +132,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Administrator
+	 */
 	public static void administratorLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -133,26 +154,30 @@ public class Main {
 		}
 	}
 	
-	private static void saveAllListsToCsv() {
-		//TODO Complete the method when all the classes have been connected
+	/**
+	 * Saving all the lists to .csv files
+	 */
+	public static void saveAllListsToCsv() {
 		FileHandler.writeOrderListToCSV(Order.getOrders());
 		FileHandler.writeProductListToCSV(Storage.getProducts());
 		FileHandler.writeProductQuantitiesListToCSV(Storage.getProductQuantities());
 		FileHandler.writeUserListToCSV(User.getUsers());
 		FileHandler.writeStorageOrderToCSV(StorageOrder.getOrders());
-		FileHandler.writeSupplierToCSV(Supplier.getSuppliers());
+		FileHandler.writeSupplierToCSV(Supplier.getsuppliers());
 		FileHandler.writeCustomerListToCSV(RegisteredCustomer.getCustomers());
 	}
 	
-	private static void loadAllListsFromCsv() {
-		// TODO Complete the method when all the classes have been connected
+	/**
+	 * Loading all the list from the .csv files
+	 */
+	public static void loadAllListsFromCsv() {
 		User.createUsersFromList(FileHandler.getUsersFromCsv());
 		Product.createProductsFromList(FileHandler.getProductsFromCsv());
-		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
-		StorageOrder.createOrdersFromList(FileHandler.getStorageOrdersFromCsv());
-		Supplier.createStorageOrdersFromList(FileHandler.getSuppliersFromCsv());
-		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
 		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
+		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
+		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
+		Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
+		StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
 	}
 
 }

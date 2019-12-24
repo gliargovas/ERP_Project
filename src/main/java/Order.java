@@ -18,7 +18,7 @@ public class Order {
   /** Date and time the order was made */
   private final String orderDate;
   /** Total cost of the order in euro currency */
-  private final double totalCost;
+  private double totalCost;
   /** The customer that made the order */
   private final Customer customer;
   /** The user that made the order */
@@ -26,17 +26,17 @@ public class Order {
   /** Contains the combination of the product id and quantity of all the products */
   private ArrayList<int[]> basket = new ArrayList<int[]>();
   /** The counter of the created orders, used for generating new order ids */
-  private static int count = 1;
+  private static int count = FileHandler.getOrderCounterFromFile();
   /** The order list that contains all the orders made */
   protected static ArrayList<Order> orders = new ArrayList<Order>();
 
   /**
    * Constructor for creating a new order.
    *
-   * @param orderDate
-   * @param customer
-   * @param cashier
-   * @param basket
+   * @param orderDate the date the order was created
+   * @param customer the customer who made the order
+   * @param cashier the cashier who made the order
+   * @param basket the products the order contains
    */
   public Order(String orderDate, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
     this.orderNo = count++;
@@ -52,12 +52,12 @@ public class Order {
    * Constructor for already created products read from .csv file. There is non need to calculate
    * the total cost again as it has been created.
    *
-   * @param orderNo
-   * @param orderDate
-   * @param totalCost
-   * @param customer
-   * @param cashier
-   * @param basket
+   * @param orderNo the order's number
+   * @param orderDate the date the order was created
+   * @param totalCost the order's total cost
+   * @param customer the customer who made the order
+   * @param cashier the cashier who made the order
+   * @param basket the products the order contains
    */
   public Order(
       int orderNo,
@@ -78,7 +78,7 @@ public class Order {
   /**
    * Returns the order number.
    *
-   * @return
+   * @return order number, type integer
    */
   public int getOrderNo() {
     return orderNo;
@@ -87,7 +87,7 @@ public class Order {
   /**
    * Returns the order date.
    *
-   * @return
+   * @return the order date, type String
    */
   public String getOrderDate() {
     return orderDate;
@@ -96,16 +96,20 @@ public class Order {
   /**
    * Returns the order total cost.
    *
-   * @return
+   * @return the order total cost, type double
    */
   public double getTotalCost() {
     return totalCost;
+  }
+  
+  public void setTotalCost(double totalCost) {
+	  this.totalCost = totalCost;
   }
 
   /**
    * Returns the order's Customer object.
    *
-   * @return
+   * @return customer's Customer object, type Customer
    */
   public Customer getCustomer() {
     return customer;
@@ -114,7 +118,7 @@ public class Order {
   /**
    * Returns the order's Cashier object.
    *
-   * @return
+   * @return the order's Cashier, type Cashier
    */
   public Cashier getCashier() {
     return cashier;
@@ -123,7 +127,7 @@ public class Order {
   /**
    * Returns the ArrayList that represents the order's basket.
    *
-   * @return
+   * @return an ArrayList of Products, type integer
    */
   public ArrayList<int[]> getBasket() {
     return basket;
@@ -132,22 +136,23 @@ public class Order {
   /**
    * Returns the ArrayList that the order objects are stored.
    *
-   * @return
+   * @return an ArrayList of the previous Orders, type Order
    */
   public static ArrayList<Order> getOrders() {
     return orders;
   }
 
   /**
-   * Returns the id counter
+   * Returns the products id counter
    *
-   * @return
+   * @return The count of products' id, type Integer
    */
   public static int getIdCounter() {
     return count;
   }
 
-  /** Prints all the orders */
+  /**
+   * Prints all the orders */
   public static void printOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
@@ -181,7 +186,7 @@ public class Order {
   /**
    * Prints the orders of a customer with a specific given id.
    *
-   * @param id
+   * @param id the id of the customer who wants to print his orders
    */
   public static void printOrderHistory(int id) {
     int counter = 0;
@@ -203,8 +208,8 @@ public class Order {
    * Increases the quantity of a product with a given id in the storage by a specific given
    * quantity.
    *
-   * @param id
-   * @param quantity
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
    */
   public void addProductToBasket(int id, int quantity) {
     int[] products = {id, quantity};
@@ -214,9 +219,9 @@ public class Order {
   /**
    * Calculates the cost of a product and quantity combination.
    *
-   * @param id
-   * @param quantity
-   * @return
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
+   * @return the total cost of a product, type double
    */
   public static double calculateCost(int id, int quantity) {
     Product prod = Storage.searchById(id);
@@ -228,8 +233,8 @@ public class Order {
   /**
    * Calculates the total cost of an order's basket.
    *
-   * @param basket
-   * @return
+   * @param basket all the products the customer choose
+   * @return total cost of the Basket, type double
    */
   public static double calculateBasketCost(ArrayList<int[]> basket) {
     double totalCost = 0;
@@ -247,8 +252,8 @@ public class Order {
    * Prints a product's information with a given id, in the format used to print the order
    * information.
    *
-   * @param id
-   * @param quantity
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
    */
   public static void printProduct(int id, int quantity) {
     Product prod = Storage.searchById(id);
@@ -262,9 +267,9 @@ public class Order {
   /**
    * Prints a preview of the order, in the appropriate format.
    *
-   * @param cashier
-   * @param customer
-   * @param basket
+   * @param cashier the cashier who made the order
+   * @param customer the customer who made the order
+   * @param basket all the products the customer choose 
    */
   public static void previewOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     int cashierId = cashier.getIdUser();
@@ -329,8 +334,8 @@ public class Order {
   /**
    * Contains the prompts in order to make a customer order.
    *
-   * @param cashier
-   * @param isRegistered
+   * @param cashier the cashier who made the order
+   * @param isRegistered declares if the customer who want to make an order is registered or not
    */
   public static void makeOrder(Cashier cashier, boolean isRegistered) {
     Scanner in = new Scanner(System.in);
@@ -342,18 +347,25 @@ public class Order {
       try {
         if (isRegistered) {
           System.out.println("*** Registered Customer Order Menu ***");
-          System.out.print(
-              "Enter the id of the user the order is about. " + "To cancel, press \"enter\": ");
-          ans = in.nextLine();
-          if (ans.equals("")) {
-            System.out.println("Process cancelled, returning to previous menu...");
-            return;
-          }
-          id = Integer.parseInt(ans);
-          customer = RegisteredCustomer.searchById(id);
+          for (;;) {
+            System.out.print("Enter the id of the registered cutomer the order is about. "
+              + "To cancel, press \"enter\": ");
+            ans = in.nextLine();
+            if (ans.equals("")) {
+              System.out.println("Process cancelled, returning to previous menu...");
+                return;
+            }
+            id = Integer.parseInt(ans);
+            customer = RegisteredCustomer.searchById(id);
+            if (customer == null) {
+              System.out.println("Registered customer with such id does not exist. Try again..." ); 
+              continue;
+            }
+            break;
+          } 
         } else {
-          System.out.println("*** Guest Customer Order Menu ***");
-          customer = null;
+        System.out.println("*** Guest Customer Order Menu ***");
+        customer = null;
         }
         basket = fillBasket();
         Order.previewOrder(cashier, customer, basket);
@@ -385,9 +397,9 @@ public class Order {
    * Makes the needed changes in the storage product quantities, and creates the order object with
    * the system's current date and time.
    *
-   * @param cashier
-   * @param customer
-   * @param basket
+   * @param cashier the cashier who made the order
+   * @param customer the customer who made the order
+   * @param basket all the products the customer choose 
    */
   public static void confirmOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     for (int[] product : basket) {
@@ -402,16 +414,30 @@ public class Order {
     }
     String orderDate = getCurrentDate();
     Order newOrder = new Order(orderDate, customer, cashier, basket);
+    if (customer instanceof RegisteredCustomer && newOrder.checkPointDiscount((RegisteredCustomer)customer) == true) {
+    	newOrder.setTotalCost(0.9 * newOrder.getTotalCost());
+    }
     newOrder.printFinalOrder();
+  }
+  
+  public boolean checkPointDiscount(RegisteredCustomer c) {
+	  ((RegisteredCustomer)(this.getCustomer())).setPoints((int) Math.round(((this.getTotalCost() * 5))));
+	  System.out.println("With this purchase " + Math.round(this.getTotalCost() * 5) +" points were earned!");
+	  if (c.getPoints() >= 10000) {
+		  System.out.println("Order has been discounted by 10% by redeeming 10000 points!");
+		  c.setPoints(c.getPoints() - 10000);
+		  return true;
+	  }
+	  return false;
   }
 
   /**
    * Utility method that returns the system's date and time as a String.
    *
-   * @return
+   * @return the specific form of date, type String
    */
   public static String getCurrentDate() {
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     Date date = new Date();
     return dateFormatter.format(date);
   }
@@ -419,7 +445,7 @@ public class Order {
   /**
    * Contains the prompts in order for the user to fill the order basket.
    *
-   * @return
+   * @return the temporary Basket, type integer
    */
   public static ArrayList<int[]> fillBasket() {
     Scanner in = new Scanner(System.in);
@@ -435,9 +461,6 @@ public class Order {
                 + "Press only \"enter\" when you do not want to add any products: ");
         input = in.nextLine();
         if (input.equals("")) {
-          for (int[] i : tempBasket) {
-            System.out.println(i[0] + " | " + i[1]);
-          }
           return tempBasket;
         }
         tempProduct[0] = Integer.parseInt(input);
@@ -469,10 +492,10 @@ public class Order {
    * there are enough units available in the storage and either updates the basket or rejects the
    * product.
    *
-   * @param id
-   * @param quantity
-   * @param basket
-   * @return
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
+   * @param basket all the products the customer choose 
+   * @return if the product is available, type boolean
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(
       int id, int quantity, ArrayList<int[]> basket) {
@@ -497,7 +520,7 @@ public class Order {
   /**
    * Creates a new order from an Arraylist of strings by parsing its contents.
    *
-   * @param orders
+   * @param orders list of all order information parsed from a .csv files
    */
   public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
     int customerId, cashierId, orderNo;

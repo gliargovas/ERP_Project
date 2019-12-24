@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 
 public class RegisteredCustomerMenuTest {
 	
@@ -35,6 +36,7 @@ public class RegisteredCustomerMenuTest {
 			RegisteredCustomer.deleteCustomerMenu();
 			System.out.println("\n\nRegister new customer test\n");
 			RegisteredCustomer.registerNewCustomerMenu();
+			RegisteredCustomer.printAllCustomers();
 			System.out.println("\n\nSearch and print customer by address test\n");
 			RegisteredCustomer.searchAndPrintCustomerByAddressMenu();
 			System.out.println("\n\nSearch and print customer by id test\n");
