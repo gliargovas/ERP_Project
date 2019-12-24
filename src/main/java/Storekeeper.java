@@ -2,22 +2,43 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Storekeeper represents the customer that is 
+ * This class represents the Store keeper. The store keeper got the ability to 
+ * view information about the products and the suppliers. There is also the 
+ * ability to edit and create new suppliers and to make a new resupply order.
  * 
- * @version
- * @author Nikos Mavromaras
- * @author George Liargkovas
- *
+ * @version 1.0
+ * @author Nick Mavromaras
+ * @author George Liargovas
  */
 public class Storekeeper extends User{
+	/**
+	 * The constructor for creating a new Storekeeper object.
+	 * @param name the name of the Storekeeper
+	 * @param surname the surname of the Storekeeper
+	 * @param username the username of the Storekeeper
+	 * @param password the password of the Storekeeper
+	 */
 	public Storekeeper(String name, String surname, String username, String password) {
 		super(name, surname, username, password);
 	}
-	
+	/**
+	 * The constructor for loading a previously created Storekeeper object to the ERP system.
+	 * @param idUser the id given to the Storekeeper the first time he was created.
+	 * @param name the name of the Storekeeper
+	 * @param surname the surname of the Storekeeper
+	 * @param username the username of the Storekeeper
+	 * @param password the password of the Storekeeper
+	 */
 	public Storekeeper(int idUser, String name, String surname, String username, String password) {
 		super(idUser, name, surname, username, password);
 	}
-	
+	/**
+	 * Checks if the given user credentials exist in the list and if they do, the user is logged in and the
+	 * specific user menu is called.
+	 * @param username the user's username as a String
+	 * @param password the user's password as a String
+	 * @throws Exception Exception in case the credentials do not match for any Storekeeper in the list
+	 */
 	public static void login(String username, String password) throws Exception {
 		Storekeeper storekeeper;
 		for (User user : User.getUsers()) {
@@ -32,6 +53,7 @@ public class Storekeeper extends User{
 		}
 		throw new Exception("Invalid Credentials");
 	}
+	/** Prints the Store keeper's menu */
 	private void printMenu() {
 		System.out.print("--- Storekeeper Menu ---\n"
 				+ "1) Storage\n"
@@ -40,7 +62,7 @@ public class Storekeeper extends User{
 				+ "4) Logout and Return to Main Menu\n"
 				+ "Option: ");
 	}
-	
+	/**Prints the product menu*/
 	public void printStorageMenu() {
 		System.out.print("--- Product Menu ---\n"
 				+ "1) View All Products\n"
@@ -51,7 +73,7 @@ public class Storekeeper extends User{
 				+ "6) Return to previous menu\n" 
 				+ "Option: ");
 	}
-	
+	/**Prints the suppliers menu*/
 	public void printCustomerMenu() {
 		System.out.print("--- Supplier Menu ---\n"
 				+ "1)  View All Suppliers\n"
@@ -67,6 +89,11 @@ public class Storekeeper extends User{
 				+ "11) Return to Previous Menu\n"
 				+ "Option: ");
 	}
+	/**
+	 * The Storekeeper's menu. Several options are available.
+	 * When the return option is selected, the user is logged out and
+	 * returned to the main menu
+	 */
 	@Override
 	public void getMenu() {
 		int ch;
@@ -95,7 +122,11 @@ public class Storekeeper extends User{
 			}
 		}
 	}
-	
+	/**
+	 * The product menu. Several options are available.
+	 * When the return option is selected, the user is
+	 * returned to the previous menu
+	 */
 	public void getStorageMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -129,6 +160,11 @@ public class Storekeeper extends User{
 			}
 		}
 	}
+	/**
+	 * The suppliers menu. Several options are available.
+	 * When the return option is selected, the user is
+	 * returned to the previous menu
+	 */
 	public void getSupplierMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
