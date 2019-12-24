@@ -23,8 +23,8 @@ public class Cashier extends User {
 	}
 	/**
 	   * Login Method for Cashiers.
-	   * @param username
-	   * @param password
+	   * @param username the username of the Cashier
+	   * @param password the password of the Cashier
 	   */
 	public static void login(String username, String password) throws Exception {
 		Cashier cashier;
@@ -41,7 +41,9 @@ public class Cashier extends User {
 		throw new Exception("Invalid Credentials");
 	}
 	
-	/** Prints product's Menu. */
+	/** Prints product's Menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu */
 	public static void printProductMenu() {
 		System.out.print("--- Product Menu ---\n"
 				+ "1) View All Products\n"
@@ -51,7 +53,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
-	/** Prints customer's Menu. */
+	/** The customer's menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu */
 	public static void printCustomerMenu() {
 		System.out.print("--- Customer Menu ---\n"
 				+ "1) View All Customers\n"
@@ -68,7 +72,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
-	/** Prints cashier's Menu. */
+	/**The cashier's menu. Several options are available. 
+	 *  When the return option is selected, the user is logged out and
+	 *  returned to the main menu */
 	public static void printMenu() {
 		System.out.print("--- Cashier Menu ---\n"
 				+ "1) Products\n"
@@ -78,7 +84,9 @@ public class Cashier extends User {
 				+ "Option: ");
 	}
 	
-	/** Prints new Order's Menu. */
+	/** The order's menu. Several options are available. 
+	 *  When the return option is selected, the user is
+	 *  returned to the main menu. */
 	public static void printNewOrderMenu() {
 		System.out.print("--- New Order Menu ---\n"
 				+ "Who does the order concern?\n"
