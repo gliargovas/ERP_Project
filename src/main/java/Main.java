@@ -7,7 +7,10 @@ public class Main {
 		//loadAllListsFromCsv();
 		getMainMenu();
 	}
-
+	
+	/**
+	 * Prints the main menu of the ERP SYSTEM
+	 */
 	public static void printMainMenu() {
 		System.out.print("ERP SYSTEM\n\n"
 				+ "1) Login as a Cashier\n"
@@ -18,6 +21,9 @@ public class Main {
 				+ "\tAnswer: ");
 	}
 	
+	/**
+	 * Select the type you want to connect to 
+	 */
 	public static void getMainMenu() {
 		Scanner in = new Scanner(System.in);
 		int ans;
@@ -60,6 +66,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Cashier
+	 */
 	public static void cashierLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -79,6 +88,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Storekeeper
+	 */
 	public static void storekeeperLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -98,6 +110,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Data Analyst
+	 */
 	public static void dataAnalystLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -117,6 +132,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Login as a Administrator
+	 */
 	public static void administratorLogin() {
 		Scanner in = new Scanner(System.in);
 		String username, password;
@@ -136,6 +154,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Saving all the lists to .csv files
+	 */
 	public static void saveAllListsToCsv() {
 		FileHandler.writeOrderListToCSV(Order.getOrders());
 		FileHandler.writeProductListToCSV(Storage.getProducts());
@@ -146,6 +167,9 @@ public class Main {
 		FileHandler.writeCustomerListToCSV(RegisteredCustomer.getCustomers());
 	}
 	
+	/**
+	 * Loading all the list from the .csv files
+	 */
 	public static void loadAllListsFromCsv() {
 		User.createUsersFromList(FileHandler.getUsersFromCsv());
 		Product.createProductsFromList(FileHandler.getProductsFromCsv());
