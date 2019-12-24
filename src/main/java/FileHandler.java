@@ -11,9 +11,21 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class contains the methods for writing and reading the data of the ERP system
+ * to and from files. The files that the data is written are predefined. All the data
+ * except the object counters are stored in .csv format. The counters are stored in
+ * .txt format.
+ * 
+ * @version 1.0
+ * @author George Liargkovas
+ *
+ */
+
 public class FileHandler {
 
-  /** CSV file separator used. In European countries it is usually the ";" symbol */
+  /** CSV file separator used. In European countries the ";" symbol is usually
+   *  used instead of a comma (,) */
   private static final String CSV_SEPARATOR = ";";
 
   /**
