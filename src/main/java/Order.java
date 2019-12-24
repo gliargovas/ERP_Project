@@ -33,10 +33,10 @@ public class Order {
   /**
    * Constructor for creating a new order.
    *
-   * @param orderDate
-   * @param customer
-   * @param cashier
-   * @param basket
+   * @param orderDate the date the order was created
+   * @param customer the customer who made the order
+   * @param cashier the cashier who made the order
+   * @param basket the products the order contains
    */
   public Order(String orderDate, Customer customer, Cashier cashier, ArrayList<int[]> basket) {
     this.orderNo = count++;
@@ -52,12 +52,12 @@ public class Order {
    * Constructor for already created products read from .csv file. There is non need to calculate
    * the total cost again as it has been created.
    *
-   * @param orderNo
-   * @param orderDate
-   * @param totalCost
-   * @param customer
-   * @param cashier
-   * @param basket
+   * @param orderNo the order's number
+   * @param orderDate the date the order was created
+   * @param totalCost the order's total cost
+   * @param customer the customer who made the order
+   * @param cashier the cashier who made the order
+   * @param basket the products the order contains
    */
   public Order(
       int orderNo,
@@ -182,7 +182,7 @@ public class Order {
   /**
    * Prints the orders of a customer with a specific given id.
    *
-   * @param id
+   * @param id the id of the customer who wants to print his orders
    */
   public static void printOrderHistory(int id) {
     int counter = 0;
@@ -204,8 +204,8 @@ public class Order {
    * Increases the quantity of a product with a given id in the storage by a specific given
    * quantity.
    *
-   * @param id
-   * @param quantity
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
    */
   public void addProductToBasket(int id, int quantity) {
     int[] products = {id, quantity};
@@ -215,8 +215,8 @@ public class Order {
   /**
    * Calculates the cost of a product and quantity combination.
    *
-   * @param id
-   * @param quantity
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
    * @return the total cost of a product, type double
    */
   public static double calculateCost(int id, int quantity) {
@@ -229,7 +229,7 @@ public class Order {
   /**
    * Calculates the total cost of an order's basket.
    *
-   * @param basket
+   * @param basket all the products the customer choose
    * @return total cost of the Basket, type double
    */
   public static double calculateBasketCost(ArrayList<int[]> basket) {
@@ -248,8 +248,8 @@ public class Order {
    * Prints a product's information with a given id, in the format used to print the order
    * information.
    *
-   * @param id
-   * @param quantity
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
    */
   public static void printProduct(int id, int quantity) {
     Product prod = Storage.searchById(id);
@@ -263,9 +263,9 @@ public class Order {
   /**
    * Prints a preview of the order, in the appropriate format.
    *
-   * @param cashier
-   * @param customer
-   * @param basket
+   * @param cashier the cashier who made the order
+   * @param customer the customer who made the order
+   * @param basket all the products the customer choose 
    */
   public static void previewOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     int cashierId = cashier.getIdUser();
@@ -330,8 +330,8 @@ public class Order {
   /**
    * Contains the prompts in order to make a customer order.
    *
-   * @param cashier
-   * @param isRegistered
+   * @param cashier the cashier who made the order
+   * @param isRegistered declares if the customer who want to make an order is registered or not
    */
   public static void makeOrder(Cashier cashier, boolean isRegistered) {
     Scanner in = new Scanner(System.in);
@@ -386,9 +386,9 @@ public class Order {
    * Makes the needed changes in the storage product quantities, and creates the order object with
    * the system's current date and time.
    *
-   * @param cashier
-   * @param customer
-   * @param basket
+   * @param cashier the cashier who made the order
+   * @param customer the customer who made the order
+   * @param basket all the products the customer choose 
    */
   public static void confirmOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     for (int[] product : basket) {
@@ -470,9 +470,9 @@ public class Order {
    * there are enough units available in the storage and either updates the basket or rejects the
    * product.
    *
-   * @param id
-   * @param quantity
-   * @param basket
+   * @param id product's id
+   * @param quantity how many specific products the customer orders
+   * @param basket all the products the customer choose 
    * @return if the product is available, type boolean
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(
@@ -498,7 +498,7 @@ public class Order {
   /**
    * Creates a new order from an Arraylist of strings by parsing its contents.
    *
-   * @param orders
+   * @param orders list of all order information parsed from a .csv files
    */
   public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
     int customerId, cashierId, orderNo;
