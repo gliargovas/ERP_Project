@@ -418,6 +418,8 @@ public class Order {
     	newOrder.setTotalCost(0.9 * newOrder.getTotalCost());
     }
     newOrder.printFinalOrder();
+    //new
+    ProductSale.orderToSale(newOrder);
   }
   
   public boolean checkPointDiscount(RegisteredCustomer c) {

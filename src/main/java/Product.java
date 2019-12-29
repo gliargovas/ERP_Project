@@ -18,6 +18,8 @@ public class Product {
 	private final String description;
 	/** salePrice product's price */
 	private double salePrice;
+	//new
+	private ArrayList<ProductSale> sales = new ArrayList<>();
 	/**
 	 * The constructor for creating a new Product object
 	 * @param name product's name
@@ -99,6 +101,10 @@ public class Product {
 	public static int getIdCounter() {
 		return idCounter;
 	}
+	//new
+	public ArrayList<ProductSale> getSales() {
+        return sales;
+    }
 	/**
 	 * Returns a String with product's id, name, category, price and description 
 	 */
