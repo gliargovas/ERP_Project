@@ -468,7 +468,7 @@ public class Supplier {
 		for (;;) {
 			System.out.print("Enter the address of the supplier you want to print\nTo cancel, press \"enter\": ");
 			input = in.nextLine();
-			if (input.equals(" ")) {
+			if (input.equals(" ")){
 				System.out.println("Process cancelled. Returning to previous menu...");
 				return;
 			}
