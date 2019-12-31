@@ -1,19 +1,33 @@
 package ERP_Core;
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		//loadAllListsFromCsv();
+		printLogo();
+		loadAllListsFromCsv();
 		getMainMenu();
 	}
 	
+	public static void printLogo() {
+		System.out.println("\n\n\n\n\n" 
+		    + " ______   _______  _        _______  _______  _______                    _______  _______  _______ \n"
+		    + "(  __  \\ (  ___  )( (    /|(  ____ \\(  ____ \\(  ____ )       |\\     /|  (  ____ \\(  ____ )(  ____ )\n"
+		    + "| (  \\  )| (   ) ||  \\  ( || (    \\/| (    \\/| (    )|       ( \\   / )  | (    \\/| (    )|| (    )|\n"
+		    + "| |   ) || (___) ||   \\ | || |      | (__    | (____)| _____  \\ (_) /   | (__    | (____)|| (____)|\n"
+		    + "| |   | ||  ___  || (\\ \\) || | ____ |  __)   |     __)(_____)  ) _ (    |  __)   |     __)|  _____)\n"
+		    + "| |   ) || (   ) || | \\   || | \\_  )| (      | (\\ (           / ( ) \\   | (      | (\\ (   | (      \n"
+		    + "| (__/  )| )   ( || )  \\  || (___) || (____/\\| ) \\ \\__       ( /   \\ )  | (____/\\| ) \\ \\__| )      \n"
+		    + "(______/ |/     \\||/    )_)(_______)(_______/|/   \\__/       |/     \\|  (_______/|/   \\__/|/ \n\n\n" ); 
+	}
+	
 	/**
-	 * Prints the main menu of the ERP SYSTEM
+	 * Prints the main menu of the ERP system
 	 */
 	public static void printMainMenu() {
-		System.out.print("ERP SYSTEM\n\n"
+		System.out.print("****** MAIN MENU ******\n\n"
 				+ "1) Login as a Cashier\n"
 				+ "2  Login as a Storekeeper\n"
 				+ "3) Login as a Data Analyst\n"
@@ -134,7 +148,7 @@ public class Main {
 	}
 	
 	/**
-	 * Login as a Administrator
+	 * Login as an Administrator
 	 */
 	public static void administratorLogin() {
 		Scanner in = new Scanner(System.in);
@@ -172,13 +186,41 @@ public class Main {
 	 * Loading all the list from the .csv files
 	 */
 	public static void loadAllListsFromCsv() {
-		User.createUsersFromList(FileHandler.getUsersFromCsv());
-		Product.createProductsFromList(FileHandler.getProductsFromCsv());
-		Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
-		RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
-		Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
-		Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
-		StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
+		try {
+			User.createUsersFromList(FileHandler.getUsersFromCsv());
+		} catch (FileNotFoundException e){
+			User.createUsersFromList(null);
+		}
+		try {
+			Product.createProductsFromList(FileHandler.getProductsFromCsv());
+		} catch (FileNotFoundException e){
+			Product.createProductsFromList(null);
+		}
+		try {
+			Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
+		} catch (FileNotFoundException e){
+			Storage.createProductQuantitiesFromList(null);
+		}
+		try {
+			RegisteredCustomer.createRegisteredCustomersFromList(FileHandler.getRegisteredCustomersFromCsv());
+		} catch (FileNotFoundException e){
+			RegisteredCustomer.createRegisteredCustomersFromList(null);
+		}
+		try {
+			Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
+		} catch (FileNotFoundException e){
+			Order.createOrdersFromList(null);
+		}
+		try {
+			Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
+		} catch (FileNotFoundException e){
+			Supplier.createSuppliersFromList(null);
+		}
+		try {
+			StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
+		} catch (FileNotFoundException e){
+			StorageOrder.createStorageOrdersFromList(null);
+		}
 	}
 
 }

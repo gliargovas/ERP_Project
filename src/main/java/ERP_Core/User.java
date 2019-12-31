@@ -108,7 +108,6 @@ public abstract class User {
 	 * @param users
 	 */
 	public static void createUsersFromList(ArrayList<ArrayList<String>> users) {
-		//TODO: Change fileHandler writeToCsv(User) administrator names and add username & password
 		int id;
 		String name, surname, username, password, type;
 		double salePrice;

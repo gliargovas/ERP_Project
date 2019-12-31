@@ -69,6 +69,108 @@ public class AnalyzeOrders {
 		printSpecificYearOrderValueByMonthWithLabel(year);
 	}
 	
+	public static double predictSalesForYear(int predictionYear) {
+		ArrayList<Double> xValuesArrayList = new ArrayList<Double>();
+		ArrayList<Double> yValuesArrayList = new ArrayList<Double>();
+		for (Order order : Order.getOrders()) {
+			xValuesArrayList.add((double) getDateYear(order.getOrderDate()));
+			yValuesArrayList.add(order.getTotalCost());
+		}
+		int size = xValuesArrayList.size();
+		double[] xValues = new double[size];
+		double[] yValues = new double[size];
+		for (int i = 0; i < size; i++) {
+			xValues[i] = xValuesArrayList.get(i);
+			yValues[i] = yValuesArrayList.get(i);
+		}
+		double[] regressionSlopeAndIntercept = calculateLinearRegressionEquationForTotalSales(xValues, yValues);
+		return predictSalesAccordingToLinearRegressionEquation(regressionSlopeAndIntercept, predictionYear);
+	}
+	
+	public static void predictSalesAccordingToLinearRegressionEquationMenu() {
+		Scanner in = new Scanner(System.in);
+		double predictionYear;
+		for (;;) {
+			try {
+				System.out.print("Enter the year of the sales prediction: " );
+				predictionYear = in.nextDouble();
+				break;
+			} catch(InputMismatchException e) {
+				System.out.println("Please enter a valid year..." ); 
+			}
+		}
+		int size = Order.getOrders().size();
+		double[] years = new double[size];
+		double[] sales = new double[size];
+		int index = 0;
+		for (Order order : Order.getOrders()) {
+			years[index] = getDateYear(order.getOrderDate());
+			sales[index] = order.getTotalCost();
+			index++;
+		}
+		double[] i = calculateLinearRegressionEquationForTotalSales(years, sales);
+		double prediction = predictSalesAccordingToLinearRegressionEquation(
+				calculateLinearRegressionEquationForTotalSales(years, sales), predictionYear);
+		System.out.printf("The sales for the year %d are predicted to be %.02f euros\n", (int)predictionYear, prediction); 
+	}
+	
+	public static double predictSalesAccordingToLinearRegressionEquation(double[] equation, double x) {
+		double a = equation[0];
+		double b = equation[1];
+		double y = a * x + b;
+		return y;
+	}
+	
+	public static double[] calculateLinearRegressionEquationForTotalSales(double[] xValues, double[] yValues) {
+		double slope = calculateLinearRegressionSlope(xValues, yValues);
+		double intercept = calculateLinearRegressionIntercept(slope, xValues, yValues);
+		double[] equation = {slope, intercept};
+		return equation;
+	}
+	
+	public static double calculateLinearRegressionSlope(double[] xValues, double[] yValues) {
+		double sumXY = calculateSumOfProducts(xValues, yValues);
+		double sumX = calclateSumOfArray(xValues);
+		double sumY = calclateSumOfArray(yValues);
+		double sumXSq = calculateSumOfSquares(xValues);
+		int n = xValues.length;
+		double slope = (n * sumXY - sumX * sumY) / (n * sumXSq - sumX * sumX);
+		return slope;
+	}
+	
+	public static double calculateLinearRegressionIntercept(double slope, double[] xValues, double[] yValues) {
+		int n = xValues.length;
+		double sumX = calclateSumOfArray(xValues);
+		double sumY = calclateSumOfArray(yValues);
+		double intercept = ((sumY - slope * sumX) / n);
+		return intercept;
+		
+	}
+	
+	public static double calculateSumOfProducts(double[] xValues, double[] yValues) {
+		double sum = 0;
+		for (int i = 0; i < xValues.length ; i++) {
+			sum += (xValues[i] * yValues[i]);
+		}
+		return sum;
+	}
+	
+	public static double calculateSumOfSquares(double[] values) {
+		double sum = 0;
+		for (double value : values) {
+			sum += value * value;
+		}
+		return sum;
+	}
+	
+	public static double calclateSumOfArray(double[] values) {
+		double sum = 0;
+		for (double value : values) {
+			sum += value;
+		}
+		return sum;
+	}
+	
 	
 	
 	// value by year interval
@@ -110,7 +212,6 @@ public class AnalyzeOrders {
 		}
 		printTotalOrderValueByYearIntervalWithLabel(startYear, endYear);
 	}
-	
 	
 	// value by year for all years
 	public static int findMinYearInOrders() {

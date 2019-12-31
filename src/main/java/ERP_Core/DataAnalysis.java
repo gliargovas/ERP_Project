@@ -3,7 +3,7 @@ package ERP_Core;
 import java.util.ArrayList;
 
 public class DataAnalysis {
-
+/*
     // Checks if certain product is in the basket of the certain order adds the sold quantity to the product sales.
     // Returns the updated product sales
     public static int salesPerProduct(int productId, Order order, int soldPieces) {
@@ -52,5 +52,5 @@ public class DataAnalysis {
             int [] salesPerMonth = salesPerProductPerMonth(products.get(i).getProductId(), orders, year);
             barchart(products.get(i).getProductId(), salesPerMonth);
         }
-    }
+    }*/
 }
