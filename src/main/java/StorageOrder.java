@@ -106,7 +106,7 @@ public class StorageOrder {
 
   /**
    * Returns the order's list of supplies that were resupplied
-   * @return
+   * @return supplies
    */
   public ArrayList<int[]> getSupplies() {
     return supplies;
@@ -342,7 +342,7 @@ public class StorageOrder {
   
   /**
    * Contains the prompts in order for the user to fill the order basket
-   * @return
+   * @return tempbasket
    */
   public static ArrayList<int[]> fillBasket() {
 	    Scanner in = new Scanner(System.in);
@@ -430,7 +430,7 @@ public class StorageOrder {
   /**
    * Utility method that returns the system's date and time as a String.
    *
-   * @return
+   * @return date
    */
   public static String getCurrentDate() {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
