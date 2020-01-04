@@ -1,4 +1,5 @@
 package ERP_Core;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,20 +13,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The class contains the methods for writing and reading the data of the ERP system
- * to and from files. The files that the data is written are predefined. All the data
- * except the object counters are stored in .csv format. The counters are stored in
- * .txt format.
- * 
+ * The class contains the methods for writing and reading the data of the ERP system to and from
+ * files. The files that the data is written are predefined. All the data except the object counters
+ * are stored in .csv format. The counters are stored in .txt format.
+ *
  * @version 1.0
  * @author George Liargkovas
- *
  */
-
 public class FileHandler {
 
-  /** CSV file separator used. In European countries the ";" symbol is usually
-   *  used instead of a comma (,) */
+  /**
+   * CSV file separator used. In European countries the ";" symbol is usually used instead of a
+   * comma (,)
+   */
   private static final String CSV_SEPARATOR = ";";
 
   /**
@@ -35,7 +35,8 @@ public class FileHandler {
   public static void writeAllCountersToFile() {
     try {
       BufferedWriter bw =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./Data/Counters.txt"), "UTF-8"));
+          new BufferedWriter(
+              new OutputStreamWriter(new FileOutputStream("./Data/Counters.txt"), "UTF-8"));
       bw.write("User counter: " + User.getUserIdCounter());
       bw.newLine();
       bw.write("Product counter: " + Product.getIdCounter());
@@ -51,156 +52,156 @@ public class FileHandler {
       bw.flush();
       bw.close();
     } catch (UnsupportedEncodingException e) {
-    	e.printStackTrace();
+      e.printStackTrace();
     } catch (FileNotFoundException e) {
-    	e.printStackTrace();
+      e.printStackTrace();
     } catch (IOException e) {
-    	e.printStackTrace();
+      e.printStackTrace();
     }
   }
-  
+
   /**
    * Retrieves the user counter stored in "Counters.txt".
+   *
    * @return userCounter as int
    */
   public static int getUserCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {;
-				if (line.contains("User counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(14));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {;
+        if (line.contains("User counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(14));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
-  
+
   /**
    * Retrieves the product counter stored in "Counters.txt".
+   *
    * @return productCounter as int
    */
   public static int getProductCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {;
-				if (line.contains("Product counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(17));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {;
+        if (line.contains("Product counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(17));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
-  
+
   /**
    * Retrieves the registered customer counter stored in "Counters.txt".
-   * @return registeredCustomerCounter as int 
+   *
+   * @return registeredCustomerCounter as int
    */
   public static int getRegisteredCustomerCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {
-				if (line.contains("Registered customer counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(29));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {
+        if (line.contains("Registered customer counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(29));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
-  
+
   /**
    * Retrieves the order counter stored in "Counters.txt".
-   * @return orderCounter as int 
+   *
+   * @return orderCounter as int
    */
   public static int getOrderCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {;
-				if (line.contains("Order counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(15));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {;
+        if (line.contains("Order counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(15));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
-  
+
   /**
    * Retrieves the supplier counter stored in "Counters.txt".
-   * @return supplierCounter as int 
+   *
+   * @return supplierCounter as int
    */
   public static int getSupplierCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {;
-				if (line.contains("Supplier counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(18));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {;
+        if (line.contains("Supplier counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(18));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
-  
+
   /**
    * Retrieves the storage order counter stored in "Counters.txt".
-   * @return storageOrderCounter as int 
+   *
+   * @return storageOrderCounter as int
    */
   public static int getStorageOrderCounterFromFile() {
-	  BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"./Data/Counters.txt"));
-			String line = reader.readLine();
-			while (line != null) {;
-				if (line.contains("Storage order counter:")) {
-					reader.close();
-					return Integer.parseInt(line.substring(23));
-				}
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  return 0;
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("./Data/Counters.txt"));
+      String line = reader.readLine();
+      while (line != null) {;
+        if (line.contains("Storage order counter:")) {
+          reader.close();
+          return Integer.parseInt(line.substring(23));
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return 0;
   }
 
   /**
@@ -212,7 +213,8 @@ public class FileHandler {
   public static void writeProductListToCSV(ArrayList<Product> products) {
     try {
       BufferedWriter bw =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./Data/Products.csv"), "UTF-8"));
+          new BufferedWriter(
+              new OutputStreamWriter(new FileOutputStream("./Data/Products.csv"), "UTF-8"));
       for (Product product : products) {
         StringBuffer line = new StringBuffer();
         line.append(product.getProductId());
@@ -243,14 +245,15 @@ public class FileHandler {
    * Writes the ProductQuantities list stored in the memory, to a file named
    * "ProductQuantities.csv", in .csv format and UTF-8 encoding.
    *
-   * @param productQuantities ArrayList<int[]> that contains the ids and the quantities
-   * of the products in the storage 
+   * @param productQuantities ArrayList<int[]> that contains the ids and the quantities of the
+   *     products in the storage
    */
   public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities) {
     try {
       BufferedWriter bw =
           new BufferedWriter(
-              new OutputStreamWriter(new FileOutputStream("./Data/ProductQuantities.csv"), "UTF-8"));
+              new OutputStreamWriter(
+                  new FileOutputStream("./Data/ProductQuantities.csv"), "UTF-8"));
       for (int[] productQuantity : productQuantities) {
         StringBuffer line = new StringBuffer();
         line.append(productQuantity[0]);
@@ -305,12 +308,13 @@ public class FileHandler {
    * Writes the User list stored in the memory, to a file named "Users.csv", in .csv format and
    * UTF-8 encoding.
    *
-   * @param users ArrayList that contains the user objects created by the ERP 
+   * @param users ArrayList that contains the user objects created by the ERP
    */
   public static void writeUserListToCSV(ArrayList<User> users) {
     try {
       BufferedWriter bw =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./Data/Users.csv"), "UTF-8"));
+          new BufferedWriter(
+              new OutputStreamWriter(new FileOutputStream("./Data/Users.csv"), "UTF-8"));
       for (User user : users) {
         StringBuffer line = new StringBuffer();
         if (user instanceof Cashier) {
@@ -347,12 +351,13 @@ public class FileHandler {
    * Writes the order list stored in the memory, to a file named "Orders.csv", in .csv format and
    * UTF-8 encoding.
    *
-   * @param orders ArrayList that contains the user order objects created by the ERP 
+   * @param orders ArrayList that contains the user order objects created by the ERP
    */
   public static void writeOrderListToCSV(ArrayList<Order> orders) {
     try {
       BufferedWriter bw =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./Data/Orders.csv"), "UTF-8"));
+          new BufferedWriter(
+              new OutputStreamWriter(new FileOutputStream("./Data/Orders.csv"), "UTF-8"));
       for (Order order : orders) {
         StringBuffer line = new StringBuffer();
         line.append(order.getOrderNo());
@@ -388,7 +393,7 @@ public class FileHandler {
    * Writes the storage order list stored in the memory, to a file named "StorageOrders.csv", in
    * .csv format and UTF-8 encoding.
    *
-   * @param orders ArrayList that contains the storage order objects created by the ERP 
+   * @param orders ArrayList that contains the storage order objects created by the ERP
    */
   public static void writeStorageOrderToCSV(ArrayList<StorageOrder> orders) {
     try {
@@ -459,7 +464,8 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Products.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Products.csv file
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Products.csv
+   *     file
    */
   public static ArrayList<ArrayList<String>> getProductsFromCsv() throws FileNotFoundException {
     Scanner scanner = null;
@@ -477,9 +483,11 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "ProductQuantities.csv" file to the
    * main memory as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the ProductQuantities.csv file
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the
+   *     ProductQuantities.csv file
    */
-  public static ArrayList<ArrayList<String>> getProductQuantityFromCsv() throws FileNotFoundException {
+  public static ArrayList<ArrayList<String>> getProductQuantityFromCsv()
+      throws FileNotFoundException {
     Scanner scanner = null;
     ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     scanner = new Scanner(new File("./Data/ProductQuantities.csv"));
@@ -513,9 +521,11 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Customers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Customers.csv file
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Customers.csv
+   *     file
    */
-  public static ArrayList<ArrayList<String>> getRegisteredCustomersFromCsv() throws FileNotFoundException {
+  public static ArrayList<ArrayList<String>> getRegisteredCustomersFromCsv()
+      throws FileNotFoundException {
     Scanner scanner = null;
     ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     scanner = new Scanner(new File("./Data/Customers.csv"));
@@ -549,9 +559,11 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "StorageOrders.csv" file to the main
    * memory as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the StorageOrders.csv
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the
+   *     StorageOrders.csv
    */
-  public static ArrayList<ArrayList<String>> getStorageOrdersFromCsv() throws FileNotFoundException {
+  public static ArrayList<ArrayList<String>> getStorageOrdersFromCsv()
+      throws FileNotFoundException {
     Scanner scanner = null;
     ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
     scanner = new Scanner(new File("./Data/StorageOrders.csv"));
@@ -567,7 +579,8 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Suppliers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Suppliers.csv file
+   * @return an ArrayList<ArrayList<String>> that contains each element read from the Suppliers.csv
+   *     file
    */
   public static ArrayList<ArrayList<String>> getSuppliersFromCsv() throws FileNotFoundException {
     Scanner scanner = null;

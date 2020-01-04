@@ -1,4 +1,5 @@
 package ERP_Core;
+
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -102,9 +103,9 @@ public class Order {
   public double getTotalCost() {
     return totalCost;
   }
-  
+
   public void setTotalCost(double totalCost) {
-	  this.totalCost = totalCost;
+    this.totalCost = totalCost;
   }
 
   /**
@@ -152,8 +153,7 @@ public class Order {
     return count;
   }
 
-  /**
-   * Prints all the orders */
+  /** Prints all the orders */
   public static void printOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
@@ -270,7 +270,7 @@ public class Order {
    *
    * @param cashier the cashier who made the order
    * @param customer the customer who made the order
-   * @param basket all the products the customer choose 
+   * @param basket all the products the customer choose
    */
   public static void previewOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     int cashierId = cashier.getIdUser();
@@ -348,25 +348,26 @@ public class Order {
       try {
         if (isRegistered) {
           System.out.println("*** Registered Customer Order Menu ***");
-          for (;;) {
-            System.out.print("Enter the id of the registered cutomer the order is about. "
-              + "To cancel, press \"enter\": ");
+          for (; ; ) {
+            System.out.print(
+                "Enter the id of the registered cutomer the order is about. "
+                    + "To cancel, press \"enter\": ");
             ans = in.nextLine();
             if (ans.equals("")) {
               System.out.println("Process cancelled, returning to previous menu...");
-                return;
+              return;
             }
             id = Integer.parseInt(ans);
             customer = RegisteredCustomer.searchById(id);
             if (customer == null) {
-              System.out.println("Registered customer with such id does not exist. Try again..." ); 
+              System.out.println("Registered customer with such id does not exist. Try again...");
               continue;
             }
             break;
-          } 
+          }
         } else {
-        System.out.println("*** Guest Customer Order Menu ***");
-        customer = null;
+          System.out.println("*** Guest Customer Order Menu ***");
+          customer = null;
         }
         basket = fillBasket();
         Order.previewOrder(cashier, customer, basket);
@@ -400,7 +401,7 @@ public class Order {
    *
    * @param cashier the cashier who made the order
    * @param customer the customer who made the order
-   * @param basket all the products the customer choose 
+   * @param basket all the products the customer choose
    */
   public static void confirmOrder(Cashier cashier, Customer customer, ArrayList<int[]> basket) {
     for (int[] product : basket) {
@@ -415,21 +416,24 @@ public class Order {
     }
     String orderDate = getCurrentDate();
     Order newOrder = new Order(orderDate, customer, cashier, basket);
-    if (customer instanceof RegisteredCustomer && newOrder.checkPointDiscount((RegisteredCustomer)customer) == true) {
-    	newOrder.setTotalCost(0.9 * newOrder.getTotalCost());
+    if (customer instanceof RegisteredCustomer
+        && newOrder.checkPointDiscount((RegisteredCustomer) customer) == true) {
+      newOrder.setTotalCost(0.9 * newOrder.getTotalCost());
     }
     newOrder.printFinalOrder();
   }
-  
+
   public boolean checkPointDiscount(RegisteredCustomer c) {
-	  ((RegisteredCustomer)(this.getCustomer())).setPoints((int) Math.round(((this.getTotalCost() * 5))));
-	  System.out.println("With this purchase " + Math.round(this.getTotalCost() * 5) +" points were earned!");
-	  if (c.getPoints() >= 10000) {
-		  System.out.println("Order has been discounted by 10% by redeeming 10000 points!");
-		  c.setPoints(c.getPoints() - 10000);
-		  return true;
-	  }
-	  return false;
+    ((RegisteredCustomer) (this.getCustomer()))
+        .setPoints((int) Math.round(((this.getTotalCost() * 5))));
+    System.out.println(
+        "With this purchase " + Math.round(this.getTotalCost() * 5) + " points were earned!");
+    if (c.getPoints() >= 10000) {
+      System.out.println("Order has been discounted by 10% by redeeming 10000 points!");
+      c.setPoints(c.getPoints() - 10000);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -495,7 +499,7 @@ public class Order {
    *
    * @param id product's id
    * @param quantity how many specific products the customer orders
-   * @param basket all the products the customer choose 
+   * @param basket all the products the customer choose
    * @return if the product is available, type boolean
    */
   public static boolean checkIfProductAlreadyExistsAndAddToBasket(

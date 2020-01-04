@@ -163,7 +163,6 @@ public class DataAnalyst extends User {
 		try {
       Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
     e.printStackTrace();
     }
 		DataAnalyst d = new DataAnalyst(0, "", "","","");
