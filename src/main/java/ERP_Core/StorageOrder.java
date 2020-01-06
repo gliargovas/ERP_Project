@@ -7,15 +7,27 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-
+/**
+ * This class represents an order for resupplying the shop's storage, made in the ERP system.
+ *
+ * @author George Liargovas
+ */
 public class StorageOrder {
+  /** The counter for the unique orders created. */
   private static int counter = FileHandler.getStorageOrderCounterFromFile();
+  /** The unique number of each order. */
   private final int storageOrderNumber;
+  /** The date the order was made. */
   private final String storageOrderDate;
+  /** The total cost of the order */
   private final double totalCost;
+  /** The supplier object who the order concerned. */
   private final Supplier supplier;
+  /** The storekeeper object who made the order. */
   private final Storekeeper storekeeper;
+  /** The list of supplies that the order contains. */
   public ArrayList<int[]> supplies = new ArrayList<int[]>();
+  /** The list of orders made */
   public static ArrayList<StorageOrder> orders = new ArrayList<StorageOrder>();
 
   /**
@@ -72,61 +84,61 @@ public class StorageOrder {
   }
 
   /**
-   * Returns the storage order date
+   * Returns the Date of the order.
    *
-   * @return the storageOrderDate
+   * @return storageOrderDate, type String
    */
   public String getStorageOrderDate() {
     return storageOrderDate;
   }
 
   /**
-   * Returns the order's total cost
+   * Returns the total cost.
    *
-   * @return the totalCost
+   * @return TotalCost, type double
    */
   public double getTotalCost() {
     return totalCost;
   }
 
   /**
-   * Returns the order's supplier object
+   * Returns the object supplier.
    *
-   * @return Supplier object
+   * @return the supplier
    */
   public Supplier getSupplier() {
     return supplier;
   }
 
   /**
-   * Returns the order's storekeeper object
+   * Returns the object Storekeeper.
    *
-   * @return Storekeeper object
+   * @return storekeeper
    */
   public Storekeeper getStorekeeper() {
     return storekeeper;
   }
 
   /**
-   * Returns the order's unique number
+   * Returns the Number of the Order.
    *
-   * @return storage order number
+   * @return storageOrderNumber, type int
    */
   public int getStorageOrderNumber() {
     return storageOrderNumber;
   }
 
   /**
-   * Returns the order's list of supplies that were resupplied
+   * Returns the supplies from the list.
    *
-   * @return
+   * @return supplies
    */
   public ArrayList<int[]> getSupplies() {
     return supplies;
   }
 
   /**
-   * Returns the arrayList which contains the orders storage
+   * Returns the arrayList which contains the orders storage.
    *
    * @return ArrayList with StorageOrder objects
    */
@@ -135,29 +147,12 @@ public class StorageOrder {
   }
 
   /**
-   * Returns the counter of the storage orders created
+   * Returns the counter of the storage orders created.
    *
    * @return counter of orders as an int
    */
   public static int getIdCounter() {
     return counter;
-  }
-
-  @Override
-  public String toString() {
-    return "StorageOrder [storageOrderNumber="
-        + storageOrderNumber
-        + ", storageOrderDate="
-        + storageOrderDate
-        + ", totalCost="
-        + totalCost
-        + ", supplier="
-        + supplier
-        + ", storekeeper="
-        + storekeeper
-        + ", supplies="
-        + supplies
-        + "]";
   }
 
   /** Prints all the storage orders */

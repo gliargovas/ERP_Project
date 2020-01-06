@@ -5,14 +5,39 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * The class represents a supplier of the ERP system The class is responsible for creating a
+ * supplier object and storing it in an ArrayList either by creating a completely new supplier or
+ * loading it from a .csv file. It also contains methods for searching and editing the contents of
+ * the suppliers list with specific criteria. There are also methods that contain menus in order to
+ * use the above mentioned methods according to user input.
+ *
+ * @author Christina Kardami
+ * @author George Liargovas
+ * @version 1.0
+ */
 public class Supplier {
+  /** The name of the supplier */
   private String name;
+  /** The unique id of the supplier */
   private int id;
+  /** The telephone of the supplier */
   private int tel;
+  /** The address of the supplier */
   private String address;
+  /** The counter that counts the unique suppliers created */
   private static int idCounter = FileHandler.getSupplierCounterFromFile();
+  /** The list where the suppliers are stored */
   private static ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
 
+  /**
+   * Constructor for loading objects from .csv file
+   *
+   * @param name
+   * @param address
+   * @param tel
+   * @param id
+   */
   public Supplier(String name, String address, int tel, int id) {
     super();
     this.name = name;
@@ -22,6 +47,13 @@ public class Supplier {
     suppliers.add(this);
   }
 
+  /**
+   * Constructor for creating new Supplier objects
+   *
+   * @param name
+   * @param tel
+   * @param address
+   */
   public Supplier(String name, int tel, String address) {
     this.name = name;
     this.id = ++idCounter;
@@ -30,34 +62,74 @@ public class Supplier {
     suppliers.add(this);
   }
 
+  /**
+   * Returns the name of the Supplier
+   *
+   * @return the Name of supplier , type String
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the name of the Supplier according to the parameter that is given
+   *
+   * @param name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Returns the id of the supplier
+   *
+   * @return Id of the supplier, type integer
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * Returns the telephone of the supplier
+   *
+   * @return the Telephone, type integer
+   */
   public int getTel() {
     return tel;
   }
 
+  /**
+   * Sets the number of the telephone according to the parameter that is given
+   *
+   * @param tel
+   */
   public void setTel(int tel) {
     this.tel = tel;
   }
 
+  /**
+   * Returns the Address of the supplier
+   *
+   * @return the Address, type String
+   */
   public String getAddress() {
     return address;
   }
 
+  /**
+   * Sets the Address of the supplier according to the parameter that is given
+   *
+   * @param address
+   */
   public void setAddress(String address) {
     this.address = address;
   }
 
+  /**
+   * Returns all the suppliers from the List Suppliers
+   *
+   * @return alla the Suppliers from the list
+   */
   public static ArrayList<Supplier> getsuppliers() {
     return suppliers;
   }
@@ -66,12 +138,19 @@ public class Supplier {
     return idCounter;
   }
 
+  /** All the suppliers from the list are appeared */
   public static void printAllSuppliers() {
     for (Supplier k : suppliers) {
       System.out.println(k.toString());
     }
   }
 
+  /**
+   * Deletes the supplier that the id ,that is given, refers to
+   *
+   * @param id
+   * @return true if the supplier is removed or false if the id doesn't refer to a supplier
+   */
   public static boolean deleteSupplier(int id) {
     for (Supplier i : suppliers) {
       if (i.getId() == id) {
@@ -82,6 +161,12 @@ public class Supplier {
     return false;
   }
 
+  /**
+   * Searches the supplier, which has the id that is given
+   *
+   * @param id
+   * @return the supplier from the list according its id
+   */
   public static Supplier searchById(int id) {
     for (Supplier i : suppliers) {
       if (i.getId() == id) {
@@ -92,6 +177,11 @@ public class Supplier {
     return null;
   }
 
+  /**
+   * Creates all the suppliers from the list
+   *
+   * @param Suppliers
+   */
   public static void createSuppliersFromList(ArrayList<ArrayList<String>> suppliers) {
     int id, tel;
     String name, address;
@@ -104,6 +194,11 @@ public class Supplier {
     }
   }
 
+  /**
+   * Searches the supplier and prints him according to the name that is given
+   *
+   * @param name, String type
+   */
   public static void searchAndPrintSupplierByname(String name) {
     boolean found = false;
     for (Supplier s : suppliers) {
@@ -117,6 +212,11 @@ public class Supplier {
     }
   }
 
+  /**
+   * Searches the supplier and prints him according to the address that is given
+   *
+   * @param address, String type
+   */
   public static void searchAndPrintSupplierByaddress(String address) {
     boolean found = false;
     for (Supplier s : suppliers) {
@@ -130,6 +230,11 @@ public class Supplier {
     }
   }
 
+  /**
+   * Searches the Supplier and prints him according to the id that is given
+   *
+   * @param id, integer type
+   */
   public static void searchAndPrintSupplierByid(int id) {
     for (Supplier s : suppliers) {
       if (s.getId() == id) {
@@ -140,6 +245,7 @@ public class Supplier {
     System.out.println("No suppliers with such id");
   }
 
+  /** Searches and prints the supplier according to the telephone that is given */
   public static void searchAndPrintSupplierBytelephone(int tel) {
     boolean found = false;
     for (Supplier s : suppliers) {
@@ -153,6 +259,14 @@ public class Supplier {
     }
   }
 
+  /**
+   * Changes the Name of the Name of the supplier from the list according to the id and name that is
+   * given
+   *
+   * @param id
+   * @param name
+   * @throws NoSuchElementException
+   */
   public static void changeName(int id, String name) throws NoSuchElementException {
     Supplier supplier = searchById(id);
     if (supplier == null) {
@@ -162,6 +276,13 @@ public class Supplier {
     }
   }
 
+  /**
+   * Changes the address of the supplier according to the id and the address that is given
+   *
+   * @param id
+   * @param address
+   * @throws NoSuchElementException
+   */
   public static void changeAddress(int id, String address) throws NoSuchElementException {
     Supplier supplier = searchById(id);
     if (supplier == null) {
@@ -171,6 +292,13 @@ public class Supplier {
     }
   }
 
+  /**
+   * Changes the telephone of the supplier according to th id and telephone that is given
+   *
+   * @param id
+   * @param tel
+   * @throws NoSuchElementException
+   */
   public static void changeTelephone(int id, int tel) throws NoSuchElementException {
     Supplier supplier = searchById(id);
     if (supplier == null) {
@@ -180,6 +308,7 @@ public class Supplier {
     }
   }
 
+  /** Creates the registration of the supplier according to the values given from the user */
   public static void registerNewSupplierMenu() {
     String name, address;
     int tel;
@@ -205,6 +334,7 @@ public class Supplier {
     System.out.printf("Supplier %s registered successfully!\n", name);
   }
 
+  /** Changes the name of the supplier at the menu according to the id that is given */
   public static void changeCustomerNameMenu() {
     Scanner in = new Scanner(System.in);
     int id;
@@ -232,6 +362,7 @@ public class Supplier {
     }
   }
 
+  /** Changes the address of the supplier at the menu according to the id that is given */
   public static void changeSupplierAddressMenu() {
     Scanner in = new Scanner(System.in);
     int id;
@@ -259,7 +390,7 @@ public class Supplier {
     }
   }
 
-  // contains customer telephone change menu
+  /** changes the telephone of the supplier at the menu according to the id that is given */
   public static void changeSupplierTelephoneMenu() {
     Scanner in = new Scanner(System.in);
     int id, tel;
@@ -289,6 +420,7 @@ public class Supplier {
     }
   }
 
+  /** Deletes the supplier at the menu according to the id that is given */
   public static void deleteSupplierMenu() {
     Scanner in = new Scanner(System.in);
     int id;
@@ -312,6 +444,7 @@ public class Supplier {
     }
   }
 
+  /** Searches and prints the Supplier according to the name that is given */
   public static void searchAndPrintSupplierBynameMenu() {
     Scanner in = new Scanner(System.in);
     String input;
@@ -328,6 +461,7 @@ public class Supplier {
     }
   }
 
+  /** Searches and prints the Supplier according to the address that is given */
   public static void searchAndPrintSupplierByaddressMenu() {
     Scanner in = new Scanner(System.in);
     String input;
@@ -344,6 +478,7 @@ public class Supplier {
     }
   }
 
+  /** Searches and prints the Supplier according to the id that is given */
   public static void searchAndPrintSupplierByidMenu() {
     Scanner in = new Scanner(System.in);
     int id;
@@ -367,6 +502,7 @@ public class Supplier {
     }
   }
 
+  /** Searches and prints the Supplier according to the telephone that is given */
   public static void searchAndPrintSupplierByTelephoneMenu() {
     Scanner in = new Scanner(System.in);
     int tel;
@@ -390,6 +526,7 @@ public class Supplier {
     }
   }
 
+  /** Returns the current Supplier object in String format */
   @Override
   public String toString() {
     return "Supplier [name=" + name + ", id=" + id + ", tel=" + tel + ", address=" + address + "]";

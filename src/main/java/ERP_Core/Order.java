@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * Class represents an order made in the ERP system.
+ * This class represents an order made in the ERP system.
  *
  * @version 1.0
  * @author George Liargovas
