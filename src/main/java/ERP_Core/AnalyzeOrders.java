@@ -6,6 +6,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+/**
+ * 
+ * @author user
+ *
+ */
 
 public class AnalyzeOrders {
   public static final String[] MONTHS = {
@@ -27,6 +32,11 @@ public class AnalyzeOrders {
   public static int[] weeklyTotalSales = new int[52];
 
   // total value by month
+  /**
+   * 
+   * @param orders
+   * @return
+   */
   public static double[] getTotalOrderValueByMonth(ArrayList<Order> orders) {
     double[] monthlySales = new double[12];
     int month;
@@ -36,7 +46,9 @@ public class AnalyzeOrders {
     }
     return monthlySales;
   }
-
+/**
+ * 
+ */
   public static void printTotalOrderValueByMonthWithLabel() {
     double[] monthlyValue = getTotalOrderValueByMonth(Order.getOrders());
     System.out.println("Total order value by month:\n");
@@ -44,7 +56,12 @@ public class AnalyzeOrders {
       System.out.printf("%s Sales: %.02f \n", MONTHS[i], monthlyValue[i]);
     }
   }
-
+/**
+ * 
+ * @param orders
+ * @param year
+ * @return
+ */
   // value by month for specific year
   public static double[] getSpecificYearOrderValueByMonth(ArrayList<Order> orders, int year) {
     double[] monthlySales = new double[12];
@@ -59,7 +76,10 @@ public class AnalyzeOrders {
     }
     return monthlySales;
   }
-
+/**
+ * 
+ * @param year
+ */
   public static void printSpecificYearOrderValueByMonthWithLabel(int year) {
     double[] monthlyValue = getSpecificYearOrderValueByMonth(Order.getOrders(), year);
     System.out.printf("Total order value by month for the year %d:\n\n", year);
@@ -67,7 +87,9 @@ public class AnalyzeOrders {
       System.out.printf("%s Sales: %f \n", MONTHS[i], monthlyValue[i]);
     }
   }
-
+/**
+ * 
+ */
   public static void printTotalOrderValueByMonthWithLabellMenu() {
     Scanner in = new Scanner(System.in);
     int year;
@@ -83,7 +105,11 @@ public class AnalyzeOrders {
     }
     printSpecificYearOrderValueByMonthWithLabel(year);
   }
-
+/**
+ * 
+ * @param predictionYear
+ * @return
+ */
   public static double predictSalesForYear(int predictionYear) {
     ArrayList<Double> xValuesArrayList = new ArrayList<Double>();
     ArrayList<Double> yValuesArrayList = new ArrayList<Double>();
@@ -103,7 +129,9 @@ public class AnalyzeOrders {
     return predictSalesAccordingToLinearRegressionEquation(
         regressionSlopeAndIntercept, predictionYear);
   }
-
+/**
+ * 
+ */
   public static void predictSalesAccordingToLinearRegressionEquationMenu() {
     Scanner in = new Scanner(System.in);
     double predictionYear;
@@ -133,7 +161,12 @@ public class AnalyzeOrders {
         "The sales for the year %d are predicted to be %.02f euros\n",
         (int) predictionYear, prediction);
   }
-
+/**
+ * 
+ * @param equation
+ * @param x
+ * @return
+ */
   public static double predictSalesAccordingToLinearRegressionEquation(
       double[] equation, double x) {
     double a = equation[0];
@@ -141,7 +174,12 @@ public class AnalyzeOrders {
     double y = a * x + b;
     return y;
   }
-
+/**
+ * 
+ * @param xValues
+ * @param yValues
+ * @return
+ */
   public static double[] calculateLinearRegressionEquationForTotalSales(
       double[] xValues, double[] yValues) {
     double slope = calculateLinearRegressionSlope(xValues, yValues);
@@ -149,7 +187,12 @@ public class AnalyzeOrders {
     double[] equation = {slope, intercept};
     return equation;
   }
-
+/**
+ * 
+ * @param xValues
+ * @param yValues
+ * @return
+ */
   public static double calculateLinearRegressionSlope(double[] xValues, double[] yValues) {
     double sumXY = calculateSumOfProducts(xValues, yValues);
     double sumX = calclateSumOfArray(xValues);
@@ -159,7 +202,13 @@ public class AnalyzeOrders {
     double slope = (n * sumXY - sumX * sumY) / (n * sumXSq - sumX * sumX);
     return slope;
   }
-
+/**
+ * 
+ * @param slope
+ * @param xValues
+ * @param yValues
+ * @return
+ */
   public static double calculateLinearRegressionIntercept(
       double slope, double[] xValues, double[] yValues) {
     int n = xValues.length;
@@ -168,7 +217,12 @@ public class AnalyzeOrders {
     double intercept = ((sumY - slope * sumX) / n);
     return intercept;
   }
-
+/**
+ * 
+ * @param xValues
+ * @param yValues
+ * @return
+ */
   public static double calculateSumOfProducts(double[] xValues, double[] yValues) {
     double sum = 0;
     for (int i = 0; i < xValues.length; i++) {
@@ -176,7 +230,11 @@ public class AnalyzeOrders {
     }
     return sum;
   }
-
+/**
+ * 
+ * @param values
+ * @return
+ */
   public static double calculateSumOfSquares(double[] values) {
     double sum = 0;
     for (double value : values) {
@@ -184,7 +242,11 @@ public class AnalyzeOrders {
     }
     return sum;
   }
-
+/**
+ * 
+ * @param values
+ * @return
+ */
   public static double calclateSumOfArray(double[] values) {
     double sum = 0;
     for (double value : values) {
@@ -192,7 +254,13 @@ public class AnalyzeOrders {
     }
     return sum;
   }
-
+/**
+ * 
+ * @param orders
+ * @param startYear
+ * @param endYear
+ * @return
+ */
   // value by year interval
   public static double[] getTotalOrderValueByYearInterval(
       ArrayList<Order> orders, int startYear, int endYear) {
@@ -206,7 +274,11 @@ public class AnalyzeOrders {
     }
     return yearlySales;
   }
-
+/**
+ * 
+ * @param startYear
+ * @param endYear
+ */
   public static void printTotalOrderValueByYearIntervalWithLabel(int startYear, int endYear) {
     double[] yearlyValue = getTotalOrderValueByYearInterval(Order.getOrders(), startYear, endYear);
     int index = 0;
@@ -216,7 +288,9 @@ public class AnalyzeOrders {
       index++;
     }
   }
-
+/**
+ * 
+ */
   public static void printTotalOrderValueByYearIntervalWithLabelMenu() {
     Scanner in = new Scanner(System.in);
     int startYear;
@@ -235,7 +309,10 @@ public class AnalyzeOrders {
     }
     printTotalOrderValueByYearIntervalWithLabel(startYear, endYear);
   }
-
+/**
+ * 
+ * @return
+ */
   // value by year for all years
   public static int findMinYearInOrders() {
     int min = Integer.MAX_VALUE;
@@ -248,7 +325,10 @@ public class AnalyzeOrders {
     }
     return min;
   }
-
+/**
+ * 
+ * @return
+ */
   public static int findMaxYearInOrders() {
     int max = Integer.MIN_VALUE;
     int year;
@@ -260,23 +340,37 @@ public class AnalyzeOrders {
     }
     return max;
   }
-
+/**
+ * 
+ */
   public static void printTotalOrderValueByYearWithLabel() {
     int startYear = findMinYearInOrders();
     int endYear = findMaxYearInOrders();
     printTotalOrderValueByYearIntervalWithLabel(startYear, endYear);
   }
-
+/**
+ * 
+ * @param date
+ * @return
+ */
   public static int getDateDay(String date) {
     String[] cutDate = date.split("-");
     return Integer.parseInt(cutDate[0]);
   }
-
+/**
+ * 
+ * @param date
+ * @return
+ */
   public static int getDateMonth(String date) {
     String[] cutDate = date.split("-");
     return Integer.parseInt(cutDate[1]);
   }
-
+/**
+ * 
+ * @param date
+ * @return
+ */
   public static int getDateYear(String date) {
     String[] cutDate = date.split("-");
     return Integer.parseInt(cutDate[2].substring(0, 4));
