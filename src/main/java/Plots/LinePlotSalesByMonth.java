@@ -1,5 +1,6 @@
 package Plots;
 
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import ERP_Core.AnalyzeOrders;
@@ -12,14 +13,22 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+/**
+ * The class contains an javafx application for creating a line chart for the monthly order value
+ * for a specific year interval.
+ *
+ * @author George Liargovas
+ * @version 1.0
+ */
 public class LinePlotSalesByMonth extends Application {
 
+  /** Start the application thread. */
   @Override
   public void start(Stage stage) {
     int[] years = getPlotParameters();
     int startYear = years[0];
     int endYear = years[1];
-    
+
     stage.setTitle("Total Sales");
     NumberAxis xAxis = new NumberAxis(1, 12, 1);
     xAxis.setLabel("Month");
@@ -27,7 +36,7 @@ public class LinePlotSalesByMonth extends Application {
     yAxis.setLabel("Sales");
     LineChart<Number, Number> lc = new LineChart<Number, Number>(xAxis, yAxis);
     lc.setTitle("Total monthly sales for each year");
-    
+
     XYChart.Series data = null;
     for (int year = startYear; year <= endYear; year++) {
       data = new XYChart.Series();
@@ -37,7 +46,6 @@ public class LinePlotSalesByMonth extends Application {
       for (int i = 0; i < 12; i++) {
         data.getData().add(new XYChart.Data(i + 1, monthlyValue[i]));
       }
-      System.out.println(year);
       lc.getData().add(data);
     }
     Scene scene = new Scene(lc, 500, 400);
@@ -45,10 +53,17 @@ public class LinePlotSalesByMonth extends Application {
     stage.show();
   }
 
+  /** Launch the application */
   public static void main(String[] args) {
     launch(args);
   }
 
+  /**
+   * Contains the prompts in order for the user to specify the plot parameters. If the year interval
+   * is not specified by the user the default interval is used.
+   *
+   * @return the first and last year of the interval
+   */
   public int[] getPlotParameters() {
     Scanner in = new Scanner(System.in);
     int startYear;

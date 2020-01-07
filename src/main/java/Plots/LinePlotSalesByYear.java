@@ -10,9 +10,17 @@ import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+/**
+ * The class contains an javafx application for creating a line chart for the yearly order value for
+ * every year.
+ *
+ * @author George Liargovas
+ * @version 1.0
+ */
 public class LinePlotSalesByYear extends Application {
 
   @Override
+  /** Start the application thread. */
   public void start(Stage stage) {
     int startYear = AnalyzeOrders.findMinYearInOrders();
     int endYear = AnalyzeOrders.findMaxYearInOrders();
@@ -27,7 +35,7 @@ public class LinePlotSalesByYear extends Application {
     sc.setTitle("Total sales by year");
     XYChart.Series data = new XYChart.Series();
     data.setName("Equities");
-    
+
     double[] yearlyValue =
         AnalyzeOrders.getTotalOrderValueByYearInterval(Order.getOrders(), startYear, endYear);
     int index = 0;
@@ -41,6 +49,7 @@ public class LinePlotSalesByYear extends Application {
     stage.show();
   }
 
+  /** Launch the application. */
   public static void main(String[] args) {
     launch(args);
   }

@@ -11,12 +11,21 @@ import javafx.scene.chart.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The class contains an javafx application for creating a bar chart for the yearly order value for
+ * every year for a specified year interval.
+ *
+ * @author George Liargovas
+ * @version 1.0
+ */
 public class PlotSalesByYear extends Application {
 
+  /** Launch the application thread */
   public static void main(String args[]) {
     Application.launch(args);
   }
 
+  /** The application's thread for creating the plot */
   public void start(Stage stage) {
     int[] years = this.getPlotParameters();
     int startYear = years[0];
@@ -48,6 +57,12 @@ public class PlotSalesByYear extends Application {
     stage.show();
   }
 
+  /**
+   * Contains the prompts in order for the user to specify the plot parameters. If the year interval
+   * is not specified by the user the default interval is used.
+   *
+   * @return the first and last year of the interval
+   */
   public int[] getPlotParameters() {
     Scanner in = new Scanner(System.in);
     int startYear;

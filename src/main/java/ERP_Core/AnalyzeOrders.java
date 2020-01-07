@@ -7,12 +7,16 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 /**
+ * The class contains methods for analyzing the orders that have been recorded by the 
+ * ERP. There are methods for calculating frequencies of products by specific time periods 
+ * as well as methods for predicting the sales by using linear regression.
  * 
- * @author user
- *
+ * @author George Liargovas
+ * @version 1.0
  */
 
 public class AnalyzeOrders {
+  /** A final array that contains the month names of a year */
   public static final String[] MONTHS = {
     "January",
     "February",
@@ -27,15 +31,11 @@ public class AnalyzeOrders {
     "November",
     "December"
   };
-  public static ArrayList<int[]> ordersByMonth = new ArrayList<int[]>();
-  public static int[] monthlyTotalSales = new int[12];
-  public static int[] weeklyTotalSales = new int[52];
 
-  // total value by month
   /**
-   * 
-   * @param orders
-   * @return
+   * Returns an array with the total order value of each, ignoring the year.
+   * @param orders the order list
+   * @return total order value of each month
    */
   public static double[] getTotalOrderValueByMonth(ArrayList<Order> orders) {
     double[] monthlySales = new double[12];
@@ -46,9 +46,8 @@ public class AnalyzeOrders {
     }
     return monthlySales;
   }
-/**
- * 
- */
+  
+  /** Prints the total order value of each month with month labels. */
   public static void printTotalOrderValueByMonthWithLabel() {
     double[] monthlyValue = getTotalOrderValueByMonth(Order.getOrders());
     System.out.println("Total order value by month:\n");
@@ -56,13 +55,13 @@ public class AnalyzeOrders {
       System.out.printf("%s Sales: %.02f \n", MONTHS[i], monthlyValue[i]);
     }
   }
+  
 /**
- * 
- * @param orders
- * @param year
- * @return
+ * Returns the order value by month for a specific year
+ * @param orders the order list
+ * @param year the year for which to print the orders
+ * @return total order value each month for the given year
  */
-  // value by month for specific year
   public static double[] getSpecificYearOrderValueByMonth(ArrayList<Order> orders, int year) {
     double[] monthlySales = new double[12];
     int month;
@@ -76,9 +75,10 @@ public class AnalyzeOrders {
     }
     return monthlySales;
   }
+  
 /**
- * 
- * @param year
+ * Prints the order value for each month for specific year, with label.
+ * @param year the year for which to print the orders
  */
   public static void printSpecificYearOrderValueByMonthWithLabel(int year) {
     double[] monthlyValue = getSpecificYearOrderValueByMonth(Order.getOrders(), year);
@@ -87,8 +87,9 @@ public class AnalyzeOrders {
       System.out.printf("%s Sales: %f \n", MONTHS[i], monthlyValue[i]);
     }
   }
+  
 /**
- * 
+ * Prints the order value by month for a specific year according to user input.
  */
   public static void printTotalOrderValueByMonthWithLabellMenu() {
     Scanner in = new Scanner(System.in);
@@ -105,10 +106,11 @@ public class AnalyzeOrders {
     }
     printSpecificYearOrderValueByMonthWithLabel(year);
   }
+  
 /**
- * 
- * @param predictionYear
- * @return
+ * Predicts the sales for the given year using simple linear regression
+ * @param predictionYear the year of the prediction
+ * @return the predicted sales for the given year
  */
   public static double predictSalesForYear(int predictionYear) {
     ArrayList<Double> xValuesArrayList = new ArrayList<Double>();
@@ -129,9 +131,8 @@ public class AnalyzeOrders {
     return predictSalesAccordingToLinearRegressionEquation(
         regressionSlopeAndIntercept, predictionYear);
   }
-/**
- * 
- */
+  
+  /** Predicts the sales for the given year using simple linear regression, according to user input. */
   public static void predictSalesAccordingToLinearRegressionEquationMenu() {
     Scanner in = new Scanner(System.in);
     double predictionYear;
@@ -161,11 +162,12 @@ public class AnalyzeOrders {
         "The sales for the year %d are predicted to be %.02f euros\n",
         (int) predictionYear, prediction);
   }
+  
 /**
- * 
- * @param equation
- * @param x
- * @return
+ * Returns a predicted value according to a given simple linear regression equation.
+ * @param equation the array with the linear regression equation coefficients
+ * @param x the year of the prediction
+ * @return the predicted value
  */
   public static double predictSalesAccordingToLinearRegressionEquation(
       double[] equation, double x) {
@@ -174,11 +176,12 @@ public class AnalyzeOrders {
     double y = a * x + b;
     return y;
   }
+  
 /**
- * 
- * @param xValues
- * @param yValues
- * @return
+ * Calculated the linear regression slope and intercept of a given set of values
+ * @param xValues the x axis arguments
+ * @param yValues the y axis arguments
+ * @return the linear regression equation slope and intercept
  */
   public static double[] calculateLinearRegressionEquationForTotalSales(
       double[] xValues, double[] yValues) {
@@ -187,11 +190,12 @@ public class AnalyzeOrders {
     double[] equation = {slope, intercept};
     return equation;
   }
+  
 /**
- * 
- * @param xValues
- * @param yValues
- * @return
+ * Calculates the linear regression equation slope.
+ * @param xValues the x axis values
+ * @param yValues the y axis values
+ * @return the slope of the regression line
  */
   public static double calculateLinearRegressionSlope(double[] xValues, double[] yValues) {
     double sumXY = calculateSumOfProducts(xValues, yValues);
@@ -202,12 +206,13 @@ public class AnalyzeOrders {
     double slope = (n * sumXY - sumX * sumY) / (n * sumXSq - sumX * sumX);
     return slope;
   }
+  
 /**
- * 
- * @param slope
- * @param xValues
- * @param yValues
- * @return
+ * Calculates the linear regression equation intercept.
+ * @param slope the slope of the linear regression line
+ * @param xValues the x axis values
+ * @param yValues the y axis values
+ * @return the regression line intercept
  */
   public static double calculateLinearRegressionIntercept(
       double slope, double[] xValues, double[] yValues) {
@@ -217,11 +222,12 @@ public class AnalyzeOrders {
     double intercept = ((sumY - slope * sumX) / n);
     return intercept;
   }
+  
 /**
- * 
- * @param xValues
- * @param yValues
- * @return
+ * Calculates the sum of the product of x and y value pairs.
+ * @param xValues the x axis values
+ * @param yValues the y axis values
+ * @return the sum of products
  */
   public static double calculateSumOfProducts(double[] xValues, double[] yValues) {
     double sum = 0;
@@ -230,10 +236,11 @@ public class AnalyzeOrders {
     }
     return sum;
   }
+  
 /**
- * 
- * @param values
- * @return
+ * Calculates the sum of squared values of an array.
+ * @param values the values of the array
+ * @return the sum of squared values
  */
   public static double calculateSumOfSquares(double[] values) {
     double sum = 0;
@@ -242,10 +249,11 @@ public class AnalyzeOrders {
     }
     return sum;
   }
+  
 /**
- * 
- * @param values
- * @return
+ * Calculates the sum of the values of an array.
+ * @param values the values of the array
+ * @return sum of values
  */
   public static double calclateSumOfArray(double[] values) {
     double sum = 0;
@@ -254,12 +262,13 @@ public class AnalyzeOrders {
     }
     return sum;
   }
+  
 /**
- * 
- * @param orders
- * @param startYear
- * @param endYear
- * @return
+ * Returns the total order value for a year interval.
+ * @param orders the order list
+ * @param startYear the beginning of the interval
+ * @param endYear the end of the interval
+ * @return an array with the total order value of each year for the given interval
  */
   // value by year interval
   public static double[] getTotalOrderValueByYearInterval(
@@ -274,10 +283,11 @@ public class AnalyzeOrders {
     }
     return yearlySales;
   }
+  
 /**
- * 
- * @param startYear
- * @param endYear
+ * Prints the total order value for a year interval with label.
+ * @param startYear the beginning of the interval
+ * @param endYear the end of the interval
  */
   public static void printTotalOrderValueByYearIntervalWithLabel(int startYear, int endYear) {
     double[] yearlyValue = getTotalOrderValueByYearInterval(Order.getOrders(), startYear, endYear);
@@ -288,9 +298,10 @@ public class AnalyzeOrders {
       index++;
     }
   }
-/**
- * 
- */
+  
+/** 
+ * Prints the total order value with labels for a year interval, according to user input. 
+ * If no interval is specified by the user, the sales of every year are displayed. */
   public static void printTotalOrderValueByYearIntervalWithLabelMenu() {
     Scanner in = new Scanner(System.in);
     int startYear;
@@ -309,11 +320,11 @@ public class AnalyzeOrders {
     }
     printTotalOrderValueByYearIntervalWithLabel(startYear, endYear);
   }
+  
 /**
- * 
- * @return
+ * Returns the year the earliest order has been made.
+ * @return the earliest year
  */
-  // value by year for all years
   public static int findMinYearInOrders() {
     int min = Integer.MAX_VALUE;
     int year;
@@ -325,9 +336,10 @@ public class AnalyzeOrders {
     }
     return min;
   }
+  
 /**
- * 
- * @return
+ * Returns the year the latest order has been made.
+ * @return the latest year
  */
   public static int findMaxYearInOrders() {
     int max = Integer.MIN_VALUE;
@@ -340,36 +352,40 @@ public class AnalyzeOrders {
     }
     return max;
   }
+  
 /**
- * 
+ * Prints total order value for each year, with label.
  */
   public static void printTotalOrderValueByYearWithLabel() {
     int startYear = findMinYearInOrders();
     int endYear = findMaxYearInOrders();
     printTotalOrderValueByYearIntervalWithLabel(startYear, endYear);
   }
+  
 /**
- * 
- * @param date
- * @return
+ * Returns the day of a given date.
+ * @param date the order date
+ * @return the day of the date
  */
   public static int getDateDay(String date) {
     String[] cutDate = date.split("-");
     return Integer.parseInt(cutDate[0]);
   }
+  
 /**
- * 
- * @param date
- * @return
+ * Returns the month of a given date.
+ * @param date the order date
+ * @return the month of the date
  */
   public static int getDateMonth(String date) {
     String[] cutDate = date.split("-");
     return Integer.parseInt(cutDate[1]);
   }
+  
 /**
- * 
- * @param date
- * @return
+ * Returns the year of a given date.
+ * @param date the order date
+ * @return the year of the date
  */
   public static int getDateYear(String date) {
     String[] cutDate = date.split("-");
