@@ -1,10 +1,10 @@
 package Plots;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import ERP_Core.AnalyzeOrders;
 import ERP_Core.FileHandler;
 import ERP_Core.Order;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -12,20 +12,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * The class contains an javafx application for creating a bar chart for the yearly order value for
- * every year for a specified year interval.
+ * The class contains an javafx application for creating a bar chart for the yearly order value
+ * for every year for a specified year interval.
  *
  * @author George Liargovas
  * @version 1.0
  */
 public class PlotSalesByYear extends Application {
 
-  /** Launch the application thread */
-  public static void main(String args[]) {
+  /** Launch the application thread. */
+  public static void main(String[] args) {
     Application.launch(args);
   }
 
-  /** The application's thread for creating the plot */
+  /** The application's thread for creating the plot. */
   public void start(Stage stage) {
     int[] years = this.getPlotParameters();
     int startYear = years[0];

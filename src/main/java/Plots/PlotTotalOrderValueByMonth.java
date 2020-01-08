@@ -18,12 +18,12 @@ import javafx.stage.Stage;
  */
 public class PlotTotalOrderValueByMonth extends Application {
 
-  /** Main method for launching the application */
+  /** Main method for launching the application. */
   public static void main(String args[]) {
     Application.launch(args);
   }
 
-  /** Create the plot */
+  /** Create the plot. */
   public void start(Stage stage) {
     stage.setTitle("Total Sales by Month");
     CategoryAxis xAxis = new CategoryAxis();

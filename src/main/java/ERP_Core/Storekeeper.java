@@ -24,6 +24,7 @@ public class Storekeeper extends User {
   public Storekeeper(String name, String surname, String username, String password) {
     super(name, surname, username, password);
   }
+  
   /**
    * The constructor for loading a previously created Storekeeper object to the ERP system.
    *
@@ -36,6 +37,7 @@ public class Storekeeper extends User {
   public Storekeeper(int idUser, String name, String surname, String username, String password) {
     super(idUser, name, surname, username, password);
   }
+  
   /**
    * Checks if the given user credentials exist in the list and if they do, the user is logged in
    * and the specific user menu is called.
@@ -59,17 +61,20 @@ public class Storekeeper extends User {
     }
     throw new Exception("Invalid Credentials");
   }
-  /** Prints the Store keeper's menu */
+  
+  /** Prints the Store keeper's menu. */
   private void printMenu() {
     System.out.print(
         "--- Storekeeper Menu ---\n"
             + "1) Storage\n"
             + "2) Suppliers\n"
             + "3) Make a new Storage Ressuply Order\n"
-            + "4) Logout and Return to Main Menu\n"
+            + "4) Save changes\n"
+            + "5) Logout and Return to Main Menu\n"
             + "Option: ");
   }
-  /** Prints the product menu */
+  
+  /** Prints the product menu. */
   public void printStorageMenu() {
     System.out.print(
         "--- Product Menu ---\n"
@@ -81,7 +86,8 @@ public class Storekeeper extends User {
             + "6) Return to previous menu\n"
             + "Option: ");
   }
-  /** Prints the suppliers menu */
+  
+  /** Prints the suppliers menu. */
   public void printCustomerMenu() {
     System.out.print(
         "--- Supplier Menu ---\n"
@@ -98,9 +104,10 @@ public class Storekeeper extends User {
             + "11) Return to Previous Menu\n"
             + "Option: ");
   }
+  
   /**
    * The Storekeeper's menu. Several options are available. When the return option is selected, the
-   * user is logged out and returned to the main menu
+   * user is logged out and returned to the main menu.
    */
   @Override
   public void getMenu() {
@@ -121,6 +128,9 @@ public class Storekeeper extends User {
             StorageOrder.makeOrder(this);
             break;
           case 4:
+        	Main.saveAllListsToCsv();
+          	System.out.println("Changes saved!" ); 
+          case 5:
             return;
         }
       } catch (InputMismatchException e) {
@@ -130,9 +140,10 @@ public class Storekeeper extends User {
       }
     }
   }
+  
   /**
    * The product menu. Several options are available. When the return option is selected, the user
-   * is returned to the previous menu
+   * is returned to the previous menu.
    */
   public void getStorageMenu() {
     Scanner in = new Scanner(System.in);
@@ -167,9 +178,10 @@ public class Storekeeper extends User {
       }
     }
   }
+  
   /**
    * The suppliers menu. Several options are available. When the return option is selected, the user
-   * is returned to the previous menu
+   * is returned to the previous menu.
    */
   public void getSupplierMenu() {
     Scanner in = new Scanner(System.in);

@@ -69,13 +69,13 @@ public class StorageOrder {
    * @param storekeeper the Storekeeper object of the order, who made the order
    */
   public StorageOrder(
-      int StorageOrderNumber,
+      int storageOrderNumber,
       String storageOrderDate,
       double totalCost,
       Supplier supplier,
       Storekeeper storekeeper,
       ArrayList<int[]> supplies) {
-    this.storageOrderNumber = StorageOrderNumber;
+    this.storageOrderNumber = storageOrderNumber;
     this.storageOrderDate = storageOrderDate;
     this.totalCost = totalCost;
     this.supplier = supplier;
@@ -155,7 +155,7 @@ public class StorageOrder {
     return counter;
   }
 
-  /** Prints all the storage orders */
+  /** Prints all the storage orders. */
   public static void printStorageOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
@@ -189,9 +189,9 @@ public class StorageOrder {
   }
 
   /**
-   * Prints the orders of a customer with a specific given id.
+   * Prints the orders of a supplier with a specific given id.
    *
-   * @param id
+   * @param id the id of the supplier
    */
   public static void printOrderHistory(int id) {
     int counter = 0;
@@ -210,11 +210,11 @@ public class StorageOrder {
   }
 
   /**
-   * Prints a product's information with a given id, in the format used to print the storage order
+   * Prints a product's quantity with a given id, in the format used to print the storage order
    * information.
    *
-   * @param id
-   * @param quantity
+   * @param id the id of the product
+   * @param quantity the quantity of the product
    */
   public static void printProduct(int id, int quantity) {
     Product prod = Storage.searchById(id);
@@ -227,9 +227,9 @@ public class StorageOrder {
   /**
    * Prints a preview of the order, in the appropriate format.
    *
-   * @param storekeeper
-   * @param supplier
-   * @param supplies
+   * @param storekeeper the Storekeeper who made the order
+   * @param supplier the Supplier who the order concerns
+   * @param supplies the supplies list that the supplier resupplied
    */
   public static void previewOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
@@ -246,7 +246,7 @@ public class StorageOrder {
       System.out.println("Supplier Deleted");
     }
     System.out.println("\n---Supplies List: ");
-    for (int prod[] : supplies) {
+    for (int[] prod : supplies) {
       printProduct(prod[0], prod[1]);
       System.out.println();
     }
@@ -277,7 +277,7 @@ public class StorageOrder {
       System.out.println("Supplier Deleted");
     }
     System.out.println("\n---Product Basket: ");
-    for (int prod[] : this.getSupplies()) {
+    for (int[] prod : this.getSupplies()) {
       try {
         printProduct(prod[0], prod[1]);
       } catch (NoSuchElementException e) {
@@ -291,7 +291,7 @@ public class StorageOrder {
   /**
    * Contains the prompts in order to make a storage order.
    *
-   * @param storekeeper
+   * @param storekeeper the Storekeeper who made the order
    */
   public static void makeOrder(Storekeeper storekeeper) {
     Scanner in = new Scanner(System.in);
@@ -360,9 +360,9 @@ public class StorageOrder {
   }
 
   /**
-   * Contains the prompts in order for the user to fill the order basket
+   * Contains the prompts in order for the user to fill the order basket.
    *
-   * @return
+   * @return the supplies of the order
    */
   public static ArrayList<int[]> fillBasket() {
     Scanner in = new Scanner(System.in);
@@ -408,12 +408,12 @@ public class StorageOrder {
   /**
    * Checks if a given product id exists in the given ArrayList. If it does, the existing's product
    * quantity is increased, otherwise, a new entry with the new id and quantity is created on the
-   * ArrayList
+   * ArrayList.
    *
-   * @param id
-   * @param quantity
-   * @param supplies
-   * @return
+   * @param id the product id to add
+   * @param quantity the product quantity to add
+   * @param supplies the supplies list already ordered
+   * @return true if product exists already, else false
    */
   public static boolean checkIfProductAlreadyExistsAndAddQuantity(
       int id, int quantity, ArrayList<int[]> supplies) {
@@ -430,9 +430,9 @@ public class StorageOrder {
    * Makes the needed changes in the storage product quantities, and creates the order object with
    * the system's current date and time.
    *
-   * @param cashier
-   * @param customer
-   * @param basket
+   * @param storekeeper the storekeeper who made the order
+   * @param supplier the supplier who the order concerns
+   * @param supplies the supplies list
    */
   public static void confirmOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
@@ -454,7 +454,7 @@ public class StorageOrder {
   /**
    * Utility method that returns the system's date and time as a String.
    *
-   * @return
+   * @return the system's current date and time
    */
   public static String getCurrentDate() {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
@@ -465,10 +465,12 @@ public class StorageOrder {
   /**
    * Creates a new Storage Order from an Arraylist of strings by parsing its contents.
    *
-   * @param orders
+   * @param orders an ArrayList of Strings with the parsed contents of the storage orders file
    */
   public static void createStorageOrdersFromList(ArrayList<ArrayList<String>> orders) {
-    int supplierId, storekeeperId, orderNo;
+    int supplierId;
+    int storekeeperId;
+    int orderNo;
     double totalCost;
     ArrayList<int[]> supplies;
     String orderDate;

@@ -1,11 +1,13 @@
 package ERP_Core;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
+
 
 /**
  * This class represents an order made in the ERP system.
@@ -15,21 +17,21 @@ import java.util.ArrayList;
  * @author Eirini Piperou
  */
 public class Order {
-  /** The unique id of the order */
+  /** The unique id of the order. */
   private final int orderNo;
-  /** Date and time the order was made */
+  /** Date and time the order was made. */
   private final String orderDate;
-  /** Total cost of the order in euro currency */
+  /** Total cost of the order in euro currency. */
   private double totalCost;
-  /** The customer that made the order */
+  /** The customer that made the order. */
   private final Customer customer;
-  /** The user that made the order */
+  /** The user that made the order. */
   private final Cashier cashier;
-  /** Contains the combination of the product id and quantity of all the products */
+  /** Contains the combination of the product id and quantity of all the products. */
   private ArrayList<int[]> basket = new ArrayList<int[]>();
-  /** The counter of the created orders, used for generating new order ids */
+  /** The counter of the created orders, used for generating new order ids. */
   private static int count = FileHandler.getOrderCounterFromFile();
-  /** The order list that contains all the orders made */
+  /** The order list that contains all the orders made. */
   protected static ArrayList<Order> orders = new ArrayList<Order>();
 
   /**
@@ -145,7 +147,7 @@ public class Order {
   }
 
   /**
-   * Returns the products id counter
+   * Returns the products id counter.
    *
    * @return The count of products' id, type Integer
    */
@@ -153,13 +155,34 @@ public class Order {
     return count;
   }
 
-  /** Prints all the orders */
+  /** Prints all the orders. */
   public static void printOrderHistory() {
     int counter = 1;
     System.out.println("***Order History***\n");
     for (Order order : orders) {
       System.out.printf("-> Order #%d\n", counter++);
       order.printOrderFormatted();
+    }
+  }
+  
+  /**
+   * Prints the orders of a customer with a specific given id.
+   *
+   * @param id the id of the customer who wants to print his orders
+   */
+  public static void printOrderHistory(int id) {
+    int counter = 0;
+    for (Order order : orders) {
+      if (order.getCustomer() != null && ((RegisteredCustomer) order.getCustomer()).getId() == id) {
+        if (counter == 0) {
+          System.out.printf("Printing orders of the customer with id %d\n\n:", id);
+        }
+        System.out.printf("-> Order #%d\n", ++counter);
+        order.printOrderFormatted();
+      }
+    }
+    if (counter == 0) {
+      System.out.printf("Customer with id %d has not made any orders\n", id);
     }
   }
 
@@ -181,27 +204,6 @@ public class Order {
         System.err.println("Something went wrong. Returning to previous menu");
         return;
       }
-    }
-  }
-
-  /**
-   * Prints the orders of a customer with a specific given id.
-   *
-   * @param id the id of the customer who wants to print his orders
-   */
-  public static void printOrderHistory(int id) {
-    int counter = 0;
-    for (Order order : orders) {
-      if (order.getCustomer() != null && ((RegisteredCustomer) order.getCustomer()).getId() == id) {
-        if (counter == 0) {
-          System.out.printf("Printing orders of the customer with id %d\n\n:", id);
-        }
-        System.out.printf("-> Order #%d\n", ++counter);
-        order.printOrderFormatted();
-      }
-    }
-    if (counter == 0) {
-      System.out.printf("Customer with id %d has not made any orders\n", id);
     }
   }
 
@@ -288,7 +290,7 @@ public class Order {
       System.out.println("Guest or Deleted");
     }
     System.out.println("\n---Product Basket: ");
-    for (int prod[] : basket) {
+    for (int[] prod : basket) {
       printProduct(prod[0], prod[1]);
       System.out.println();
     }
@@ -321,7 +323,7 @@ public class Order {
       System.out.println("Guest or Deleted");
     }
     System.out.println("\n---Product Basket: ");
-    for (int prod[] : basket) {
+    for (int[] prod : basket) {
       try {
         printProduct(prod[0], prod[1]);
       } catch (NoSuchElementException e) {
@@ -423,6 +425,11 @@ public class Order {
     newOrder.printFinalOrder();
   }
 
+  /**
+   * Checks if a given customer has enough points for a discount.
+   * @param c the customer
+   * @return true if he is eligible for discount, else false
+   */
   public boolean checkPointDiscount(RegisteredCustomer c) {
     ((RegisteredCustomer) (this.getCustomer()))
         .setPoints((int) Math.round(((this.getTotalCost() * 5))));
@@ -528,7 +535,9 @@ public class Order {
    * @param orders list of all order information parsed from a .csv files
    */
   public static void createOrdersFromList(ArrayList<ArrayList<String>> orders) {
-    int customerId, cashierId, orderNo;
+    int customerId;
+    int cashierId;
+    int orderNo;
     double totalCost;
     ArrayList<int[]> basket;
     String orderDate;

@@ -9,18 +9,20 @@ package ERP_Core;
  * @author George Drosos
  */
 public class Customer {
-  /** the name of the customer */
+
+  /** The name of the customer. */
   private String companyName;
-  /** the customer's address */
+  /** The customer's address. */
   private String address;
-  /** the customer's telephone */
+  /** The customer's telephone. */
   private int telephone;
+  
   /**
    * Constructor for creating a new non-registered customer.
    *
-   * @param name
-   * @param address
-   * @param telephone
+   * @param name the customer's name
+   * @param address the customer's address
+   * @param telephone the customer's telephone, must be less than 10 digits
    */
   public Customer(String name, String address, int telephone) {
     this.companyName = name;
@@ -40,16 +42,16 @@ public class Customer {
   /**
    * Sets the customer name to the value of the variable received.
    *
-   * @param name
+   * @param name the name of the customer
    */
   public void setName(String name) {
     this.companyName = name;
   }
 
   /**
-   * returns customer's address
+   * Returns customer's address.
    *
-   * @return
+   * @return the customer address
    */
   public String getAddress() {
     return address;
@@ -58,7 +60,7 @@ public class Customer {
   /**
    * Sets the customer address to the value of the variable received.
    *
-   * @param adress
+   * @param adress the customer's address
    */
   public void setAddress(String adress) {
     this.address = adress;
@@ -76,7 +78,7 @@ public class Customer {
   /**
    * Sets the customer telephone to the value of the variable received.
    *
-   * @param telephone
+   * @param telephone the telephone of the customer
    */
   public void setTelephone(int telephone) {
     this.telephone = telephone;

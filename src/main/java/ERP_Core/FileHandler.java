@@ -59,6 +59,43 @@ public class FileHandler {
       e.printStackTrace();
     }
   }
+  
+  /** Create default counters file */
+  public static void createDefaultCountersFile() {
+	    try {
+	      BufferedWriter bw =
+	          new BufferedWriter(
+	              new OutputStreamWriter(new FileOutputStream("./Data/Counters.txt"), "UTF-8"));
+	      bw.write("User counter: 1");
+	      bw.newLine();
+	      bw.write("Product counter: 0");
+	      bw.newLine();
+	      bw.write("Registered customer counter: 0");
+	      bw.newLine();
+	      bw.write("Order counter: 0");
+	      bw.newLine();
+	      bw.write("Supplier counter: 0");
+	      bw.newLine();
+	      bw.write("Storage order counter: 0");
+	      bw.newLine();
+	      bw.flush();
+	      bw.close();
+	    } catch (UnsupportedEncodingException e) {
+	      e.printStackTrace();
+	    } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	  }
+  
+  /**
+   * Checks if the file Counters.txt exists
+   * @return true if the file exists, else, false
+   */
+  public static boolean checkIfCountersFileExists() {
+	  return new File("./Data/Counters.txt").isFile();
+  }
 
   /**
    * Retrieves the user counter stored in "Counters.txt".

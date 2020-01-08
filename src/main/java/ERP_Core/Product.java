@@ -1,27 +1,30 @@
 package ERP_Core;
 
 import java.util.ArrayList;
+
 /**
- * This is the class with product constructors , setters , getters and toString methods
+ * This is the class with product constructors , setters , getters and toString methods.
  *
  * @version 1.0
  * @author George Liargovas
  */
 public class Product {
-  /** idCounter counts the number of objects created */
+
+  /** idCounter counts the number of objects created. */
   private static int idCounter = FileHandler.getProductCounterFromFile();
-  /** productId product's id */
+  /** productId product's id. */
   private final int productId;
-  /** name product's name */
+  /** name product's name. */
   private final String name;
-  /** category product's category */
+  /** category product's category. */
   private final String category;
-  /** description product's description */
+  /** description product's description.*/
   private final String description;
-  /** salePrice product's price */
+  /** salePrice product's price. */
   private double salePrice;
+  
   /**
-   * The constructor for creating a new Product object
+   * The constructor for creating a new Product object.
    *
    * @param name product's name
    * @param category product's category
@@ -37,6 +40,7 @@ public class Product {
     Storage.addProductToList(this);
     Storage.createProductQuantity(this.getProductId());
   }
+  
   /**
    * The constructor for loading a previously created Product object to the ERP system.
    *
@@ -46,6 +50,7 @@ public class Product {
    * @param salePrice product's price
    * @param id the id given to the Product the first time he was created
    */
+  
   public Product(String name, String category, String description, double salePrice, int id) {
     this.productId = id;
     this.name = name;
@@ -54,63 +59,71 @@ public class Product {
     this.salePrice = salePrice;
     Storage.addProductToList(this);
   }
+  
   /**
-   * salePrice getter
+   * salePrice getter.
    *
    * @return salePrice product's price
    */
   public double getSalePrice() {
     return salePrice;
   }
+  
   /**
-   * salePrice setter
+   * salePrice setter.
    *
    * @param salePrice product's price
    */
   public void setSalePrice(double salePrice) {
     this.salePrice = salePrice;
   }
+  
   /**
-   * ProductId getter
+   * ProductId getter.
    *
    * @return ProductId product id
    */
   public int getProductId() {
     return productId;
   }
+  
   /**
-   * Name getter
+   * Name getter.
    *
    * @return getName product's name
    */
   public String getName() {
     return name;
   }
+  
   /**
-   * Description getter
+   * Description getter.
    *
    * @return description product's description
    */
   public String getDescription() {
     return description;
   }
+  
   /**
-   * Product's category getter
+   * Product's category getter.
    *
    * @return category product's category
    */
   public String getCategory() {
     return category;
   }
+  
   /**
-   * idCounter getter
+   * idCounter getter.
    *
    * @return idCounter the number of objects created
    */
   public static int getIdCounter() {
     return idCounter;
   }
-  /** Returns a String with product's id, name, category, price and description */
+  
+  /** Returns a String with product's id, name, category, price and description. */
   @Override
   public String toString() {
     return String.format(
@@ -121,8 +134,9 @@ public class Product {
         this.getSalePrice(),
         this.getDescription());
   }
+  
   /**
-   * Returns a string with product's id, name, category and price
+   * Returns a string with product's id, name, category and price.
    *
    * @return String product info without description
    */
@@ -131,6 +145,7 @@ public class Product {
         "Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac",
         this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice());
   }
+  
   /**
    * Returns a string with product's id, name, category, price and quantity.
    *
@@ -145,14 +160,17 @@ public class Product {
         this.getSalePrice(),
         Storage.getProductQuantity(this.getProductId()));
   }
+  
   /**
-   * Create Product from a list
+   * Create Product from a list.
    *
-   * @param products
+   * @param products an ArrayList of strings with the parsed contents of the products file
    */
   public static void createProductsFromList(ArrayList<ArrayList<String>> products) {
     int id;
-    String name, category, description;
+    String name;
+    String category;
+    String description;
     double salePrice;
     for (ArrayList<String> product : products) {
       id = Integer.parseInt(product.get(0));

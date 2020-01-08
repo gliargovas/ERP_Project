@@ -34,7 +34,8 @@ public abstract class User {
   private static int userIdCounter = FileHandler.getUserCounterFromFile();
 
   /**
-   * Constructor for new users
+   * Constructor for new users.
+   * 
    * @param name the name of the user
    * @param surname the surname of the user
    * @param username the user's username
@@ -50,7 +51,8 @@ public abstract class User {
   }
 
   /**
-   * Constructor for user from .csv file
+   * Constructor for user from .csv file.
+   * 
    * @param idUser the id of an existing user
    * @param name the name of the user
    * @param surname the surname of the user
@@ -67,61 +69,61 @@ public abstract class User {
   }
 
   /**
-   * Returns the id counter of the Users
+   * Returns the id counter of the Users.
    *
-   * @return id
+   * @return the user counter
    */
   public static int getUserIdCounter() {
     return userIdCounter;
   }
 
   /**
-   * Returns the Id of the User
+   * Returns the id of the User.
    *
-   * @return id
+   * @return the id of the user
    */
   public int getIdUser() {
     return idUser;
   }
 
   /**
-   * Returns the name of the User
+   * Returns the name of the User.
    *
-   * @return name
+   * @return name the name of the user
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Returns the Surname of the User
+   * Returns the username of the User.
    *
-   * @return surname
+   * @return the surname of the user
    */
   public String getSurname() {
     return surname;
   }
 
   /**
-   * Returns the Username of the User
+   * Returns the username of the User.
    *
-   * @return username
+   * @return the username of the user
    */
   public String getUsername() {
     return username;
   }
 
   /**
-   * Returns the Password of the User
+   * Returns the password of the User.
    *
-   * @return password
+   * @return the password of the user
    */
   public String getPassword() {
     return password;
   }
 
   /**
-   * Changes the value of the user's password
+   * Changes the value of the user's password.
    *
    * @param password the new password
    */
@@ -130,33 +132,37 @@ public abstract class User {
   }
 
   /**
-   * Returns all the users from the List users
+   * Returns the user list.
    *
-   * @return users
+   * @return Users list
    */
   public static ArrayList<User> getUsers() {
     return users;
   }
 
-  /** toString method for printing the user in a formatted way */
+  /** toString method for printing the user in a formatted way. */
   @Override
   public String toString() {
     return String.format(
-        "ID: %d  Name: %s  Surname: %s  Username: %s",
+        "ID: %d | Name: %s | Surname: %s | Username: %s",
         getIdUser(), getName(), getSurname(), getUsername());
   }
 
-  /** The abstract method that returns the main menu of each user according to their type */
+  /** The abstract method that returns the main menu of each user according to their type. */
   public abstract void getMenu();
 
   /**
-   * Creates the users from the list according to the type
+   * Creates the users from the list according to the type.
    *
-   * @param users
+   * @param users The ArrayList of strings that contains the parsed contents of the user file
    */
   public static void createUsersFromList(ArrayList<ArrayList<String>> users) {
     int id;
-    String name, surname, username, password, type;
+    String name;
+    String surname;
+    String username;
+    String password;
+    String type;
     double salePrice;
     for (ArrayList<String> user : users) {
       type = user.get(0);
@@ -178,11 +184,11 @@ public abstract class User {
   }
 
   /**
-   * Searches the user according to the id that is given
+   * Searches the user according to the id that is given.
    *
-   * @param id
-   * @return User
-   * @throws NoSuchElementException if the user does not exist
+   * @param id The id of the user
+   * @return The user with the given id
+   * @throws NoSuchElementException The user does not exist
    */
   public static User searchUserById(int id) throws NoSuchElementException {
     for (User user : users) {

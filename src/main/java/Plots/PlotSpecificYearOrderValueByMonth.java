@@ -1,10 +1,10 @@
 package Plots;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import ERP_Core.AnalyzeOrders;
 import ERP_Core.FileHandler;
 import ERP_Core.Order;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -20,12 +20,12 @@ import javafx.stage.Stage;
  */
 public class PlotSpecificYearOrderValueByMonth extends Application {
 
-  /** Launches the application */
-  public static void main(String args[]) {
+  /** Launches the application. */
+  public static void main(String[] args) {
     Application.launch(args);
   }
 
-  /** The application's thread for creating the plot */
+  /** The application's thread for creating the plot. */
   public void start(Stage stage) {
     int year = this.getPlotArguments();
     stage.setTitle("Total Sales by Month for year " + year);

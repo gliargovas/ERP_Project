@@ -1,15 +1,15 @@
 package Plots;
 
-import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import ERP_Core.AnalyzeOrders;
 import ERP_Core.FileHandler;
 import ERP_Core.Order;
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
@@ -53,7 +53,7 @@ public class LinePlotSalesByMonth extends Application {
     stage.show();
   }
 
-  /** Launch the application */
+  /** Launch the application. */
   public static void main(String[] args) {
     launch(args);
   }

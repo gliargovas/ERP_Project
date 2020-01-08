@@ -88,7 +88,8 @@ public class Cashier extends User {
             + "1) Products\n"
             + "2) Customers\n"
             + "3) Make a New Customer Order\n"
-            + "4) Logout and Return to Main Menu\n"
+            + "4) Save changes\n"
+            + "5) Logout and Return to Main Menu\n"
             + "Option: ");
   }
 
@@ -231,6 +232,9 @@ public class Cashier extends User {
             makeOrderMenu();
             break;
           case 4:
+        	Main.saveAllListsToCsv();
+          	System.out.println("Changes saved!" ); 
+          case 5:
             return;
         }
       } catch (InputMismatchException e) {

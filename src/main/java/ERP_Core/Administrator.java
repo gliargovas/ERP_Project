@@ -77,7 +77,8 @@ public class Administrator extends User {
             + "9)  View specific orders\n"
             + "10) View all storage orders\n"
             + "11) View specific storage orders\n"
-            + "12) Return to previous menu\n"
+            + "12) Save all changes\n"
+            + "13) Return to previous menu\n"
             + "Option: ");
   }
 
@@ -128,6 +129,9 @@ public class Administrator extends User {
             StorageOrder.printOrderHistoryMenu();
             break;
           case 12:
+        	Main.saveAllListsToCsv();
+        	System.out.println("Changes saved!" ); 
+          case 13:
             System.out.println("Logging off...Returning to previous menu");
             return;
           default:
@@ -276,7 +280,7 @@ public class Administrator extends User {
       for (; ; ) {
         try {
           System.out.print(
-              "What is the type of the user? \n"
+              "Choose the type of the new user: \n"
                   + "1) Cashier\n"
                   + "2) Storekeeper\n"
                   + "3) Data Analyst\n"

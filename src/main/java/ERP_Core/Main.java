@@ -168,43 +168,47 @@ public class Main {
 
   /** Loading all the lists from the .csv files */
   public static void loadAllListsFromCsv() {
+	if (FileHandler.checkIfCountersFileExists() == false) {
+		System.out.println("File Counters.txt not found, creating default file" ); 
+		FileHandler.createDefaultCountersFile();
+	}
     try {
       User.createUsersFromList(FileHandler.getUsersFromCsv());
     } catch (FileNotFoundException e) {
       // if no user file was found, the user list is initialized with the default administrator user
       new Administrator(0, "admin", "admin", "admin", "admin");
-      System.out.println("File not found, initializing default user list");
+      System.out.println("File Users.csv not found, initializing default user list");
     }
     try {
       Product.createProductsFromList(FileHandler.getProductsFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default product list");
+      System.out.println("File Products.csv not found, initializing default product list");
     }
     try {
       Storage.createProductQuantitiesFromList(FileHandler.getProductQuantityFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default product quantity list");
+      System.out.println("File ProductQuantities.csv not found, initializing default product quantity list");
     }
     try {
       RegisteredCustomer.createRegisteredCustomersFromList(
           FileHandler.getRegisteredCustomersFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default registered customer list");
+      System.out.println("File RegisteredCustomers.csv not found, initializing default registered customer list");
     }
     try {
       Order.createOrdersFromList(FileHandler.getOrdersFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default order list");
+      System.out.println("File Orders.csv not found, initializing default order list");
     }
     try {
       Supplier.createSuppliersFromList(FileHandler.getSuppliersFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default supplier list");
+      System.out.println("File Suppliers.csv not found, initializing default supplier list");
     }
     try {
       StorageOrder.createStorageOrdersFromList(FileHandler.getStorageOrdersFromCsv());
     } catch (FileNotFoundException e) {
-      System.out.println("File not found, initializing default storage order list");
+      System.out.println("File StorageOrders.csv not found, initializing default storage order list");
     }
   }
 }

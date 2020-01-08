@@ -17,22 +17,22 @@ import java.util.Scanner;
  * @author George Liargovas
  */
 public class RegisteredCustomer extends Customer {
-  /** the unique id of each registered customer */
+  /** the unique id of each registered customer. */
   private int id;
-  /** points each customer earns depending on his purchases */
+  /** points each customer earns depending on his purchases. */
   private int points;
-  /** counts the number of registered customers created */
+  /** counts the number of registered customers created. */
   private static int idCounter = FileHandler.getRegisteredCustomerCounterFromFile();
-  /** an @Arraylist in which Customer information is temporarily saved */
+  /** an @Arraylist in which Customer information is temporarily saved. */
   protected static ArrayList<RegisteredCustomer> customers = new ArrayList<RegisteredCustomer>();
 
   /**
    * Constructor for creating a new registered customer.
    *
-   * @param name
-   * @param address
-   * @param telephone
-   * @param points
+   * @param name the customer name
+   * @param address the customer address
+   * @param telephone the customer telephone
+   * @param points the customer points
    */
   public RegisteredCustomer(String name, String address, int telephone, int points) {
     super(name, address, telephone);
@@ -44,13 +44,13 @@ public class RegisteredCustomer extends Customer {
 
   /**
    * Constructor for loading customers read from .csv file The id is already associated with the
-   * customer, used when loading information from the database to the program
+   * customer, used when loading information from the database to the program.
    *
-   * @param name
-   * @param address
-   * @param telephone
-   * @param id
-   * @param points
+   * @param name the customer name
+   * @param address the customer address
+   * @param telephone the customer telephone
+   * @param id the customer id
+   * @param points the customer points
    */
   public RegisteredCustomer(String name, String address, int telephone, int id, int points) {
     super(name, address, telephone);
@@ -60,18 +60,18 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Returns the customer points
+   * Returns the customer points.
    *
-   * @return
+   * @return the points
    */
   public int getPoints() {
     return points;
   }
 
   /**
-   * Returns the id counter
+   * Returns the id counter.
    *
-   * @return
+   * @return the counter of the unique registered customers created
    */
   public static int getIdCounter() {
     return idCounter;
@@ -80,34 +80,34 @@ public class RegisteredCustomer extends Customer {
   /**
    * Sets the registered customer points to the value of the variable received
    *
-   * @param points
+   * @param points the points
    */
   public void setPoints(int points) {
     this.points = points;
   }
 
   /**
-   * Returns the customer id
+   * Returns the customer id.
    *
-   * @return
+   * @return the id
    */
   public int getId() {
     return id;
   }
 
   /**
-   * Returns the @Arraylist of registered customers
+   * Returns the @Arraylist of registered customers.
    *
-   * @return
+   * @return registered customers list
    */
   public static ArrayList<RegisteredCustomer> getCustomers() {
     return customers;
   }
 
   /**
-   * Returns the current registered customer object in String format
+   * Returns the current registered customer object in String format.
    *
-   * @return
+   * @return formatted RegisteredCustomer string
    */
   @Override
   public String toString() {
@@ -118,9 +118,9 @@ public class RegisteredCustomer extends Customer {
   /**
    * Returns a customer with a given id.
    *
-   * @param id
-   * @return RegisteredCustomer
-   * @throws NoSuchElementException
+   * @param id the customer id
+   * @return RegisteredCustomer the RegisteredCustomer object found
+   * @throws NoSuchElementException RegisteredCustomer with such id does not exist
    */
   public static RegisteredCustomer searchById(int id) throws NoSuchElementException {
     for (RegisteredCustomer i : customers) {
@@ -134,11 +134,14 @@ public class RegisteredCustomer extends Customer {
   /**
    * Creates a new registered customer from an @Arraylist of strings by parsing its contents.
    *
-   * @param customers
+   * @param customers an ArrayList of Strings with the parsed contents of the customers file.
    */
   public static void createRegisteredCustomersFromList(ArrayList<ArrayList<String>> customers) {
-    int id, points, telephone;
-    String name, address;
+    int id;
+    int points;
+    int telephone;
+    String name;
+    String address;
     for (ArrayList<String> customer : customers) {
       id = Integer.parseInt(customer.get(0));
       name = customer.get(1);
@@ -160,7 +163,7 @@ public class RegisteredCustomer extends Customer {
    * Searches the customer list and prints all the registered customers with a name that contains
    * the character sequence given.
    *
-   * @param name
+   * @param name the name to match
    */
   public static void searchAndPrintRegisteredCustomerByName(String name) {
     boolean found = false;
@@ -179,7 +182,7 @@ public class RegisteredCustomer extends Customer {
    * Searches the customer list and prints the registered customer with the same address as a given
    * string.
    *
-   * @param address
+   * @param address the address to match
    */
   public static void searchAndPrintRegisteredCustomerByAddress(String address) {
     boolean found = false;
@@ -198,7 +201,7 @@ public class RegisteredCustomer extends Customer {
    * Searches the customer list and prints the registered customer with the same id number as a
    * given integer.
    *
-   * @param id
+   * @param id the customer id to match
    */
   public static void searchAndPrintRegisteredCustomerById(int id) {
     for (RegisteredCustomer c : customers) {
@@ -214,7 +217,7 @@ public class RegisteredCustomer extends Customer {
    * Searches the customer list and prints the registered customer with the same telephone number as
    * a given number.
    *
-   * @param telephone
+   * @param telephone the telephone to match
    */
   public static void searchAndPrintRegisteredCustomerByTelephone(int telephone) {
     boolean found = false;
@@ -233,7 +236,7 @@ public class RegisteredCustomer extends Customer {
    * Searches the customer list and prints all the registered customer with the same amount of
    * points as the user input.
    *
-   * @param points
+   * @param points the points to match
    */
   public static void searchAndPrintRegisteredCustomerByPoints(int points) {
     boolean found = false;
@@ -249,10 +252,10 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Deletes a customer from list with given id
+   * Deletes a customer from list with given id.
    *
-   * @param id
-   * @throws NoSuchElementException
+   * @param id the customer id
+   * @throws NoSuchElementException the customer does not exist
    */
   public static void deleteRegisteredCustomer(int id) throws NoSuchElementException {
     RegisteredCustomer customer = searchById(id);
@@ -263,12 +266,12 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Checks if a Registered Customer already exists and if it does, changes his points
+   * Checks if a Registered Customer already exists and if it does, changes his points.
    *
-   * @param id
-   * @param points
-   * @throws NoSuchElementException
-   * @throws NumberFormatException
+   * @param id the id of the customer
+   * @param points the new points
+   * @throws NoSuchElementException customer does not exist
+   * @throws NumberFormatException invalid points
    */
   public static void changePoints(int id, int points)
       throws NoSuchElementException, NumberFormatException {
@@ -284,11 +287,11 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Checks if a Registered Customer already exists and if it does, changes his name
+   * Checks if a Registered Customer already exists and if it does, changes his name.
    *
-   * @param id
-   * @param name
-   * @throws NoSuchElementException
+   * @param id the id of the customer
+   * @param name the new name
+   * @throws NoSuchElementException customer does not exist
    */
   public static void changeName(int id, String name) throws NoSuchElementException {
     RegisteredCustomer customer = searchById(id);
@@ -300,11 +303,11 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Checks if a Registered Customer already exists and if it does, changes his address
+   * Checks if a Registered Customer already exists and if it does, changes his address.
    *
-   * @param id
-   * @param address
-   * @throws NoSuchElementException
+   * @param id the id of the customer
+   * @param address the new address
+   * @throws NoSuchElementException customer does not exist
    */
   public static void changeAddress(int id, String address) throws NoSuchElementException {
     RegisteredCustomer customer = searchById(id);
@@ -316,11 +319,11 @@ public class RegisteredCustomer extends Customer {
   }
 
   /**
-   * Checks if a Registered Customer already exists and if it does, changes his telephone
+   * Checks if a Registered Customer already exists and if it does, changes his telephone.
    *
-   * @param id
-   * @param telephone
-   * @throws NoSuchElementException
+   * @param id the id of the customer
+   * @param telephone the new telephone
+   * @throws NoSuchElementException customer does not exist
    */
   public static void changeTelephone(int id, int telephone) throws NoSuchElementException {
     RegisteredCustomer customer = searchById(id);
@@ -331,7 +334,7 @@ public class RegisteredCustomer extends Customer {
     }
   }
 
-  /** Contains the registered customer creation menu */
+  /** Contains the registered customer creation menu. */
   public static void registerNewCustomerMenu() {
     String name;
     String address;
@@ -534,7 +537,8 @@ public class RegisteredCustomer extends Customer {
     String input;
     for (; ; ) {
       System.out.print(
-          "Enter the name of the registered customer you want to print\nTo cancel, press \"enter\": ");
+          "Enter the name of the registered customer you want to print\n"
+          + "To cancel, press \"enter\": ");
       input = in.nextLine();
       if (input.equals(" ")) {
         System.out.println("Process cancelled. Returning to previous menu...");

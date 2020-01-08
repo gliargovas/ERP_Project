@@ -19,6 +19,11 @@ import javafx.stage.Stage;
  */
 public class LinePlotSalesByYear extends Application {
 
+  /** Launch the application. */
+  public static void main(String[] args) {
+    launch(args);
+  }
+
   @Override
   /** Start the application thread. */
   public void start(Stage stage) {
@@ -47,10 +52,5 @@ public class LinePlotSalesByYear extends Application {
     Scene scene = new Scene(sc, 500, 400);
     stage.setScene(scene);
     stage.show();
-  }
-
-  /** Launch the application. */
-  public static void main(String[] args) {
-    launch(args);
   }
 }
