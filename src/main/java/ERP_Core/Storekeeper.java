@@ -129,7 +129,8 @@ public class Storekeeper extends User {
             break;
           case 4:
         	Main.saveAllListsToCsv();
-          	System.out.println("Changes saved!" ); 
+          	System.out.println("Changes saved!" );
+          	break;
           case 5:
             return;
         }

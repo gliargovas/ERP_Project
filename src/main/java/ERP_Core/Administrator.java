@@ -130,7 +130,8 @@ public class Administrator extends User {
             break;
           case 12:
         	Main.saveAllListsToCsv();
-        	System.out.println("Changes saved!" ); 
+        	System.out.println("Changes saved!" );
+        	break;
           case 13:
             System.out.println("Logging off...Returning to previous menu");
             return;
