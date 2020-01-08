@@ -39,6 +39,7 @@ public class StorageOrder {
    *     products
    * @param supplier the Supplier object of the order
    * @param storekeeper the Storekeeper object of the order, who made the order
+   * @param supplies the products and their quantities added to the storage with the order
    */
   public StorageOrder(
       String storageOrderDate,
@@ -231,6 +232,7 @@ public class StorageOrder {
    * @param storekeeper the Storekeeper who made the order
    * @param supplier the Supplier who the order concerns
    * @param supplies the supplies list that the supplier resupplied
+   * @param totalcost the total cost of the order
    */
   public static void previewOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
@@ -434,6 +436,7 @@ public class StorageOrder {
    * @param storekeeper the storekeeper who made the order
    * @param supplier the supplier who the order concerns
    * @param supplies the supplies list
+   * @param totalcost the total cost of the order
    */
   public static void confirmOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
