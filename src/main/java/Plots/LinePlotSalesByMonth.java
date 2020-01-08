@@ -53,7 +53,10 @@ public class LinePlotSalesByMonth extends Application {
     stage.show();
   }
 
-  /** Launch the application. */
+  /** 
+   * Launch the application.
+   * @param args the arguments given 
+   */
   public static void main(String[] args) {
     launch(args);
   }

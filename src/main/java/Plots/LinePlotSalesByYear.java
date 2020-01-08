@@ -19,7 +19,11 @@ import javafx.stage.Stage;
  */
 public class LinePlotSalesByYear extends Application {
 
-  /** Launch the application. */
+  /**
+   * Launch the application.
+   *
+   * @param args the arguments given
+   */
   public static void main(String[] args) {
     launch(args);
   }

@@ -21,7 +21,7 @@ public class Storage {
   /**
    * Returns the product list.
    *
-   * @return
+   * @return the product list
    */
   public static ArrayList<Product> getProducts() {
     return products;
@@ -30,7 +30,7 @@ public class Storage {
   /**
    * Returns a list with the combination of product id and available quantity.
    *
-   * @return
+   * @return the product - quantities list
    */
   public static ArrayList<int[]> getProductQuantities() {
     return productQuantities;

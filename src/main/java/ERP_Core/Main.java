@@ -5,7 +5,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-  /** The main method of the program. Starts the ERP */
+  /**
+   * The main method of the program. Starts the ERP.
+   * @param args the arguments given while starting the program
+   */
   public static void main(String[] args) {
     printLogo();
     loadAllListsFromCsv();
@@ -29,7 +32,7 @@ public class Main {
   /** Prints the main menu of the ERP system */
   public static void printMainMenu() {
     System.out.print(
-        "****** MAIN MENU ******\n\n"
+        "\n\n****** MAIN MENU ******\n\n"
             + "1) Login as a Cashier\n"
             + "2  Login as a Storekeeper\n"
             + "3) Login as a Data Analyst\n"
@@ -168,6 +171,10 @@ public class Main {
 
   /** Loading all the lists from the .csv files */
   public static void loadAllListsFromCsv() {
+	if (FileHandler.checkIfDataDirectoryExists() == false) {
+		System.out.println("Directory \"Data\" not found. Creating a new directory...");
+		FileHandler.createDataDirectory();
+	}
 	if (FileHandler.checkIfCountersFileExists() == false) {
 		System.out.println("File Counters.txt not found, creating default file" ); 
 		FileHandler.createDefaultCountersFile();

@@ -18,7 +18,11 @@ import javafx.stage.Stage;
  */
 public class PlotTotalOrderValueByMonth extends Application {
 
-  /** Main method for launching the application. */
+  /**
+   * Launch the application.
+   *
+   * @param args the arguments given
+   */
   public static void main(String args[]) {
     Application.launch(args);
   }

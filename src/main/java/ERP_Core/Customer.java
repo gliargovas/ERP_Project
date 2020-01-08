@@ -33,7 +33,7 @@ public class Customer {
   /**
    * Returns customer's name.
    *
-   * @return
+   * @return the customer's name
    */
   public String getCompanyName() {
     return companyName;
@@ -69,7 +69,7 @@ public class Customer {
   /**
    * Returns customer's telephone.
    *
-   * @return
+   * @return the customer's telephone
    */
   public int getTelephone() {
     return telephone;

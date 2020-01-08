@@ -27,6 +27,7 @@ public class Cashier extends User {
    *
    * @param username the username of the Cashier
    * @param password the password of the Cashier
+   * @throws Exception invalid credentials given
    */
   public static void login(String username, String password) throws Exception {
     Cashier cashier;

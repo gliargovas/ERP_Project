@@ -24,9 +24,25 @@ public class FileHandler {
 
   /**
    * CSV file separator used. In European countries the ";" symbol is usually used instead of a
-   * comma (,)
+   * comma (,).
    */
   private static final String CSV_SEPARATOR = ";";
+
+  /**
+   * Checks whether the Data directory has been created.
+   *
+   * @return true if the directory exists, else, false
+   */
+  public static boolean checkIfDataDirectoryExists() {
+    File dir = new File("./Data");
+    boolean exists = dir.exists();
+    return exists;
+  }
+
+  /** Created the data directory. */
+  public static void createDataDirectory() {
+    new File("./Data").mkdir();
+  }
 
   /**
    * Writes all the object counters of the other classes of the ERP system to a .txt file named
@@ -59,42 +75,43 @@ public class FileHandler {
       e.printStackTrace();
     }
   }
-  
+
   /** Create default counters file */
   public static void createDefaultCountersFile() {
-	    try {
-	      BufferedWriter bw =
-	          new BufferedWriter(
-	              new OutputStreamWriter(new FileOutputStream("./Data/Counters.txt"), "UTF-8"));
-	      bw.write("User counter: 1");
-	      bw.newLine();
-	      bw.write("Product counter: 0");
-	      bw.newLine();
-	      bw.write("Registered customer counter: 0");
-	      bw.newLine();
-	      bw.write("Order counter: 0");
-	      bw.newLine();
-	      bw.write("Supplier counter: 0");
-	      bw.newLine();
-	      bw.write("Storage order counter: 0");
-	      bw.newLine();
-	      bw.flush();
-	      bw.close();
-	    } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    }
-	  }
-  
+    try {
+      BufferedWriter bw =
+          new BufferedWriter(
+              new OutputStreamWriter(new FileOutputStream("./Data/Counters.txt"), "UTF-8"));
+      bw.write("User counter: 1");
+      bw.newLine();
+      bw.write("Product counter: 0");
+      bw.newLine();
+      bw.write("Registered customer counter: 0");
+      bw.newLine();
+      bw.write("Order counter: 0");
+      bw.newLine();
+      bw.write("Supplier counter: 0");
+      bw.newLine();
+      bw.write("Storage order counter: 0");
+      bw.newLine();
+      bw.flush();
+      bw.close();
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * Checks if the file Counters.txt exists
+   *
    * @return true if the file exists, else, false
    */
   public static boolean checkIfCountersFileExists() {
-	  return new File("./Data/Counters.txt").isFile();
+    return new File("./Data/Counters.txt").isFile();
   }
 
   /**
@@ -245,7 +262,7 @@ public class FileHandler {
    * Writes the product list stored in the memory, to a file named "Products.csv", in .csv format
    * and UTF-8 encoding.
    *
-   * @param products ArrayList<product> that contains the products created by the ERP
+   * @param products ArrayList that contains the products created by the ERP
    */
   public static void writeProductListToCSV(ArrayList<Product> products) {
     try {
@@ -282,7 +299,7 @@ public class FileHandler {
    * Writes the ProductQuantities list stored in the memory, to a file named
    * "ProductQuantities.csv", in .csv format and UTF-8 encoding.
    *
-   * @param productQuantities ArrayList<int[]> that contains the ids and the quantities of the
+   * @param productQuantities ArrayList that contains the ids and the quantities of the
    *     products in the storage
    */
   public static void writeProductQuantitiesListToCSV(ArrayList<int[]> productQuantities) {
@@ -501,8 +518,9 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Products.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Products.csv
+   * @return an ArrayList that contains each element read from the Products.csv
    *     file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getProductsFromCsv() throws FileNotFoundException {
     Scanner scanner = null;
@@ -520,8 +538,9 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "ProductQuantities.csv" file to the
    * main memory as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the
+   * @return an ArrayList that contains each element read from the
    *     ProductQuantities.csv file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getProductQuantityFromCsv()
       throws FileNotFoundException {
@@ -540,7 +559,8 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Users.csv" file to the main memory as
    * an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Users.csv file
+   * @return an ArrayList that contains each element read from the Users.csv file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getUsersFromCsv() throws FileNotFoundException {
     Scanner scanner = null;
@@ -558,8 +578,9 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Customers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Customers.csv
+   * @return an ArrayList that contains each element read from the Customers.csv
    *     file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getRegisteredCustomersFromCsv()
       throws FileNotFoundException {
@@ -578,7 +599,8 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Orders.csv" file to the main memory as
    * an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Order.csv file
+   * @return an ArrayList that contains each element read from the Order.csv file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getOrdersFromCsv() throws FileNotFoundException {
     Scanner scanner = null;
@@ -596,8 +618,9 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "StorageOrders.csv" file to the main
    * memory as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the
+   * @return an ArrayList that contains each element read from the
    *     StorageOrders.csv
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getStorageOrdersFromCsv()
       throws FileNotFoundException {
@@ -616,8 +639,9 @@ public class FileHandler {
    * .csv file format reader for loading the contents of the "Suppliers.csv" file to the main memory
    * as an ArrayList of strings.
    *
-   * @return an ArrayList<ArrayList<String>> that contains each element read from the Suppliers.csv
+   * @return an ArrayList that contains each element read from the Suppliers.csv
    *     file
+   * @throws FileNotFoundException file not found
    */
   public static ArrayList<ArrayList<String>> getSuppliersFromCsv() throws FileNotFoundException {
     Scanner scanner = null;
@@ -635,7 +659,7 @@ public class FileHandler {
    * A String parser used for reading a single line of a .csv file using the ";" delimiter.
    *
    * @param line of the .csv file that contains separators
-   * @return ArrayList<String> that contains the split line according to the separators
+   * @return ArrayList that contains the split line according to the separators
    */
   private static ArrayList<String> getRecordFromLine(String line) {
     ArrayList<String> values = new ArrayList<String>();

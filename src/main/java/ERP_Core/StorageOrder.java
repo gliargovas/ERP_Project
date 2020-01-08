@@ -59,7 +59,7 @@ public class StorageOrder {
    * Constructor for already created products read from .csv file. There is non need to calculate
    * the total cost again as it has been created.
    *
-   * @param StorageOrderNumber the id number that was assigned to the order when it was first
+   * @param storageOrderNumber the id number that was assigned to the order when it was first
    *     created
    * @param storageOrderDate the date as a String when the order was created in "dd/MM/yyyy
    *     hh:mm:ss" format
@@ -67,6 +67,7 @@ public class StorageOrder {
    *     products
    * @param supplier the Supplier object of the order
    * @param storekeeper the Storekeeper object of the order, who made the order
+   * @param supplies the list of the products resupplied by the order
    */
   public StorageOrder(
       int storageOrderNumber,

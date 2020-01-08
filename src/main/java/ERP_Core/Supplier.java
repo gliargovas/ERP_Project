@@ -180,11 +180,13 @@ public class Supplier {
   /**
    * Creates all the suppliers from the list.
    *
-   * @param Suppliers the list with the parsed contents of the supplier file
+   * @param suppliers the list with the parsed contents of the supplier file
    */
   public static void createSuppliersFromList(ArrayList<ArrayList<String>> suppliers) {
-    int id, tel;
-    String name, address;
+    int id;
+    int tel;
+    String name;
+    String address;
     for (ArrayList<String> supplier : suppliers) {
       id = Integer.parseInt(supplier.get(0));
       name = supplier.get(1);
@@ -195,7 +197,7 @@ public class Supplier {
   }
 
   /**
-   * Searches the supplier and prints him according to the name that is given
+   * Searches the supplier and prints him according to the name that is given.
    *
    * @param name the name to match
    */
@@ -213,7 +215,7 @@ public class Supplier {
   }
 
   /**
-   * Searches the supplier and prints him according to the address that is given
+   * Searches the supplier and prints him according to the address that is given.
    *
    * @param address the address to match
    */
@@ -233,7 +235,7 @@ public class Supplier {
   /**
    * Searches the Supplier and prints him according to the given id.
    *
-   * @param id, integer type
+   * @param id the user id
    */
   public static void searchAndPrintSupplierByid(int id) {
     for (Supplier s : suppliers) {
@@ -245,7 +247,11 @@ public class Supplier {
     System.out.println("No suppliers with such id");
   }
 
-  /** Searches and prints the supplier according to the given telephone. */
+  /** 
+   * Searches and prints the supplier according to the given telephone. 
+   * 
+   * @param tel the supplier's telephone
+   */
   public static void searchAndPrintSupplierBytelephone(int tel) {
     boolean found = false;
     for (Supplier s : suppliers) {
@@ -297,7 +303,7 @@ public class Supplier {
    *
    * @param id The id of the supplier
    * @param tel The new telephone o the supplier
-   * @throws NoSuchElementException
+   * @throws NoSuchElementException supplier does not exist
    */
   public static void changeTelephone(int id, int tel) throws NoSuchElementException {
     Supplier supplier = searchById(id);
@@ -329,7 +335,7 @@ public class Supplier {
         System.err.println("Price must be an integer number. Try again...");
         in.nextLine();
       } catch (InterruptedException e) {
-    	e.printStackTrace();
+          e.printStackTrace();
       }
     }
     new Supplier(name, tel, address);

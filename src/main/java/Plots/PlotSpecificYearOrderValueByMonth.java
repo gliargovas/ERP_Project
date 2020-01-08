@@ -20,7 +20,11 @@ import javafx.stage.Stage;
  */
 public class PlotSpecificYearOrderValueByMonth extends Application {
 
-  /** Launches the application. */
+  /**
+   * Launch the application.
+   *
+   * @param args the arguments given
+   */
   public static void main(String[] args) {
     Application.launch(args);
   }

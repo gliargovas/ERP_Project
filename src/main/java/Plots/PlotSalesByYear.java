@@ -12,15 +12,19 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * The class contains an javafx application for creating a bar chart for the yearly order value
- * for every year for a specified year interval.
+ * The class contains an javafx application for creating a bar chart for the yearly order value for
+ * every year for a specified year interval.
  *
  * @author George Liargovas
  * @version 1.0
  */
 public class PlotSalesByYear extends Application {
 
-  /** Launch the application thread. */
+  /**
+   * Launch the application.
+   *
+   * @param args the arguments given
+   */
   public static void main(String[] args) {
     Application.launch(args);
   }
