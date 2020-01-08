@@ -232,7 +232,7 @@ public class StorageOrder {
    * @param storekeeper the Storekeeper who made the order
    * @param supplier the Supplier who the order concerns
    * @param supplies the supplies list that the supplier resupplied
-   * @param totalcost the total cost of the order
+   * @param totalCost the total cost of the order
    */
   public static void previewOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
@@ -436,7 +436,7 @@ public class StorageOrder {
    * @param storekeeper the storekeeper who made the order
    * @param supplier the supplier who the order concerns
    * @param supplies the supplies list
-   * @param totalcost the total cost of the order
+   * @param totalCost the total cost of the order
    */
   public static void confirmOrder(
       Storekeeper storekeeper, Supplier supplier, ArrayList<int[]> supplies, double totalCost) {
