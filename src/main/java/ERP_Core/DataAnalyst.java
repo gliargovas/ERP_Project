@@ -73,7 +73,7 @@ public class DataAnalyst extends User {
             + "Option: ");
   }
 
-  /** Prints the main menu of the data analyst */
+  /** Prints the main menu of the data analyst. */
   public void printMenu() {
     System.out.print(
         "\n\n***Data Analysis Menu***\n\n"
@@ -84,7 +84,7 @@ public class DataAnalyst extends User {
             + "Option: ");
   }
 
-  /** Prints the plots menu */
+  /** Prints the plots menu. */
   public void printPlotsMenu() {
     System.out.print(
         "\n\n*** Plots ***\n\n"
