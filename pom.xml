@@ -2,5 +2,44 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ERP-Project-Java-2</groupId>
   <artifactId>ERP-Project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
+  <build>  
+  <defaultGoal>package appassembler:assemble javadoc:javadoc</defaultGoal> 
+  <plugins>  
+  <plugin>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <executions>
+      <execution>
+        <phase>package</phase>
+        <goals>
+          <goal>single</goal>
+        </goals>
+      </execution>
+    </executions>
+    <configuration>
+      <archive>
+        <manifest>
+          <addClasspath>true</addClasspath>
+          <mainClass>ERP_Core.Main</mainClass>
+        </manifest>
+      </archive>
+      <descriptorRefs>
+        <descriptorRef>jar-with-dependencies</descriptorRef>
+      </descriptorRefs>
+    </configuration>
+  </plugin> 
+    <plugin> 
+      <groupId>org.codehaus.mojo</groupId>  
+      <artifactId>appassembler-maven-plugin</artifactId>  
+      <configuration>
+       <programs>  
+         <program>  
+            <mainClass>ERP_Core.Main</mainClass>
+            <name>RunERP</name>
+         </program>
+       </programs>   
+      </configuration>  
+    </plugin>  
+ </plugins>
+ </build>
 </project>
