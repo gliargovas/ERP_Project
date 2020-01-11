@@ -451,6 +451,9 @@ public class Supplier {
         break;
       } catch (NoSuchElementException e) {
         System.err.println("Suppliers with such id do not exist");
+      } catch (NumberFormatException e) {
+    	  System.err.println("Invalid input given. Try again..." );
+    	  in.nextLine();
       }
     }
   }

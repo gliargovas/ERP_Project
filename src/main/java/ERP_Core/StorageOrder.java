@@ -336,6 +336,7 @@ public class StorageOrder {
             }
           } catch (InputMismatchException e) {
             System.err.println("Please enter a number. Try again...");
+            in.nextLine();
           }
         }
         StorageOrder.previewOrder(storekeeper, supplier, supplies, totalCost);
@@ -384,7 +385,7 @@ public class StorageOrder {
           return tempBasket;
         }
         tempProduct[0] = Integer.parseInt(input);
-        System.out.println("Enter the quantity of the product you want to shop");
+        System.out.print("Enter the quantity of the product you want to shop: ");
         tempProduct[1] = in.nextInt();
         in.nextLine();
         alreadyExists =

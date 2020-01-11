@@ -279,7 +279,7 @@ public class Storage {
       id = 0;
       try {
         System.out.print(
-            "Enter the id of the product you want to delete\nTo cancel, press \"enter\": ");
+            "Enter the id of the product you want to delete\nTo cancel, enter \"0\": ");
         input = in.nextLine();
         if (input.equals("0")) {
           System.out.println("Process cancelled. Returning to previous menu...");

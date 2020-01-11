@@ -7,8 +7,6 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-
-
 /**
  * This class represents an order made in the ERP system.
  *
@@ -49,6 +47,7 @@ public class Order {
     this.customer = customer;
     this.cashier = cashier;
     this.basket = basket;
+    ProductSale.orderToSale(this);
     orders.add(this);
   }
 
@@ -76,6 +75,7 @@ public class Order {
     this.customer = customer;
     this.cashier = cashier;
     this.basket = basket;
+    ProductSale.orderToSale(this);
     orders.add(this);
   }
 
@@ -164,7 +164,7 @@ public class Order {
       order.printOrderFormatted();
     }
   }
-  
+
   /**
    * Prints the orders of a customer with a specific given id.
    *
@@ -199,6 +199,7 @@ public class Order {
         return;
       } catch (InputMismatchException e) {
         System.err.println("Invalid input given. Id must be an integer. Try again...");
+        in.nextLine();
       } catch (Exception e) {
         e.printStackTrace();
         System.err.println("Something went wrong. Returning to previous menu");
@@ -427,6 +428,7 @@ public class Order {
 
   /**
    * Checks if a given customer has enough points for a discount.
+   *
    * @param c the customer
    * @return true if he is eligible for discount, else false
    */
@@ -476,7 +478,7 @@ public class Order {
           return tempBasket;
         }
         tempProduct[0] = Integer.parseInt(input);
-        System.out.println("Enter the quantity of the product you want to shop");
+        System.out.print("Enter the quantity of the product you want to shop: ");
         tempProduct[1] = in.nextInt();
         in.nextLine();
         alreadyExists =

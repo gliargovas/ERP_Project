@@ -6,7 +6,7 @@ import ERP_Core.Order;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
@@ -40,10 +40,10 @@ public class LinePlotSalesByYear extends Application {
     xAxis.setLabel("Year");
     NumberAxis yAxis = new NumberAxis();
     yAxis.setLabel("Sales");
-    ScatterChart<Number, Number> sc = new ScatterChart<Number, Number>(xAxis, yAxis);
+    LineChart<Number, Number> sc = new LineChart<Number, Number>(xAxis, yAxis);
     sc.setTitle("Total sales by year");
     XYChart.Series data = new XYChart.Series();
-    data.setName("Equities");
+    data.setName("Values in euros");
 
     double[] yearlyValue =
         AnalyzeOrders.getTotalOrderValueByYearInterval(Order.getOrders(), startYear, endYear);

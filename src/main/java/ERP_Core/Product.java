@@ -22,7 +22,8 @@ public class Product {
   private final String description;
   /** salePrice product's price. */
   private double salePrice;
-  
+  /** */
+  private ArrayList<ProductSale> sales = new ArrayList<ProductSale>();
   /**
    * The constructor for creating a new Product object.
    *
@@ -38,7 +39,6 @@ public class Product {
     this.description = description;
     this.salePrice = salePrice;
     Storage.addProductToList(this);
-    Storage.createProductQuantity(this.getProductId());
   }
   
   /**
@@ -121,6 +121,10 @@ public class Product {
    */
   public static int getIdCounter() {
     return idCounter;
+  }
+  
+  public ArrayList<ProductSale> getSales() {
+	  return sales;
   }
   
   /** Returns a String with product's id, name, category, price and description. */

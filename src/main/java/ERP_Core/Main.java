@@ -183,7 +183,7 @@ public class Main {
       User.createUsersFromList(FileHandler.getUsersFromCsv());
     } catch (FileNotFoundException e) {
       // if no user file was found, the user list is initialized with the default administrator user
-      new Administrator(0, "admin", "admin", "admin", "admin");
+      new Administrator(1, "admin", "admin", "admin", "admin");
       System.out.println("File Users.csv not found, initializing default user list");
     }
     try {

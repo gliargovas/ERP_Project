@@ -85,9 +85,9 @@ public class DataAnalyst extends User {
   }
 
   /** Prints the plots menu. */
-  public void printPlotsMenu() {
+  public void printSalePlotsMenu() {
     System.out.print(
-        "\n\n*** Plots ***\n\n"
+        "\n\n*** Sales Plots ***\n\n"
             + "1) Plot sales by year (barchart)\n"
             + "2) Plot sales by year (line chart)\n"
             + "3) Plot sales by month for specific year interval (line chart)\n"
@@ -95,6 +95,16 @@ public class DataAnalyst extends User {
             + "5) Plot sales by month for specific year (barchart)\n"
             + "6) Return to previous menu\n"
             + "Options: ");
+  }
+
+  /** Prints the plots menu */
+  public void printPlotsMenu() {
+    System.out.print(
+        "\n\n*** Plots Menu ***\n\n"
+            + "1) Sales Plots\n"
+            + "2) Product Plots\n"
+            + "3) Return to previous Menu\n"
+            + "Option: ");
   }
 
   /** The analysis menu. Provides access to methods that print analyzed data. */
@@ -135,6 +145,37 @@ public class DataAnalyst extends User {
     int ans;
     for (; ; ) {
       printPlotsMenu();
+      try {
+        ans = in.nextInt();
+        switch (ans) {
+          case 1:
+            getSalesPlotsMenu();
+            break;
+          case 2:
+            try {
+              Plots.Charts.main(null);
+            } catch (Exception e) {
+              System.out.println("You must restart the ERP in order to plot the charts again...");
+              e.printStackTrace();
+            }
+            break;
+          case 3:
+            return;
+        }
+      } catch (InputMismatchException e) {
+        System.err.println("Your option must be an integer number. Try again...");
+        // clear scanner buffer
+        in.nextLine();
+      }
+    }
+  }
+
+  /** The sales plots menu. */
+  public void getSalesPlotsMenu() {
+    Scanner in = new Scanner(System.in);
+    int ans;
+    for (; ; ) {
+      printSalePlotsMenu();
       try {
         ans = in.nextInt();
         switch (ans) {

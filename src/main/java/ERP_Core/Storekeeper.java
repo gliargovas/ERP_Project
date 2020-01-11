@@ -100,7 +100,7 @@ public class Storekeeper extends User {
             + "7)  Edit Supplier Telephone\n"
             + "8)  Edit Supplier Address\n"
             + "9)  View Storage Ressuply Order History\n"
-            + "10) View Specific Storage Ressuply Order History from Specific Supplier\n"
+            + "10) View Storage Ressuply Order History from Specific Supplier\n"
             + "11) Return to Previous Menu\n"
             + "Option: ");
   }
