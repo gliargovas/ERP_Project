@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * This class represents an order for resupplying the shop's storage, made in the ERP system.
  *
  * @author George Liargovas
+ * @author Aggela Trivola
  */
 public class StorageOrder {
   /** The counter for the unique orders created. */
