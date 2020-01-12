@@ -3,8 +3,12 @@
   <groupId>ERP-Project-Java-2</groupId>
   <artifactId>ERP-Project</artifactId>
   <version>1.0</version>
+    <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <build>  
-  <defaultGoal>package appassembler:assemble javadoc:javadoc</defaultGoal> 
+  <defaultGoal>compiler:compile jar:jar appassembler:assemble javadoc:javadoc</defaultGoal> 
   <plugins>  
   <plugin>
     <artifactId>maven-assembly-plugin</artifactId>
@@ -30,7 +34,8 @@
   </plugin> 
     <plugin> 
       <groupId>org.codehaus.mojo</groupId>  
-      <artifactId>appassembler-maven-plugin</artifactId>  
+      <artifactId>appassembler-maven-plugin</artifactId>
+      <version>2.1.0</version>
       <configuration>
        <programs>  
          <program>  
