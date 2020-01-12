@@ -1,3 +1,5 @@
+import ERP_Core.Product;
+import ERP_Core.Storage;
 
 public class StorageMenuTest {
 

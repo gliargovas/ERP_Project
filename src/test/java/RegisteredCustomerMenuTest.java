@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import ERP_Core.RegisteredCustomer;
+
 public class RegisteredCustomerMenuTest {
 	
 	public static void loadObjects() {
