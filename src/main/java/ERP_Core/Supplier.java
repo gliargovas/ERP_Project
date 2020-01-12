@@ -543,6 +543,6 @@ public class Supplier {
   /** Returns the current Supplier object in String format. */
   @Override
   public String toString() {
-    return "Supplier [name=" + name + ", id=" + id + ", tel=" + tel + ", address=" + address + "]";
+    return "Name:" + name + " | Id:" + id + " | tel:" + tel + " | Address=" + address;
   }
 }

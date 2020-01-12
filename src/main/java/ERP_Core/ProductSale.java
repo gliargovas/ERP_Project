@@ -97,8 +97,8 @@ public class ProductSale {
      */
     public int getDay() {
         String date = getDate();
-        int day = Integer.parseInt(date.substring(0, 2));
-        return day;
+        String[] cutDate = date.split("-");
+        return Integer.parseInt(cutDate[0]);
     }
 
     /**
@@ -108,46 +108,24 @@ public class ProductSale {
      */
     public int getMonth() {
         String date = getDate();
-        String monthstr = date.substring(3, 6);
-        switch (monthstr) {
-            case "Jan":
-                return 1;
-            case "Feb":
-                return 2;
-            case "Mar":
-                return 3;
-            case "Apr":
-                return 4;
-            case "May":
-                return 5;
-            case "Jun":
-                return 6;
-            case "Jul":
-                return 7;
-            case "Aug":
-                return 8;
-            case "Sep":
-                return 9;
-            case "Oct":
-                return 10;
-            case "Nov":
-                return 11;
-            case "Dec":
-                return 0;
-            default:
-                return -1;
+        String[] cutDate = date.split("-");
+        int intDate = Integer.parseInt(cutDate[1]);
+        if (intDate == 12) {
+        	return 0;
+        } else {
+        	return intDate;
         }
     }
-
+    
     /**
      * Returns the year of the date of the sale.
      *
      * @return the year of the sale, type integer
      */
     public int getYear() {
-        String date = getDate();
-        int year = Integer.parseInt(date.substring(7, 11));
-        return year;
+    	String date = getDate();
+        String[] cutDate = date.split("-");
+        return Integer.parseInt(cutDate[2].substring(0, 4));
     }
 
     /**
@@ -156,12 +134,6 @@ public class ProductSale {
      *
      * @param order the order that is converted to product sales
      */
-    //Μήπως πρέπει να κάνει έχει try-catch και στο catch να κάνει
-    //throw exception που θα το διαχειρίζεται η μέθοδος confirmOrder;
-    //Αν και δεν μπορώ να σκεφτώ κάποιο exception που να πετάγεται εδώ,
-    //από τη στιγμή που η παραγγελία έχει γίνει σωστά.
-    //Όταν, δηλαδή, υπάρχει το προιόν που έχει διαλέξει ο χρήστης, άρα δεν
-    //θα είναι ποτέ null κλπ.
     public static void orderToSale(Order order) {
         try {
             String date = order.getOrderDate();

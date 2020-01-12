@@ -94,7 +94,7 @@ public class DataAnalyst extends User {
             + "4) Plot cumulative sales by month (barchart)\n"
             + "5) Plot sales by month for specific year (barchart)\n"
             + "6) Return to previous menu\n"
-            + "Options: ");
+            + "Option: ");
   }
 
   /** Prints the plots menu */
@@ -153,7 +153,7 @@ public class DataAnalyst extends User {
             break;
           case 2:
             try {
-              Plots.Charts.main(null);
+              Charts.showChart();
             } catch (Exception e) {
               System.out.println("You must restart the ERP in order to plot the charts again...");
               e.printStackTrace();

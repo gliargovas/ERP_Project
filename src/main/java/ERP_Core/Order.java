@@ -158,7 +158,7 @@ public class Order {
   /** Prints all the orders. */
   public static void printOrderHistory() {
     int counter = 1;
-    System.out.println("***Order History***\n");
+    System.out.println("\n***Order History***\n");
     for (Order order : orders) {
       System.out.printf("-> Order #%d\n", counter++);
       order.printOrderFormatted();
@@ -175,7 +175,7 @@ public class Order {
     for (Order order : orders) {
       if (order.getCustomer() != null && ((RegisteredCustomer) order.getCustomer()).getId() == id) {
         if (counter == 0) {
-          System.out.printf("Printing orders of the customer with id %d\n\n:", id);
+          System.out.printf("Printing orders of the customer with id %d:\n\n", id);
         }
         System.out.printf("-> Order #%d\n", ++counter);
         order.printOrderFormatted();
@@ -304,7 +304,7 @@ public class Order {
   public void printFinalOrder() {
     System.out.println("\n***Final Order Report***");
     this.printOrderFormatted();
-    System.out.println("***End of report***\n");
+    System.out.println("***End of report***\n\n");
   }
 
   /** Prints the order in the appropriate format. */

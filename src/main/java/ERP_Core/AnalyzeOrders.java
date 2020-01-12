@@ -85,7 +85,7 @@ public class AnalyzeOrders {
     double[] monthlyValue = getSpecificYearOrderValueByMonth(Order.getOrders(), year);
     System.out.printf("Total order value by month for the year %d:\n\n", year);
     for (int i = 0; i < 12; i++) {
-      System.out.printf("%s Sales: %f \n", MONTHS[i], monthlyValue[i]);
+      System.out.printf("%s Sales: %.02f \n", MONTHS[i], monthlyValue[i]);
     }
   }
 

@@ -454,7 +454,7 @@ public class FileHandler {
       BufferedWriter bw =
           new BufferedWriter(
               new OutputStreamWriter(new FileOutputStream("./Data/StorageOrders.csv"), "UTF-8"));
-      for (StorageOrder order : orders) {
+      for (StorageOrder order : StorageOrder.getOrders()) {
         StringBuffer line = new StringBuffer();
         line.append(order.getStorageOrderNumber());
         line.append(CSV_SEPARATOR);

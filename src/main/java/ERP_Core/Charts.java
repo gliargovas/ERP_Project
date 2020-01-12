@@ -2,7 +2,6 @@ package ERP_Core;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
  * This class contains methods that create charts based on data of sales.
  * It contains menus for the user to choose from.
@@ -19,8 +18,7 @@ public class Charts {
      *
      * @throws Exception
      */
-    public static void showChart(String[] args){
-        //LoadObjects.loadObjects();
+    public static void showChart(){
         int choice = 0;
         do {
             try {
@@ -30,6 +28,7 @@ public class Charts {
                 System.out.println("    2) Best-Revenue Chart");
                 System.out.println("    3) Best-Seller Product of each month Chart");
                 System.out.println("    4) Return to previous menu");
+                System.out.print("Option: " );
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -61,15 +60,16 @@ public class Charts {
      */
     public static void chartBestSellers() {
         int choice = 0;
+        Scanner sc = new Scanner(System.in);
         do {
             try {
                 //Menu
-                Scanner sc = new Scanner(System.in);
                 System.out.println("Press: ");
                 System.out.println("    1) to show Best Sellers of all time");
                 System.out.println("    2) to show Best Sellers of certain year");
                 System.out.println("    3) to show Best Sellers of certain year and month");
                 System.out.println("    4) Return to previous menu");
+                System.out.print("Option: " ); 
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -91,6 +91,7 @@ public class Charts {
                             } catch (java.util.InputMismatchException e) {
                                 System.out.println("Wrong input. Year must be an integer number. Try again...");
                             } catch (Exception e) {
+                            	e.printStackTrace();
                                 System.out.println("Something went wrong. Maybe try another year. Year must have 4 digits.");
                             }
                         } while (true);
@@ -119,7 +120,9 @@ public class Charts {
                                 break;
                             } catch (java.util.InputMismatchException e) {
                                 System.out.println("Wrong input. Year and month must be integer numbers. Try again...");
+                                sc.nextLine();
                             } catch (Exception e) {
+                            	e.printStackTrace();
                                 System.out.println("Something went wrong. Maybe try another year. Year must have 4 digits.");
                             }
                         } while (true);
@@ -133,6 +136,7 @@ public class Charts {
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Your option must be an integer number. Try again...");
                 choice = 0;
+                sc.nextLine();
             } catch (Exception e) {
                 System.out.println("Something went wrong.");
             }
@@ -154,6 +158,7 @@ public class Charts {
                 System.out.println("    2) to show Best Revenue of certain year");
                 System.out.println("    3) to show Best Revenue of certain year and month");
                 System.out.println("    4) Return to previous menu");
+                System.out.print("Option: " );
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:

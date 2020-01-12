@@ -82,6 +82,7 @@ public class StorageOrder {
     this.totalCost = totalCost;
     this.supplier = supplier;
     this.storekeeper = storekeeper;
+    this.supplies = supplies;
     orders.add(this);
   }
 
@@ -160,7 +161,7 @@ public class StorageOrder {
   /** Prints all the storage orders. */
   public static void printStorageOrderHistory() {
     int counter = 1;
-    System.out.println("***Order History***\n");
+    System.out.println("\n\n***Order History***\n");
     for (StorageOrder order : orders) {
       System.out.printf("-> Storage Order #%d\n", counter++);
       order.printStorageOrderFormatted();
@@ -176,7 +177,7 @@ public class StorageOrder {
     int input;
     for (; ; ) {
       try {
-        System.out.print("Enter the id of the supplier to get order history: ");
+        System.out.print("\nEnter the id of the supplier to get order history: ");
         input = in.nextInt();
         printOrderHistory(input);
         return;
@@ -200,9 +201,9 @@ public class StorageOrder {
     for (StorageOrder order : orders) {
       if (order.getSupplier() != null && order.getSupplier().getId() == id) {
         if (counter == 0) {
-          System.out.printf("Printing orders made from supplier with id %d\n\n:", id);
+          System.out.printf("\nPrinting orders made from supplier with id %d:\n\n", id);
         }
-        System.out.printf("-> Order #%d\n", ++counter);
+        System.out.printf("\n-> Order #%d\n", ++counter);
         order.printStorageOrderFormatted();
       }
     }
@@ -488,7 +489,6 @@ public class StorageOrder {
       orderDate = order.get(1);
       totalCost = Double.parseDouble(order.get(2));
       supplierId = Integer.parseInt(order.get(3));
-      System.out.println(supplierId);
       storekeeperId = Integer.parseInt(order.get(4));
       try {
         supplier = Supplier.searchById(supplierId);
