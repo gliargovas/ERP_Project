@@ -175,14 +175,14 @@ public class Order {
     for (Order order : orders) {
       if (order.getCustomer() != null && ((RegisteredCustomer) order.getCustomer()).getId() == id) {
         if (counter == 0) {
-          System.out.printf("Printing orders of the customer with id %d:\n\n", id);
+          System.out.printf("\nPrinting orders of the customer with id %d:\n\n", id);
         }
-        System.out.printf("-> Order #%d\n", ++counter);
+        System.out.printf("\n-> Order #%d\n", ++counter);
         order.printOrderFormatted();
       }
     }
     if (counter == 0) {
-      System.out.printf("Customer with id %d has not made any orders\n", id);
+      System.out.printf("\nCustomer with id %d has not made any orders\n", id);
     }
   }
 
@@ -193,7 +193,7 @@ public class Order {
     for (; ; ) {
       try {
         System.out.print(
-            "Enter the id of the customer for whom you want to print the order history: ");
+            "\nEnter the id of the customer for whom you want to print the order history: ");
         input = in.nextInt();
         printOrderHistory(input);
         return;
@@ -302,9 +302,9 @@ public class Order {
 
   /** Prints the order after it has been confirmed, in the appropriate format. */
   public void printFinalOrder() {
-    System.out.println("\n***Final Order Report***");
+    System.out.println("\n***Final Order Report***\n");
     this.printOrderFormatted();
-    System.out.println("***End of report***\n\n");
+    System.out.println("\n***End of report***\n\n");
   }
 
   /** Prints the order in the appropriate format. */
@@ -436,9 +436,9 @@ public class Order {
     ((RegisteredCustomer) (this.getCustomer()))
         .setPoints((int) Math.round(((this.getTotalCost() * 5))));
     System.out.println(
-        "With this purchase " + Math.round(this.getTotalCost() * 5) + " points were earned!");
+        "\nWith this purchase " + Math.round(this.getTotalCost() * 5) + " points were earned!");
     if (c.getPoints() >= 10000) {
-      System.out.println("Order has been discounted by 10% by redeeming 10000 points!");
+      System.out.println("\nOrder has been discounted by 10% by redeeming 10000 points!");
       c.setPoints(c.getPoints() - 10000);
       return true;
     }
