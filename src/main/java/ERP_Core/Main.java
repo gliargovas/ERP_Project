@@ -34,7 +34,7 @@ public class Main {
     System.out.print(
         "\n\n****** MAIN MENU ******\n\n"
             + "1) Login as a Cashier\n"
-            + "2)  Login as a Storekeeper\n"
+            + "2) Login as a Storekeeper\n"
             + "3) Login as a Data Analyst\n"
             + "4) Login as Administrator\n"
             + "5) Exit Application\n\n"

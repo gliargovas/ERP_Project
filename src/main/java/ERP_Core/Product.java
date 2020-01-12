@@ -131,7 +131,7 @@ public class Product {
   @Override
   public String toString() {
     return String.format(
-        "Id: %d | Name: %15s | Category: %10s | Price: %5f\u20ac \nDescription: %s",
+        "Id: %d | Name: %15s | Category: %10s | Price: %.02f\nDescription: %s",
         this.getProductId(),
         this.getName(),
         this.getCategory(),
@@ -146,7 +146,7 @@ public class Product {
    */
   public String toShortString() {
     return String.format(
-        "Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac",
+        "Id: %3d | Name: %15s | Category: %10s | Price: %.02f",
         this.getProductId(), this.getName(), this.getCategory(), this.getSalePrice());
   }
   
@@ -157,7 +157,7 @@ public class Product {
    */
   public String toStringWithQuantity() {
     return String.format(
-        "Id: %3d | Name: %15s | Category: %10s | Price: %5f\u20ac | Units Available: %3d",
+        "Id: %3d | Name: %15s | Category: %10s | Price: %.02f | Units Available: %3d",
         this.getProductId(),
         this.getName(),
         this.getCategory(),
