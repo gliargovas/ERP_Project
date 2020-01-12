@@ -1,0 +1,6 @@
+User counter: 15
+Product counter: 18
+Registered customer counter: 6
+Order counter: 47
+Supplier counter: 2
+Storage order counter: 3

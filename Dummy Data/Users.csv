@@ -1,0 +1,15 @@
+Admin;1;admin;admin;admin;admin
+Admin;2;Giannis;Papadopoulos;admin2;12345678
+Admin;3;Giorgos;Papadopoulos;admin3;12345678
+Cashier;4;Xristos;Papadopoulos;cashier1;12345678
+Cashier;5;Fotis;Papadopoulos;cashier2;12345678
+Cashier;6;Dimitris;Papadopoulos;cashier3;12345678
+Cashier;7;Maria;Papadopoulou;cashier4;12345678
+Cashier;8;Panos;Papadopoulos;cashier5;12345678
+Storekeeper;9;Sokratis;Papadopoulos;storekeeper1;12345678
+Storekeeper;10;Eleni;Papadopouou;storekeeper2;12345678
+Storekeeper;11;Xristina;Papadopouou;storekeeper3;12345678
+Storekeeper;12;Pinelopi;Papadopouou;storekeeper4;12345678
+DataAnalyst;13;Marina;Papadopouou;analyst1;12345678
+DataAnalyst;14;Sofia;Papadopouou;analyst2;12345678
+DataAnalyst;15;Zoi;Papadopouou;analyst3;12345678
