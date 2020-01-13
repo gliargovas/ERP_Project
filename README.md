@@ -1,4 +1,6 @@
-# ** DANGER-X ERP USER MANUAL **
+![alt text](https://github.com/gliargovas/ERP_Project/blob/ERP_Final/Logo.png)
+
+# DANGER-X ERP USER MANUAL 
 
 # Table of contents
 
@@ -217,10 +219,10 @@ The ERP must not be running while editing the data as they will be overwritten.
 	2. Enter the user data in the following order: user_typeunique_id;name;surname;username;password (e.g. Cashier;5;Fotis;Papadopoulos;cashier2;12345678). **The username must be unique**. The available user types are: "Admin" for administrator, "Cashier" for cashier, "Storekeeper" for storekeeper, "DataAnalyst" for data analyst.
 	3. Change the value of the supplier counter in Counters.txt accordingly.
 	4. Save changes.
-**(!) It is not advised to edit orders and storage orders externally**
+<br/>**(!) It is not advised to edit orders and storage orders externally**
 
 # Exporting the data
-- The data of the ERP can be found in **Directory_With_the_unzipped_program/target/appassembler/bin/Data**
+- The data of the ERP can be found in **ERP_Project-ERP_Final/target/appassembler/bin/Data**
 
 You can export the ERP data found in the Data directory. The .csv files can be opened in other programs for further analysis. Programs that have been tested to be capable of importing the data of the ERP for further editing include Microsoft Excel, Matlab and IBM SPSS.
 
@@ -235,6 +237,18 @@ You can export the ERP data found in the Data directory. The .csv files can be o
 - Nikos Mavromaras
 - Dimitris Tsaousis
 - Aggela Trivola
+
+**Origin of the program name:**<br/>
+<br/>
+<br/>
+**D**imitris<br/>
+**A**ggela<br/>
+**N**ikos<br/>
+**G**iorgos<br/>
+**E**irini<br/>
+**R**ania<br/>
+**\-**<br/>
+**X**ristina<br/>
 
 
 *This manual was created by:* George Liargovas, Eirini Piperou
