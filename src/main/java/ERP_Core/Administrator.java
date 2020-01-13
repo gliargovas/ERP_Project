@@ -129,9 +129,9 @@ public class Administrator extends User {
             StorageOrder.printOrderHistoryMenu();
             break;
           case 12:
-        	Main.saveAllListsToCsv();
-        	System.out.println("Changes saved!" );
-        	break;
+            Main.saveAllListsToCsv();
+            System.out.println("Changes saved!");
+            break;
           case 13:
             System.out.println("Logging off...Returning to previous menu");
             return;
@@ -153,7 +153,7 @@ public class Administrator extends User {
       System.out.println(user);
     }
   }
-  
+
   /** Contains the user prompts for deleting a user from the system. */
   private void deleteUserMenu() {
     Scanner in = new Scanner(System.in);
@@ -174,7 +174,8 @@ public class Administrator extends User {
         }
         System.out.print(
             "Deleting a user is permanent. Are you sure you want to delete a user?\n"
-                + "Type \"Yes\" if you understand the risk and wish to proceed. Typing anything else will cancel the process: ");
+                + "Type \"Yes\" if you understand the risk and wish to proceed."
+                + " Typing anything else will cancel the process: ");
         ans = in.nextLine();
         if (ans.toLowerCase().equals(("Yes").toLowerCase())) {
           this.deleteUser(id);
@@ -191,7 +192,7 @@ public class Administrator extends User {
       }
     }
   }
-  
+
   /**
    * Deletes a user with a given id from the system.
    *
@@ -203,7 +204,7 @@ public class Administrator extends User {
     User.getUsers().remove(toDelete);
   }
 
-  /** Contains the user prompts for changing a user's password */
+  /** Contains the user prompts for changing a user's password. */
   private void changeUserPasswordMenu() {
     Scanner in = new Scanner(System.in);
     String ans = null;
@@ -245,7 +246,7 @@ public class Administrator extends User {
     user.setPassword(newPassword);
   }
 
-  /** Creates a new user according to user input */
+  /** Creates a new user according to user input. */
   private void createNewUserMenu() {
     Scanner in = new Scanner(System.in);
     String username;
@@ -270,7 +271,8 @@ public class Administrator extends User {
       }
       for (; ; ) {
         System.out.print(
-            "Enter the user's password." + "The password must be at least 8 characters long: ");
+            "Enter the user's password.\n"
+            + "The password must be at least 8 characters long: ");
         password = in.nextLine();
         if (password.length() < 8) {
           System.out.println("The password did not match the requirements. Try again...");
