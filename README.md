@@ -55,8 +55,9 @@ When ordering, a question will be asked about which customer the order relates t
 
 # System Requirements
 
-- Java 8 or later is required
-- Apache Maven is required
+- **Java  JDK 8** or later is required. You can download Java JDK 8 [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+- **Apache Maven** is required. You can download Apache Maven [here](https://maven.apache.org/download.cgi)<br/>
+
 
 # Run the Program
 
