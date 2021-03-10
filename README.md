@@ -194,7 +194,7 @@ The administrator menu consists of the following options:
 ## Notes while running the program
 1. The program is able to manage invalid user inputs and they will not result in an error.
 2. The plots might not work as expected in case of no orders are created.
-3. Only one plot can be created at a time. In order to create another plot a program restart is required.
+3. Only one plot can be created at a time. In order to create another plot, a program restart is required.
 
 # Editing the data
 *The external editing of data is not advised. Though, in case you want to do so, you should follow the steps below:*
